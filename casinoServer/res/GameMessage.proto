@@ -1,0 +1,17 @@
+message ServerRequest {
+
+    required string userId = 1;
+
+    required int32 bank = 2;
+
+}
+
+message UserAuthorizeMessage{
+    required string userName=1;
+    required string password=2;
+}
+message UserAuthorizeAnswerMessage{
+    required string userName=1;
+    required string password=2;
+    required bool   answer=3;
+}

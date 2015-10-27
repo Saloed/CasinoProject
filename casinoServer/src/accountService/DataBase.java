@@ -148,6 +148,7 @@ public class DataBase {
     public Account authenticate(String name, String password) {
         if (users.containsKey(name)) {
             Pair<Integer, String> temp = users.get(name);
+            if(temp.getValue().equals(password))
             return new Account(temp.getKey(), name, temp.getValue());
         }
         return new Account(0,name,password);

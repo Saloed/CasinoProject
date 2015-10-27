@@ -1,17 +1,22 @@
 package main;
 
 import authorizeClient.AuthorizeClient;
+import chatClient.ChatClient;
+
+import java.util.LinkedList;
 
 
 public final class Main {
     public static void main(String[] args) {
-       /* ChatClient chatClient=new ChatClient();
+        ChatClient chatClient=new ChatClient();
         Thread chatClientThread=new Thread(chatClient);
 
-        chatClientThread.start();
-    */
+        //TODO create all threads and add to List
 
-        Thread authorizeClientThread = new Thread(new AuthorizeClient());
+        LinkedList<Thread> threadList=new LinkedList<>();
+        threadList.add(chatClientThread);
+
+        Thread authorizeClientThread = new Thread(new AuthorizeClient(threadList));
         authorizeClientThread.start();
 
     }

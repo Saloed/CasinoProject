@@ -33,10 +33,10 @@ public class MessageIsAuthenticated extends Message {
                         .setUserName(account.getName())
                         .setPassword(account.getPassword())
                         .build();
-                authorizer.removeContext(account);
             }
 
             authorizer.getContext(account).writeAndFlush(msg);
+            authorizer.removeContext(account);
         }
     }
 }

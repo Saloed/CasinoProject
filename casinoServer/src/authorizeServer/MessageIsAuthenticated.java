@@ -5,6 +5,9 @@ import base.Abonent;
 import base.Address;
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
+import gameManager.MessageNewUserInCurrentSession;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class MessageIsAuthenticated extends Message {
@@ -22,11 +25,19 @@ public class MessageIsAuthenticated extends Message {
             UserAuthorizeAnswerMessage msg;
 
             if (account.getId() != 0) {
+                Integer sessionId = new AtomicInteger().incrementAndGet();
                 msg = UserAuthorizeAnswerMessage.newBuilder()
                         .setAnswer(true)
                         .setUserName(account.getName())
                         .setPassword(account.getPassword())
+                        .setSessionId(sessionId)
                         .build();
+
+                authorizer.addUserToCurrentSession(sessionId, account);
+                Message message = new MessageNewUserInCurrentSession(authorizer.getAddress(),
+                        authorizer.getMessageSystem().getAddressService().getGameManagerAddress(),
+                        sessionId, account);
+                authorizer.getMessageSystem().sendMessage(message);
             } else {
                 msg = UserAuthorizeAnswerMessage.newBuilder()
                         .setAnswer(false)

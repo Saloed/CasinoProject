@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 
-
 public class DataBase {
 
     private static final String XML_FILE = "casinoServer/res/users.xml";
@@ -148,22 +147,22 @@ public class DataBase {
     public Account authenticate(String name, String password) {
         if (users.containsKey(name)) {
             Pair<Integer, String> temp = users.get(name);
-            if(temp.getValue().equals(password))
-            return new Account(temp.getKey(), name, temp.getValue());
+            if (temp.getValue().equals(password))
+                return new Account(temp.getKey(), name, temp.getValue());
         }
-        return new Account(0,name,password);
+        return new Account(0, name, password);
     }
 
-    public boolean register(String name, String password) {
-        Account temp = new Account(name, password);
-
-        users.put(temp.getName(), new Pair<>(temp.getId(), temp.getPassword()));
+    public Account register(String name, String password) {
+        if (users.containsKey(name))
+            return new Account(0, name, password);
+        Account account = new Account(name, password);
+        users.put(account.getName(), new Pair<>(account.getId(), account.getPassword()));
         try {
             update(new File(XML_FILE));
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return account;
     }
 }

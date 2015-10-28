@@ -6,12 +6,15 @@ message ServerRequest {
 
 }
 
-message UserAuthorizeMessage{
-    required string userName=1;
-    required string password=2;
+message UserAuthorizeMessage {
+    required string userName = 1;
+    required string password = 2;
+    required bool register = 3;
 }
-message UserAuthorizeAnswerMessage{
-    required string userName=1;
-    required string password=2;
-    required bool   answer=3;
+
+message UserAuthorizeAnswerMessage {
+    required string userName = 1;
+    required string password = 2;
+    required bool answer = 3;
+    optional int32 sessionId = 4;
 }

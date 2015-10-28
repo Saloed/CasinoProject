@@ -4,11 +4,9 @@ import accountService.AccountService;
 import authorizeServer.Authorizer;
 import base.Address;
 import base.AddressService;
-import frontEnd.FrontEnd;
 import gameManager.GameManager;
 
 public final class AddressServiceImpl implements AddressService {
-    private Address frontEnd;
     private Address gameManager;
     private Address accountService;
     private Address authorizer;
@@ -28,9 +26,7 @@ public final class AddressServiceImpl implements AddressService {
 
     public void register(Object object) {
 
-        if (object instanceof FrontEnd)
-            frontEnd = ((FrontEnd) object).getAddress();
-        else if (object instanceof GameManager)
+        if (object instanceof GameManager)
             gameManager = ((GameManager) object).getAddress();
         else if (object instanceof AccountService)
             accountService = ((AccountService) object).getAddress();
@@ -39,9 +35,6 @@ public final class AddressServiceImpl implements AddressService {
 
     }
 
-    public Address getFrontEndAddress() {
-        return frontEnd;
-    }
 
     public Address getGameManagerAddress() {
         return gameManager;

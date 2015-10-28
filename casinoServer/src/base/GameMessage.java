@@ -607,6 +607,15 @@ public final class GameMessage {
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
+
+    /**
+     * <code>required bool register = 3;</code>
+     */
+    boolean hasRegister();
+    /**
+     * <code>required bool register = 3;</code>
+     */
+    boolean getRegister();
   }
   /**
    * Protobuf type {@code UserAuthorizeMessage}
@@ -670,6 +679,11 @@ public final class GameMessage {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
               password_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              register_ = input.readBool();
               break;
             }
           }
@@ -796,9 +810,25 @@ public final class GameMessage {
       }
     }
 
+    public static final int REGISTER_FIELD_NUMBER = 3;
+    private boolean register_;
+    /**
+     * <code>required bool register = 3;</code>
+     */
+    public boolean hasRegister() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required bool register = 3;</code>
+     */
+    public boolean getRegister() {
+      return register_;
+    }
+
     private void initFields() {
       userName_ = "";
       password_ = "";
+      register_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -814,6 +844,10 @@ public final class GameMessage {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasRegister()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -826,6 +860,9 @@ public final class GameMessage {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, register_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -843,6 +880,10 @@ public final class GameMessage {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getPasswordBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, register_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -965,6 +1006,8 @@ public final class GameMessage {
         bitField0_ = (bitField0_ & ~0x00000001);
         password_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        register_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -1001,6 +1044,10 @@ public final class GameMessage {
           to_bitField0_ |= 0x00000002;
         }
         result.password_ = password_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.register_ = register_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1027,6 +1074,9 @@ public final class GameMessage {
           password_ = other.password_;
           onChanged();
         }
+        if (other.hasRegister()) {
+          setRegister(other.getRegister());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1037,6 +1087,10 @@ public final class GameMessage {
           return false;
         }
         if (!hasPassword()) {
+          
+          return false;
+        }
+        if (!hasRegister()) {
           
           return false;
         }
@@ -1214,6 +1268,38 @@ public final class GameMessage {
         return this;
       }
 
+      private boolean register_ ;
+      /**
+       * <code>required bool register = 3;</code>
+       */
+      public boolean hasRegister() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required bool register = 3;</code>
+       */
+      public boolean getRegister() {
+        return register_;
+      }
+      /**
+       * <code>required bool register = 3;</code>
+       */
+      public Builder setRegister(boolean value) {
+        bitField0_ |= 0x00000004;
+        register_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bool register = 3;</code>
+       */
+      public Builder clearRegister() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        register_ = false;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:UserAuthorizeMessage)
     }
 
@@ -1265,6 +1351,15 @@ public final class GameMessage {
      * <code>required bool answer = 3;</code>
      */
     boolean getAnswer();
+
+    /**
+     * <code>optional int32 sessionId = 4;</code>
+     */
+    boolean hasSessionId();
+    /**
+     * <code>optional int32 sessionId = 4;</code>
+     */
+    int getSessionId();
   }
   /**
    * Protobuf type {@code UserAuthorizeAnswerMessage}
@@ -1333,6 +1428,11 @@ public final class GameMessage {
             case 24: {
               bitField0_ |= 0x00000004;
               answer_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              sessionId_ = input.readInt32();
               break;
             }
           }
@@ -1474,10 +1574,26 @@ public final class GameMessage {
       return answer_;
     }
 
+    public static final int SESSIONID_FIELD_NUMBER = 4;
+    private int sessionId_;
+    /**
+     * <code>optional int32 sessionId = 4;</code>
+     */
+    public boolean hasSessionId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 sessionId = 4;</code>
+     */
+    public int getSessionId() {
+      return sessionId_;
+    }
+
     private void initFields() {
       userName_ = "";
       password_ = "";
       answer_ = false;
+      sessionId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1513,6 +1629,9 @@ public final class GameMessage {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBool(3, answer_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, sessionId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1533,6 +1652,10 @@ public final class GameMessage {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(3, answer_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, sessionId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1657,6 +1780,8 @@ public final class GameMessage {
         bitField0_ = (bitField0_ & ~0x00000002);
         answer_ = false;
         bitField0_ = (bitField0_ & ~0x00000004);
+        sessionId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -1697,6 +1822,10 @@ public final class GameMessage {
           to_bitField0_ |= 0x00000004;
         }
         result.answer_ = answer_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.sessionId_ = sessionId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1725,6 +1854,9 @@ public final class GameMessage {
         }
         if (other.hasAnswer()) {
           setAnswer(other.getAnswer());
+        }
+        if (other.hasSessionId()) {
+          setSessionId(other.getSessionId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1949,6 +2081,38 @@ public final class GameMessage {
         return this;
       }
 
+      private int sessionId_ ;
+      /**
+       * <code>optional int32 sessionId = 4;</code>
+       */
+      public boolean hasSessionId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 sessionId = 4;</code>
+       */
+      public int getSessionId() {
+        return sessionId_;
+      }
+      /**
+       * <code>optional int32 sessionId = 4;</code>
+       */
+      public Builder setSessionId(int value) {
+        bitField0_ |= 0x00000008;
+        sessionId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 sessionId = 4;</code>
+       */
+      public Builder clearSessionId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        sessionId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:UserAuthorizeAnswerMessage)
     }
 
@@ -1985,11 +2149,12 @@ public final class GameMessage {
   static {
     java.lang.String[] descriptorData = {
       "\n\021GameMessage.proto\"-\n\rServerRequest\022\016\n\006" +
-      "userId\030\001 \002(\t\022\014\n\004bank\030\002 \002(\005\":\n\024UserAuthor" +
+      "userId\030\001 \002(\t\022\014\n\004bank\030\002 \002(\005\"L\n\024UserAuthor" +
       "izeMessage\022\020\n\010userName\030\001 \002(\t\022\020\n\010password" +
-      "\030\002 \002(\t\"P\n\032UserAuthorizeAnswerMessage\022\020\n\010" +
-      "userName\030\001 \002(\t\022\020\n\010password\030\002 \002(\t\022\016\n\006answ" +
-      "er\030\003 \002(\010"
+      "\030\002 \002(\t\022\020\n\010register\030\003 \002(\010\"c\n\032UserAuthoriz" +
+      "eAnswerMessage\022\020\n\010userName\030\001 \002(\t\022\020\n\010pass" +
+      "word\030\002 \002(\t\022\016\n\006answer\030\003 \002(\010\022\021\n\tsessionId\030" +
+      "\004 \001(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2014,13 +2179,13 @@ public final class GameMessage {
     internal_static_UserAuthorizeMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_UserAuthorizeMessage_descriptor,
-        new java.lang.String[] { "UserName", "Password", });
+        new java.lang.String[] { "UserName", "Password", "Register", });
     internal_static_UserAuthorizeAnswerMessage_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_UserAuthorizeAnswerMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_UserAuthorizeAnswerMessage_descriptor,
-        new java.lang.String[] { "UserName", "Password", "Answer", });
+        new java.lang.String[] { "UserName", "Password", "Answer", "SessionId", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -2,9 +2,8 @@ package base;
 
 
 public interface AddressService {
-    public void register(Object object);
 
-    public Address getFrontEndAddress();
+    public void register(Object object);
 
     public Address getGameManagerAddress();
 

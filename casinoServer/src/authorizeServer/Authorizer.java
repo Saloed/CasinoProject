@@ -16,10 +16,16 @@ public class Authorizer implements Abonent, Runnable {
 
     private final Map<String, ChannelHandlerContext> accountMap = new HashMap<>();
 
+    private final Map<Integer, Account> currentSession = new HashMap<>();
+
     public Authorizer(MessageSystem messageSystem) {
         this.messageSystem = messageSystem;
         messageSystem.addService(this);
         messageSystem.getAddressService().register(this);
+    }
+
+    public void addUserToCurrentSession(Integer sessionId, Account account) {
+        currentSession.put(sessionId, account);
     }
 
     public void addAccount(Account acc, ChannelHandlerContext ctx) {

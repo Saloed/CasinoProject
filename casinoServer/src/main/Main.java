@@ -3,7 +3,6 @@ package main;
 import accountService.AccountService;
 import authorizeServer.AuthorizeServer;
 import chatServer.ChatServer;
-import frontEnd.FrontEnd;
 import gameManager.GameManager;
 import gameServer.GameServer;
 import messageSystem.MessageSystemImpl;
@@ -20,9 +19,6 @@ public final class Main {
         final Thread gameManagerThread = new Thread(new GameManager(messageSystem));
         gameManagerThread.setDaemon(true);
 
-        final FrontEnd frontEnd = new FrontEnd(messageSystem);
-        final Thread frontEndThread = new Thread(frontEnd);
-        frontEndThread.setDaemon(true);
 
         final ChatServer chatServer = new ChatServer();
         final Thread chatServerThread = new Thread(chatServer);
@@ -40,7 +36,6 @@ public final class Main {
 
             accountServiceThread.start();
             gameManagerThread.start();
-            frontEndThread.start();
 
         } catch (Exception e) {
             e.printStackTrace(System.err);

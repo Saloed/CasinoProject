@@ -3,6 +3,7 @@ package messageSystem;
 import authorizeClient.AuthorizeClient;
 import base.Address;
 import base.AddressService;
+import frontend.FronEnd;
 import gameClient.GameClient;
 import gameService.GameService;
 
@@ -10,6 +11,7 @@ public final class AddressServiceImpl implements AddressService {
     private Address gameClient;
     private Address authorizeClient;
     private Address gameService;
+    private Address frontend;
 
     public void register(Object object) {
 
@@ -19,6 +21,8 @@ public final class AddressServiceImpl implements AddressService {
             authorizeClient = ((AuthorizeClient) object).getAddress();
         else if (object instanceof GameService)
             gameService = ((GameService) object).getAddress();
+        else if (object instanceof FronEnd)
+            frontend = ((FronEnd) object).getAddress();
     }
 
     public Address getGameClientAddress() {
@@ -31,5 +35,9 @@ public final class AddressServiceImpl implements AddressService {
 
     public Address getGameServiceAddress() {
         return gameService;
+    }
+
+    public Address getFrontEndAddress() {
+        return frontend;
     }
 }

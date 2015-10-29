@@ -10,4 +10,6 @@ public interface AddressService {
     public Address getAuthorizeClientAddress();
 
     public Address getGameServiceAddress();
+
+    public Address getFrontEndAddress();
 }

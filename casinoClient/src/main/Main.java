@@ -2,6 +2,7 @@ package main;
 
 import authorizeClient.AuthorizeClient;
 import chatClient.ChatClient;
+import frontend.FronEnd;
 import gameClient.GameClient;
 import gameService.GameService;
 import messageSystem.MessageSystemImpl;
@@ -13,6 +14,10 @@ public final class Main {
     public static void main(String[] args) {
 
         MessageSystemImpl messageSystem = new MessageSystemImpl();
+
+        FronEnd fronEnd = new FronEnd(messageSystem);
+        Thread fronEndThread = new Thread(fronEnd);
+        fronEndThread.start();
 
         ChatClient chatClient = new ChatClient();
         Thread chatClientThread = new Thread(chatClient);

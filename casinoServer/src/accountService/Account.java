@@ -10,6 +10,7 @@ public final class Account {
     private final int id;
     private final String name;
     private final String password;
+    private int cash;
 
     public Account(String name, String password) {
         int id = ID_GENERATOR.getAndIncrement();
@@ -18,12 +19,14 @@ public final class Account {
         this.id = id;
         this.name = name;
         this.password = password;
+        this.cash = 0;
     }
 
-    public Account(int id, String name, String pass) {
+    public Account(int id, String name, String pass, int cash) {
         this.id = id;
         this.name = name;
         this.password = pass;
+        this.cash = cash;
     }
 
     public int getId() {
@@ -38,4 +41,21 @@ public final class Account {
         return password;
     }
 
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 19;
+        hash = hash * id;
+        hash = hash * cash;
+        hash = hash * name.hashCode();
+        hash = hash * password.hashCode();
+        return hash;
+    }
 }

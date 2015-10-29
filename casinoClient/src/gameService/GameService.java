@@ -2,14 +2,14 @@ package gameService;
 
 import base.Abonent;
 import base.Address;
+import base.GameMessage;
+import io.netty.channel.Channel;
 import messageSystem.MessageSystemImpl;
 
-/**
- * Created by admin on 28.10.2015.
- */
 public class GameService implements Runnable, Abonent {
     private final Address address = new Address();
     private final MessageSystemImpl messageSystem;
+    private Channel channel;
     private Integer sessionId = 0;
 
     public GameService(MessageSystemImpl messageSystem) {
@@ -17,6 +17,20 @@ public class GameService implements Runnable, Abonent {
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
     }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
+
+    //TODO this just for test
+    public void sendRequest() {
+        GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
+                .setSessionId(sessionId)
+                .setGame(GameMessage.ServerRequest.GameType.SLOT)
+                .build();
+        channel.writeAndFlush(msg);
+    }
+
 
     public void changeSessionId(Integer sessionId) {
         this.sessionId = sessionId;

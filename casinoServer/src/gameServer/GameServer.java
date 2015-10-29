@@ -8,13 +8,17 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import messageSystem.MessageSystemImpl;
 
 
 public final class GameServer implements Runnable {
 
     final int PORT = 7777;
 
-
+final MessageSystemImpl messageSystem;
+    public GameServer(MessageSystemImpl messageSystem){
+        this.messageSystem=messageSystem;
+    }
     public void run() {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -28,7 +32,7 @@ public final class GameServer implements Runnable {
             server.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
             //TODO More option mb required
             server.handler(new LoggingHandler(LogLevel.INFO));
-            server.childHandler(new GameServerInitializer());
+            server.childHandler(new GameServerInitializer(messageSystem));
 
             ChannelFuture channel = server.bind(PORT).sync();
 

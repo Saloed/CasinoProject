@@ -23,7 +23,7 @@ public final class Main {
         final ChatServer chatServer = new ChatServer();
         final Thread chatServerThread = new Thread(chatServer);
 
-        final GameServer gameServer = new GameServer();
+        final GameServer gameServer = new GameServer(messageSystem);
         final Thread gameServerThread = new Thread(gameServer);
 
         final Thread authorizeServerThread = new Thread(new AuthorizeServer(messageSystem));

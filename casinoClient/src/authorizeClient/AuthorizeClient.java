@@ -47,10 +47,10 @@ public class AuthorizeClient implements Runnable, Abonent {
             Channel ch = client.connect(HOST, PORT).sync().channel();
 
             //TODO write here name and password
-
+//TODO realize register as message from FrontEnd
             UserAuthorizeMessage msg = UserAuthorizeMessage.newBuilder()
-                    .setUserName("admin")
-                    .setPassword("root")
+                    .setUserName("user")
+                    .setPassword("pass")
                     .setRegister(false)
                     .build();
 

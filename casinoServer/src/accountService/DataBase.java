@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class DataBase {
 
-    private static final String XML_FILE = "casinoServer/res/users.xml";
+    private static final String XML_FILE = "res/users.xml";
 
     private final class UserData {
         private Integer id;

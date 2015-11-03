@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="protobuf-java-2.6.11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/casinoServer/lib/protobuf-java-2.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

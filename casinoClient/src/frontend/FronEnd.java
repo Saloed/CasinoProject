@@ -2,27 +2,31 @@ package frontend;
 
 import base.Abonent;
 import base.Address;
+import javafx.application.Application;
 import messageSystem.MessageSystemImpl;
 
-/**
- * Created by admin on 29.10.2015.
- */
-public class FronEnd implements Runnable, Abonent {
-    private final Address address = new Address();
+
+public class FronEnd  implements Runnable, Abonent {
+  private final Address address = new Address();
     private final MessageSystemImpl messageSystem;
 
     public FronEnd(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
+        Application.launch(FrontEndApplication.class);
+
     }
 
     public Address getAddress() {
         return address;
     }
 
+
+
     @Override
     public void run() {
+
         while (true) {
             messageSystem.execForAbonent(this);
             try {

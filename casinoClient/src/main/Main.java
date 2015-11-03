@@ -2,11 +2,9 @@ package main;
 
 import authorizeClient.AuthorizeClient;
 import chatClient.ChatClient;
-import frontend.FronEnd;
-import frontend.FrontEndApplication;
+import frontend.FrontEnd;
 import gameClient.GameClient;
 import gameService.GameService;
-import javafx.application.Application;
 import messageSystem.MessageSystemImpl;
 
 import java.util.LinkedList;
@@ -17,7 +15,7 @@ public final class Main {
 
         MessageSystemImpl messageSystem = new MessageSystemImpl();
 
-        ChatClient chatClient = new ChatClient();
+        ChatClient chatClient = new ChatClient(messageSystem);
         Thread chatClientThread = new Thread(chatClient);
 
         GameClient gameClient = new GameClient(messageSystem);
@@ -36,9 +34,9 @@ public final class Main {
         Thread authorizeClientThread = new Thread(new AuthorizeClient(messageSystem, threadList));
         authorizeClientThread.start();
 
-        FronEnd fronEnd = new FronEnd(messageSystem);
-        Thread fronEndThread = new Thread(fronEnd);
-        fronEndThread.start();
+        FrontEnd frontEnd = new FrontEnd(messageSystem);
+        Thread frontEndThread = new Thread(frontEnd);
+        frontEndThread.start();
 
 
     }

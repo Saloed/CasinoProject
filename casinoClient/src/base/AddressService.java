@@ -3,7 +3,7 @@ package base;
 
 public interface AddressService {
 
-    public void register(Object object);
+    public void register(Abonent object);
 
     public Address getGameClientAddress();
 
@@ -12,4 +12,6 @@ public interface AddressService {
     public Address getGameServiceAddress();
 
     public Address getFrontEndAddress();
+
+    public Address getChatClientAddress();
 }

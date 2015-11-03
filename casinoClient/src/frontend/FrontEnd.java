@@ -6,11 +6,11 @@ import javafx.application.Application;
 import messageSystem.MessageSystemImpl;
 
 
-public class FronEnd  implements Runnable, Abonent {
+public class FrontEnd implements Runnable, Abonent {
   private final Address address = new Address();
     private final MessageSystemImpl messageSystem;
 
-    public FronEnd(MessageSystemImpl messageSystem) {
+    public FrontEnd(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);

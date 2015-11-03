@@ -2,6 +2,6 @@
 <users>
 	<user name="derevo" id="1488" password="her" cash="10"></user>
 	<user name="admin" id="1337" password="root" cash="10"></user>
-	<user name="user" id="4" password="pass" cash="17"></user>
+	<user name="user" id="4" password="pass" cash="0"></user>
 	<user name="Suka" id="0" password="Padla" cash="10"></user>
 </users>

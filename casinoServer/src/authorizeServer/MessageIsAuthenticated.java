@@ -47,6 +47,9 @@ public class MessageIsAuthenticated extends Message {
             }
 
             authorizer.getContext(account).writeAndFlush(msg);
+
+            
+
             authorizer.removeContext(account);
         }
     }

@@ -23,10 +23,10 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                     public void operationComplete(Future<Channel> future) throws Exception {
                         ctx.writeAndFlush(
                                 "Welcome to casino chat service!\n");
-                        ctx.writeAndFlush(
+                       /* ctx.writeAndFlush(
                                 "Your session is protected by " +
                                         ctx.pipeline().get(SslHandler.class).engine().getSession().getCipherSuite() +
-                                        " cipher suite.\n");
+                                        " cipher suite.\n");*/
 
                         ctx.writeAndFlush("Good Luck and Have Fun!\n");
                         channels.add(ctx.channel());
@@ -38,17 +38,20 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
         // Send the received message to all channels but the current one.
         for (Channel c : channels) {
-            if (c != ctx.channel()) {
+            /*if (c != ctx.channel()) {
                 c.writeAndFlush("[" + ctx.channel().remoteAddress() + "] " + msg + '\n');
             } else {
                 c.writeAndFlush("[you] " + msg + '\n');
-            }
-        }
+            }*/
 
+            c.writeAndFlush(msg+'\n');
+            
+        }
+        /*
         // Close the connection if the client has sent '/exit'.
         if ("/exit".equals(msg.toLowerCase())) {
             ctx.close();
-        }
+        }*/
     }
 
     @Override

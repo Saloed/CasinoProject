@@ -58,4 +58,23 @@ public final class Account {
         hash = hash * password.hashCode();
         return hash;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Account) {
+            Account other = ((Account) object);
+            if (id == other.id) {
+                if (name == null && password == null) {
+                    if (other.name == null && other.password == null)
+                        return true;
+                } else {
+                    assert name != null;
+                    assert password!=null;
+                    if (name.equals(other.name) && password.equals(other.password) && cash == other.cash)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
 }

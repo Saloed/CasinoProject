@@ -19,13 +19,17 @@ public class MessageNewPlayerAccepted extends MessageToGameManager {
         this.ctx = ctx;
         this.sessionId = msg.getSessionId();
         this.game = msg.getGame();
-
-        this.betCash = msg.getBet(0);
-        if (msg.getBetCount() >= 2)
-            this.bet = msg.getBet(1);
-        else
+        if (msg.getBetCount() == 0) {
             this.bet = null;
+            this.betCash = null;
+        } else {
 
+            this.betCash = msg.getBet(0);
+            if (msg.getBetCount() >= 2)
+                this.bet = msg.getBet(1);
+            else
+                this.bet = null;
+        }
     }
 
     public void exec(GameManager gameManager) {

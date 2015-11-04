@@ -3,7 +3,6 @@ package base;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-
 public final class Address {
     private static final AtomicInteger ID_GENERATOR = new AtomicInteger();
     private final int id;
@@ -15,5 +14,17 @@ public final class Address {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Address) {
+            Address other = (Address) object;
+            if (id == other.id)
+                return true;
+        }
+
+
+        return false;
     }
 }

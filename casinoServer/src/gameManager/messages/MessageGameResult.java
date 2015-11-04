@@ -25,10 +25,7 @@ public class MessageGameResult extends MessageToGameManager {
         ctx.writeAndFlush(msg);
        // gameManager.removeGame(sesionId);
         //gameManager.removeUserChannel(sesionId);
-        Message message = new MessageUpdateAccount(gameManager.getAddress(),
-                gameManager.getMessageSystem().getAddressService().getAccountServiceAddress(),
-                gameManager.getPlayer(sesionId).getAccount());
-        gameManager.getMessageSystem().sendMessage(message);
+
     }
 
 }

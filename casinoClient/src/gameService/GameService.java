@@ -24,20 +24,28 @@ public class GameService implements Runnable, Abonent {
 
     //TODO this just for test
     public void sendRequest() {
-        /*//SLOT test
+       /* //SLOT test
         GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
                 .setSessionId(sessionId)
                 .setGame(GameMessage.ServerRequest.GameType.SLOT)
                 .addBet(30)
                 .build();
-                */
+        */
         //ROULETT test
         GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
                 .setSessionId(sessionId)
                 .setGame(GameMessage.ServerRequest.GameType.ROULETTE)
-                .addBet(30)
+                .addBet(30) //set null to leave game
                 .addBet(17)
                 .build();
+
+        /*//leave test
+        GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
+                .setSessionId(sessionId)
+                .setGame(GameMessage.ServerRequest.GameType.SLOT)
+                .build();
+         */
+
         channel.writeAndFlush(msg);
     }
 

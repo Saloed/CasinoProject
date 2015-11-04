@@ -2,9 +2,7 @@ package gameManager;
 
 import accountService.Account;
 
-/**
- * Created by user on 04.11.15.
- */
+
 public class Player {
     private Account account;
     private Integer sessioId;
@@ -42,5 +40,40 @@ public class Player {
     public void changeBet(Integer bet, Integer betCash) {
         this.bet = bet;
         this.betCash = betCash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Player) {
+            Player other = (Player) object;
+            if (account == null && sessioId == null && betCash == null && bet == null) {
+                if (other.account == null && other.sessioId == null && other.bet == null && other.betCash == null)
+                    return true;
+            }
+            assert account != null;
+            if (account.equals(other.account) && sessioId.equals(other.sessioId)) {
+                if (bet == null && betCash == null) {
+                    if (other.bet == null && other.betCash == null)
+                        return true;
+                } else {
+                    if (bet == null && other.bet == null) {
+                        if (betCash.equals(other.betCash))
+                            return true;
+                    } else if (betCash == null && other.betCash == null) {
+                        if (bet.equals(other.bet))
+                            return true;
+                    } else {
+                        assert bet != null;
+                        assert betCash != null;
+                        if (bet.equals(other.bet) && betCash.equals(other.betCash))
+                            return true;
+                    }
+                }
+
+            }
+
+        }
+
+        return false;
     }
 }

@@ -12,6 +12,7 @@ import messageSystem.MessageSystemImpl;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 
 
 public final class GameManager implements Abonent, Runnable {
@@ -47,22 +48,45 @@ public final class GameManager implements Abonent, Runnable {
     }
 
 
-//TODO add player change game functionality
-
-
     //TODO check and rework
     public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer betCash, Integer bet) {
         GameType parsedGameType = GameType.valueOf(gameType.toString());
+        if (!activePlayers.containsKey(sessionId)) {
+            if (betCash != null) {
+                activePlayers.put(sessionId, parsedGameType);
 
-        activePlayers.put(sessionId, parsedGameType);
+                Address target = gameAdresses.get(parsedGameType);
 
-        Address target = gameAdresses.get(parsedGameType);
+                activeUsers.get(sessionId).changeBet(bet, betCash);
+                Message msg = new MessageNewPLayer(address, target,
+                        getPlayer(sessionId));
+                gameMessageSystem.sendMessage(msg);
+            }
+        } else {
+            if (activePlayers.get(sessionId).equals(parsedGameType)) {
+                if (betCash != null) {
+                    Address target = gameAdresses.get(parsedGameType);
 
-        activeUsers.get(sessionId).changeBet(bet, betCash);
-        Message msg = new MessageNewPLayer(address, target,
-                getPlayer(sessionId));
-        gameMessageSystem.sendMessage(msg);
-
+                    activeUsers.get(sessionId).changeBet(bet, betCash);
+                    Message msg = new MessageNewPLayer(address, target,
+                            getPlayer(sessionId));
+                    gameMessageSystem.sendMessage(msg);
+                } else {
+                    activePlayers.replace(sessionId, GameType.NO_GAME);
+                }
+            } else {
+                if (betCash != null) {
+                    Address target = gameAdresses.get(parsedGameType);
+                    activePlayers.replace(sessionId, parsedGameType);
+                    activeUsers.get(sessionId).changeBet(bet, betCash);
+                    Message msg = new MessageNewPLayer(address, target,
+                            getPlayer(sessionId));
+                    gameMessageSystem.sendMessage(msg);
+                } else {
+                    activePlayers.replace(sessionId, GameType.NO_GAME);
+                }
+            }
+        }
     }
 
     public GameMessageSystem getGameMessageSystem() {
@@ -75,6 +99,21 @@ public final class GameManager implements Abonent, Runnable {
 
     public void changeAccountCash(Integer sessionId, Integer cash) {
         activeUsers.get(sessionId).getAccount().setCash(cash);
+    }
+
+    public void removeUser(Integer sessionId) {
+        activeUsers.remove(sessionId);
+    }
+
+    public Integer getPlayerSessionByContext(ChannelHandlerContext ctx) {
+        if (!usersChannels.containsValue(ctx))
+            return null;
+        Set<Integer> keySet = usersChannels.keySet();
+        for (Integer key : keySet) {
+            if (usersChannels.get(key).equals(ctx))
+                return key;
+        }
+        return null;
     }
 
     public void removeGame(Integer sessionId) {
@@ -90,7 +129,9 @@ public final class GameManager implements Abonent, Runnable {
     }
 
     public void addUserChannel(Integer sessionId, ChannelHandlerContext ctx) {
-        usersChannels.put(sessionId, ctx);
+        if (!usersChannels.containsKey(sessionId)) {
+            usersChannels.put(sessionId, ctx);
+        }
     }
 
     public void removeUserChannel(Integer sessionId) {
@@ -122,9 +163,9 @@ public final class GameManager implements Abonent, Runnable {
     }
 
     private enum GameType {
-
         SLOT,
-        ROULETTE;
+        ROULETTE,
+        NO_GAME;
 
     }
 }

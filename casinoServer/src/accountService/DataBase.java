@@ -44,6 +44,24 @@ public class DataBase {
             hash = hash * password.hashCode();
             return hash;
         }
+
+        @Override
+        public boolean equals(Object object) {
+            if (object instanceof UserData) {
+                UserData other = (UserData) object;
+                if (id == null && password == null && cash == null) {
+                    if (other.id == null && other.password == null && other.cash == null)
+                        return true;
+                } else {
+                    assert id != null;
+                    assert password != null;
+                    assert cash != null;
+                    if (id.equals(other.id) && password.equals(other.password) && cash.equals(other.cash))
+                        return true;
+                }
+            }
+            return false;
+        }
     }
 
     private Map<String, UserData> users = new HashMap<>();

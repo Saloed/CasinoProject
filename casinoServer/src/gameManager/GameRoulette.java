@@ -57,8 +57,10 @@ public class GameRoulette extends Game {
         while (true) {
             messageSystem.execForAbonent(this);
 
-            if (!players.isEmpty())
+            if (!players.isEmpty()) {
                 play();
+                players.clear();
+            }
             try {
                 Thread.sleep(10000);
             } catch (Exception e) {

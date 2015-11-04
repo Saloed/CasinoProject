@@ -5,7 +5,7 @@ import base.Abonent;
 import base.Address;
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
-import gameManager.MessageNewUserInCurrentSession;
+import gameManager.messages.MessageNewUserInCurrentSession;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

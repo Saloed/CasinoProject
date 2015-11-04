@@ -1,5 +1,6 @@
-package accountService;
+package accountService.messages;
 
+import accountService.AccountService;
 import base.Abonent;
 import base.Address;
 import base.Message;

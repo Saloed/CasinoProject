@@ -1,19 +1,21 @@
-package accountService;
+package accountService.messages;
 
+import accountService.Account;
+import accountService.AccountService;
 import authorizeServer.MessageIsAuthenticated;
 import base.Address;
 import base.Message;
 
-
-
-public final class MessageAuthenticate extends MessageToAccountService {
-
+/**
+ * Created by admin on 28.10.2015.
+ */
+public class MessageRegister extends MessageToAccountService {
 
     private String name;
     private String password;
 
 
-    public MessageAuthenticate(Address from, Address to, String name, String password) {
+    public MessageRegister(Address from, Address to, String name, String password) {
         super(from, to);
         this.name = name;
         this.password = password;
@@ -22,8 +24,7 @@ public final class MessageAuthenticate extends MessageToAccountService {
 
     @Override
     protected void exec(AccountService service) {
-        final Account account = service.getAccountDataBase().authenticate(name, password);
-
+        final Account account = service.getAccountDataBase().register(name, password);
         final Message back = new MessageIsAuthenticated(getTo(), getFrom(), account);
         service.getMessageSystem().sendMessage(back);
     }

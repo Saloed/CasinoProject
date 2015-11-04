@@ -2,7 +2,7 @@ package gameServer;
 
 import base.GameMessage.ServerRequest;
 import base.Message;
-import gameManager.MessageNewPlayerAccepted;
+import gameManager.messages.MessageNewPlayerAccepted;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;

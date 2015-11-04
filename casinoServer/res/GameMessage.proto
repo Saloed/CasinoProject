@@ -29,4 +29,5 @@ message UserAuthorizeAnswerMessage {
     required string password = 2;
     required bool answer = 3;
     optional int32 sessionId = 4;
+    optional int32 cash = 5;
 }

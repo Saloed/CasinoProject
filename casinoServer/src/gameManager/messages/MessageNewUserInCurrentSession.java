@@ -1,7 +1,9 @@
-package gameManager;
+package gameManager.messages;
 
 import accountService.Account;
 import base.Address;
+import gameManager.GameManager;
+import gameManager.Player;
 
 /**
  * Created by admin on 28.10.2015.

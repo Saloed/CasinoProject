@@ -5,6 +5,7 @@ import base.Address;
 import base.GameMessage;
 import base.Message;
 import gameManager.gameMessageSystem.GameMessageSystem;
+import gameManager.messages.MessageNewPLayer;
 import io.netty.channel.ChannelHandlerContext;
 import messageSystem.MessageSystemImpl;
 
@@ -50,15 +51,15 @@ public final class GameManager implements Abonent, Runnable {
 
 
     //TODO check and rework
-    public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer bet) {
-        GameType parsedGameType = GameType.valueOf(gameType.getDescriptorForType().getContainingType().getName());
+    public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer betCash, Integer bet) {
+        GameType parsedGameType = GameType.valueOf(gameType.toString());
 
         activePlayers.put(sessionId, parsedGameType);
 
         Address target = gameAdresses.get(parsedGameType);
 
-        activeUsers.get(sessionId).changeBet(bet);
-        Message msg = new MessageNewSlotPLayer(address, target,
+        activeUsers.get(sessionId).changeBet(bet, betCash);
+        Message msg = new MessageNewPLayer(address, target,
                 getPlayer(sessionId));
         gameMessageSystem.sendMessage(msg);
 

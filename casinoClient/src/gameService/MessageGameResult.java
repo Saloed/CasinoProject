@@ -16,7 +16,10 @@ public class MessageGameResult extends MessageToGameService {
 
     //TODO rework (it just for test)
     public void exec(GameService gameService) {
+        /*
         System.out.println("Answer: Cash=" + msg.getCash() +
                 " Slots:" + msg.getGameData(0) + msg.getGameData(1) + msg.getGameData(2));
+                */
+        System.out.println("Answer: Cash="+msg.getCash()+" Roulette: "+msg.getGameData(0));
     }
 }

@@ -3,13 +3,12 @@ package gameManager;
 import base.GameMessage;
 import base.Message;
 import gameManager.gameMessageSystem.GameMessageSystem;
+import gameManager.messages.MessageGameResult;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-/**
- * Created by user on 04.11.15.
- */
+
 public class GameRoulette extends Game {
 
     private LinkedList<Player> players = new LinkedList<>();
@@ -31,20 +30,22 @@ public class GameRoulette extends Game {
             result = result * (-1);
 
         for (Player player : players) {
-            int resultCash = player.getAccount().getCash();
+            int resultCash = player.getBetCash();
             if (player.getBet() == null)
                 throw new IllegalArgumentException("Bet null");
             if (player.getBet().equals(result))
                 resultCash = resultCash * 5;
             else
-                resultCash = resultCash / 2;
+                resultCash = 0;
+
+            resultCash = resultCash + player.getAccount().getCash();
 
             GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
                     .setCash(resultCash)
                     .addGameData(result)
                     .build();
 
-            Message message = new MessageGameResult(messageSystem.getAddressService().getSlotMachineAddress(),
+            Message message = new MessageGameResult(messageSystem.getAddressService().getRouletteAddress(),
                     messageSystem.getAddressService().getGameManagerAddress(),
                     player.getSessioId(), msg);
             messageSystem.sendMessage(message);
@@ -53,13 +54,17 @@ public class GameRoulette extends Game {
 
     @Override
     public void run() {
+        while (true) {
+            messageSystem.execForAbonent(this);
 
-        messageSystem.execForAbonent(this);
-
-        if (!players.isEmpty())
-            play();
-
-
+            if (!players.isEmpty())
+                play();
+            try {
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

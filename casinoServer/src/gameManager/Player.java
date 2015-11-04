@@ -9,6 +9,7 @@ public class Player {
     private Account account;
     private Integer sessioId;
     private Integer bet;
+    private Integer betCash;
 
     public Player(Account account, Integer sessioId, Integer bet) {
         this.account = account;
@@ -34,7 +35,12 @@ public class Player {
         return bet;
     }
 
-    public void changeBet(Integer bet) {
+    public Integer getBetCash() {
+        return betCash;
+    }
+
+    public void changeBet(Integer bet, Integer betCash) {
         this.bet = bet;
+        this.betCash = betCash;
     }
 }

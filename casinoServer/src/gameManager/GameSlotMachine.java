@@ -4,6 +4,7 @@ package gameManager;
 import base.GameMessage;
 import base.Message;
 import gameManager.gameMessageSystem.GameMessageSystem;
+import gameManager.messages.MessageGameResult;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -32,11 +33,12 @@ public final class GameSlotMachine extends Game {
         int third = random.nextInt() % 5 + random.nextInt() % 5;
         if (third < 0)
             third = third * (-1);
-        int resultCash = player.getAccount().getCash();
+        int resultCash = player.getBetCash();
         if (first == secound && secound == third)
             resultCash = resultCash * 5;
         else
-            resultCash = resultCash / 2;
+            resultCash = 0;
+        resultCash = resultCash + player.getAccount().getCash();
 
         GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
                 .setCash(resultCash)
@@ -53,14 +55,20 @@ public final class GameSlotMachine extends Game {
 
     @Override
     public void run() {
+        while (true) {
+            messageSystem.execForAbonent(this);
 
-        messageSystem.execForAbonent(this);
-
-        if (!players.isEmpty())
-            for (Player player : players) {
-                play(player);
+            if (!players.isEmpty()) {
+                for (Player player : players) {
+                    play(player);
+                }
+                players.clear();
             }
-
-
+            try {
+                Thread.sleep(10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

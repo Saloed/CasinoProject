@@ -30,7 +30,7 @@ public class GameAddressService {
     }
 
     public Address getSlotMachineAddress() {
-        return getSlotMachineAddress();
+        return slotMachineAddress;
     }
 
     public Address getRouletteAddress() {

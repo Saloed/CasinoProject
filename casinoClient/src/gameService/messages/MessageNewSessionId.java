@@ -1,6 +1,7 @@
-package gameService;
+package gameService.messages;
 
 import base.Address;
+import gameService.GameService;
 
 
 public class MessageNewSessionId extends MessageToGameService {

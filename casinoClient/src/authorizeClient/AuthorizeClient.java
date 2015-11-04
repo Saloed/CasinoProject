@@ -32,9 +32,27 @@ public class AuthorizeClient implements Runnable, Abonent {
         messageSystem.addService(this);
     }
 
+    boolean breaker = true;
+
+    public void channelDisconnection() {
+        breaker = false;
+    }
+
+    public void sendRequest(UserAuthorizeMessage msg) {
+        try {
+
+            ChannelFuture channelFuture = ch.writeAndFlush(msg).sync();
+            ch.closeFuture().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Address getAddress() {
         return address;
     }
+
+    Channel ch = null;
 
     public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
@@ -44,18 +62,17 @@ public class AuthorizeClient implements Runnable, Abonent {
             client.channel(NioSocketChannel.class);
             client.handler(new AuthorizeClientInitializer(messageSystem, threadList));
 
-            Channel ch = client.connect(HOST, PORT).sync().channel();
+            ch = client.connect(HOST, PORT).sync().channel();
 
-            //TODO write here name and password
-//TODO realize register as message from FrontEnd
-            UserAuthorizeMessage msg = UserAuthorizeMessage.newBuilder()
-                    .setUserName("user")
-                    .setPassword("pass")
-                    .setRegister(false)
-                    .build();
+            while (breaker) {
+                messageSystem.execForAbonent(this);
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
-            ChannelFuture channelFuture = ch.writeAndFlush(msg).sync();
-            ch.closeFuture().sync();
 
         } catch (Exception e) {
             e.printStackTrace();

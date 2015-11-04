@@ -3,8 +3,8 @@ package gameClient;
 import base.Abonent;
 import base.Address;
 import base.Message;
-import gameService.MessageSetChannel;
-import gameService.MessageTestSendRequest;
+import gameService.messages.MessageSetChannel;
+import gameService.messages.MessageSendRequest;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -47,11 +47,6 @@ public class GameClient implements Runnable, Abonent {
             Message message = new MessageSetChannel(address,
                     messageSystem.getAddressService().getGameServiceAddress(), ch);
             messageSystem.sendMessage(message);
-            //TODO this for test
-            //TODO next time its will be message from FrontEnd to GameService
-
-            Message msg = new MessageTestSendRequest(address, messageSystem.getAddressService().getGameServiceAddress());
-            messageSystem.sendMessage(msg);
 
             ch.closeFuture().sync();
 

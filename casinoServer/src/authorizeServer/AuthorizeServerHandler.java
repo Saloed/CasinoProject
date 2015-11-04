@@ -1,5 +1,6 @@
 package authorizeServer;
 
+import authorizeServer.messages.MessageToAuthorizer;
 import base.GameMessage.UserAuthorizeMessage;
 import base.Message;
 import base.MessageSystem;

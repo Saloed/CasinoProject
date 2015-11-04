@@ -1,8 +1,9 @@
-package chatClient;
+package chatClient.messages;
 
 import base.Abonent;
 import base.Address;
 import base.Message;
+import chatClient.ChatClient;
 import gameService.GameService;
 
 /**

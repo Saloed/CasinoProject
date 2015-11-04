@@ -1,6 +1,7 @@
-package gameService;
+package gameService.messages;
 
 import base.Address;
+import gameService.GameService;
 import io.netty.channel.Channel;
 
 /**

@@ -2,7 +2,7 @@ package gameClient;
 
 import base.GameMessage.ServerAnswer;
 import base.Message;
-import gameService.MessageGameResult;
+import gameService.messages.MessageGameResult;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;

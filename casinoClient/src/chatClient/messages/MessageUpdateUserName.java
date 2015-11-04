@@ -1,6 +1,7 @@
-package chatClient;
+package chatClient.messages;
 
 import base.Address;
+import chatClient.ChatClient;
 
 /**
  * Created by user on 04.11.15.

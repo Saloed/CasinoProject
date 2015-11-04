@@ -12,18 +12,36 @@ public class GameService implements Runnable, Abonent {
     private Channel channel;
     private Integer sessionId = 0;
 
+    public enum GameType {
+        SLOT,
+        ROULETTE,
+        NO_GAME;
+
+    }
+
+    private GameType currentGame = GameType.NO_GAME;
+
     public GameService(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
     }
 
+    public void changeCurrentGame(GameType newGame) {
+        currentGame = newGame;
+    }
+
+    public GameType getCurrentGame() {
+        return currentGame;
+    }
+
     public void setChannel(Channel channel) {
         this.channel = channel;
     }
 
-    //TODO this just for test
-    public void sendRequest() {
+
+    public void sendRequest(GameMessage.ServerRequest msg) {
+
        /* //SLOT test
         GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
                 .setSessionId(sessionId)
@@ -31,14 +49,14 @@ public class GameService implements Runnable, Abonent {
                 .addBet(30)
                 .build();
         */
-        //ROULETT test
+       /* //ROULETT test
         GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
                 .setSessionId(sessionId)
                 .setGame(GameMessage.ServerRequest.GameType.ROULETTE)
                 .addBet(30) //set null to leave game
                 .addBet(17)
                 .build();
-
+*/
         /*//leave test
         GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
                 .setSessionId(sessionId)
@@ -49,6 +67,18 @@ public class GameService implements Runnable, Abonent {
         channel.writeAndFlush(msg);
     }
 
+    public Integer getSessionId() {
+        return sessionId;
+    }
+
+    public void channelDisconnect() {
+        try {
+            channel.disconnect().sync();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void changeSessionId(Integer sessionId) {
         this.sessionId = sessionId;

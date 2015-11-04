@@ -1,7 +1,8 @@
-package gameService;
+package gameService.messages;
 
 import base.Address;
 import base.GameMessage;
+import gameService.GameService;
 
 /**
  * Created by admin on 29.10.2015.

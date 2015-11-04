@@ -2,7 +2,7 @@ package accountService.messages;
 
 import accountService.Account;
 import accountService.AccountService;
-import authorizeServer.MessageIsAuthenticated;
+import authorizeServer.messages.MessageIsAuthenticated;
 import base.Address;
 import base.Message;
 

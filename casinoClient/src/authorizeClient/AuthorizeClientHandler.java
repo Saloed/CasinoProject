@@ -2,8 +2,8 @@ package authorizeClient;
 
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
-import chatClient.MessageUpdateUserName;
-import gameService.MessageNewSessionId;
+import chatClient.messages.MessageUpdateUserName;
+import gameService.messages.MessageNewSessionId;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;
@@ -44,6 +44,7 @@ public class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuth
                     messageSystem.getAddressService().getChatClientAddress(),
                     msg.getUserName());
             messageSystem.sendMessage(message);
+
         }
     }
 }

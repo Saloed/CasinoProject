@@ -14,10 +14,7 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import messageSystem.MessageSystemImpl;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-public class ChatClient implements Runnable ,Abonent{
+public class ChatClient implements Runnable, Abonent {
     static final String HOST = "127.0.0.1";
     static final int PORT = 1488;
     private final Address address = new Address();
@@ -25,18 +22,32 @@ public class ChatClient implements Runnable ,Abonent{
 
     private String userName;
 
-public ChatClient(MessageSystemImpl messageSystem){
-    this.messageSystem = messageSystem;
-    messageSystem.getAddressService().register(this);
-    messageSystem.addService(this);
-}
+    public ChatClient(MessageSystemImpl messageSystem) {
+        this.messageSystem = messageSystem;
+        messageSystem.getAddressService().register(this);
+        messageSystem.addService(this);
+    }
+
     public Address getAddress() {
         return address;
     }
 
-    public void setUserName(String userName){
-        this.userName=userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
+    private boolean breaker = true;
+
+    public void channelDisconnection() {
+        breaker = false;
+    }
+
+    public void handleMessage(String message) {
+        lastWriteFuture = ch.writeAndFlush(userName + "> " + message + "\r\n");
+    }
+
+    private ChannelFuture lastWriteFuture = null;
+    Channel ch = null;
 
     public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
@@ -47,28 +58,15 @@ public ChatClient(MessageSystemImpl messageSystem){
             client.channel(NioSocketChannel.class);
             client.handler(new ChatClientInitializer(sslCtx));
 
-            Channel ch = client.connect(HOST, PORT).sync().channel();
-
-            messageSystem.execForAbonent(this);
-
-            // Read commands from the stdin.
-            ChannelFuture lastWriteFuture = null;
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            for (; ; ) {
-                String line = in.readLine();
-                if (line == null) {
-                    break;
+            ch = client.connect(HOST, PORT).sync().channel();
+            while (breaker) {
+                messageSystem.execForAbonent(this);
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
-                // Sends the received line to the server.
-                lastWriteFuture = ch.writeAndFlush(userName+"> "+line + "\r\n");
-                /*
-                // If user typed the '/exit' command, wait until the server closes
-                // the connection.
-                if ("/exit".equals(line.toLowerCase())) {
-                    ch.closeFuture().sync();
-                    break;
-                }*/
             }
             // Wait until all messages are flushed before closing the channel.
             if (lastWriteFuture != null) {

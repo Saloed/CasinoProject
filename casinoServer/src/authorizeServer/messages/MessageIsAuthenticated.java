@@ -1,6 +1,7 @@
-package authorizeServer;
+package authorizeServer.messages;
 
 import accountService.Account;
+import authorizeServer.Authorizer;
 import base.Abonent;
 import base.Address;
 import base.GameMessage.UserAuthorizeAnswerMessage;

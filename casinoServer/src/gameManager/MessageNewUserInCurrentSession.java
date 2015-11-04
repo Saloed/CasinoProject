@@ -18,7 +18,7 @@ public class MessageNewUserInCurrentSession extends MessageToGameManager {
     }
 
     public void exec(GameManager gameManager) {
-        gameManager.addNewActiveUser(sessionId, account);
+        gameManager.addNewActiveUser(sessionId, new Player(account, sessionId));
     }
 
 }

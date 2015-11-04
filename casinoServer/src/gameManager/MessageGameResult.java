@@ -26,7 +26,7 @@ public class MessageGameResult extends MessageToGameManager {
         gameManager.removeUserChannel(sesionId);
         Message message = new MessageUpdateAccount(gameManager.getAddress(),
                 gameManager.getMessageSystem().getAddressService().getAccountServiceAddress(),
-                gameManager.getPlayerAccount(sesionId));
+                gameManager.getPlayer(sesionId).getAccount());
         gameManager.getMessageSystem().sendMessage(message);
     }
 

@@ -1,26 +1,27 @@
 package gameManager;
 
 
-import accountService.Account;
 import base.GameMessage;
 import base.Message;
-import base.MessageSystem;
+import gameManager.gameMessageSystem.GameMessageSystem;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public final class GameSlotMachine extends Game {
 
-    private Account player;
+    private LinkedList<Player> players = new LinkedList<>();
 
-    public GameSlotMachine(MessageSystem messageSystem, Integer sessionId, Account player) {
-        super(messageSystem, sessionId);
-        this.player = player;
+    public GameSlotMachine(GameMessageSystem messageSystem) {
+        super(messageSystem);
 
     }
 
-    @Override
-    public void run() {
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
 
+    private void play(Player player) {
         Random random = new Random();
         int first = random.nextInt() % 5 + random.nextInt() % 5;
         if (first < 0)
@@ -31,7 +32,7 @@ public final class GameSlotMachine extends Game {
         int third = random.nextInt() % 5 + random.nextInt() % 5;
         if (third < 0)
             third = third * (-1);
-        int resultCash = player.getCash();
+        int resultCash = player.getAccount().getCash();
         if (first == secound && secound == third)
             resultCash = resultCash * 5;
         else
@@ -44,10 +45,22 @@ public final class GameSlotMachine extends Game {
                 .addGameData(third)
                 .build();
 
-        Message message = new MessageGameResult(messageSystem.getAddressService().getGameManagerAddress(),
+        Message message = new MessageGameResult(messageSystem.getAddressService().getSlotMachineAddress(),
                 messageSystem.getAddressService().getGameManagerAddress(),
-                sessionId, msg);
+                player.getSessioId(), msg);
         messageSystem.sendMessage(message);
+    }
+
+    @Override
+    public void run() {
+
+        messageSystem.execForAbonent(this);
+
+        if (!players.isEmpty())
+            for (Player player : players) {
+                play(player);
+            }
+
 
     }
 }

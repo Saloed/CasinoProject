@@ -1,16 +1,23 @@
 package gameManager;
 
 
-import base.MessageSystem;
-import messageSystem.MessageSystemImpl;
+import base.Abonent;
+import base.Address;
+import gameManager.gameMessageSystem.GameMessageSystem;
 
-public abstract class Game implements Runnable {
-    public Integer sessionId;
-    public MessageSystem messageSystem;
+public abstract class Game implements Runnable, Abonent {
+    public GameMessageSystem messageSystem;
+    Address address = new Address();
 
-    public Game(MessageSystem messageSystem, Integer sessionId) {
+    public Game(GameMessageSystem messageSystem) {
         this.messageSystem = messageSystem;
-        this.sessionId = sessionId;
+        messageSystem.addService(this);
+        messageSystem.getAddressService().register(this);
+    }
+
+    @Override
+    public Address getAddress() {
+        return address;
     }
 
     @Override

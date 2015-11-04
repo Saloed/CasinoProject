@@ -6,10 +6,11 @@ message ServerRequest {
 
     enum GameType {
         SLOT = 1;
+        ROULETTE = 2;
     }
 
     required GameType game = 2;
-
+    repeated int32 bet = 3;
 }
 
 message ServerAnswer {

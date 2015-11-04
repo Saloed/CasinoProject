@@ -3,7 +3,7 @@ package base;
 
 public interface AddressService {
 
-    public void register(Object object);
+    public void register(Abonent object);
 
     public Address getGameManagerAddress();
 

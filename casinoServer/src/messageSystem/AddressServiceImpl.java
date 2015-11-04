@@ -2,6 +2,7 @@ package messageSystem;
 
 import accountService.AccountService;
 import authorizeServer.Authorizer;
+import base.Abonent;
 import base.Address;
 import base.AddressService;
 import gameManager.GameManager;
@@ -24,7 +25,7 @@ public final class AddressServiceImpl implements AddressService {
     }
     */
 
-    public void register(Object object) {
+    public void register(Abonent object) {
 
         if (object instanceof GameManager)
             gameManager = ((GameManager) object).getAddress();

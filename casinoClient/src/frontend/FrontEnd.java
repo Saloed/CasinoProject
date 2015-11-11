@@ -14,7 +14,6 @@ public class FrontEnd implements Runnable, Abonent {
         this.messageSystem = messageSystem;
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
-        Application.launch(FrontEndApplication.class);
 
     }
 

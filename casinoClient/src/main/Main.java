@@ -5,15 +5,25 @@ import chatClient.ChatClient;
 import frontend.FrontEnd;
 import gameClient.GameClient;
 import gameService.GameService;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import messageSystem.MessageSystemImpl;
 
 import java.util.LinkedList;
 
 
-public final class Main {
-    public static void main(String[] args) {
+public final class Main extends Application {
 
-        MessageSystemImpl messageSystem = new MessageSystemImpl();
+    private MessageSystemImpl messageSystem;
+    private LinkedList<Thread> threadList;
+
+    @Override
+    public void init() throws Exception {
+
+        messageSystem = new MessageSystemImpl();
 
         ChatClient chatClient = new ChatClient(messageSystem);
         Thread chatClientThread = new Thread(chatClient);
@@ -26,7 +36,7 @@ public final class Main {
 
         //TODO create all threads and add to List
 
-        LinkedList<Thread> threadList = new LinkedList<>();
+        threadList = new LinkedList<>();
         threadList.add(chatClientThread);
         threadList.add(gameClientThread);
         threadList.add(gameServiceThread);
@@ -38,6 +48,19 @@ public final class Main {
         Thread frontEndThread = new Thread(frontEnd);
         frontEndThread.start();
 
+    }
 
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/frontend/sample.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+
+        launch(args);
     }
 }

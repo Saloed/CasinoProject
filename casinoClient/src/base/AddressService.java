@@ -14,4 +14,6 @@ public interface AddressService {
     public Address getFrontEndAddress();
 
     public Address getChatClientAddress();
+
+    public Address getAuthorizeControllerAddress();
 }

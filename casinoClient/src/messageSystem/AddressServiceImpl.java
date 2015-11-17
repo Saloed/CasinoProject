@@ -5,6 +5,7 @@ import base.Abonent;
 import base.Address;
 import base.AddressService;
 import chatClient.ChatClient;
+import frontend.AuthorizeController;
 import frontend.FrontEnd;
 import gameClient.GameClient;
 import gameService.GameService;
@@ -15,19 +16,23 @@ public final class AddressServiceImpl implements AddressService {
     private Address gameService;
     private Address frontend;
     private Address chatClient;
+    private Address authorizeController;
+
 
     public void register(Abonent object) {
 
         if (object instanceof GameClient)
-            gameClient = ((GameClient) object).getAddress();
+            gameClient = (object).getAddress();
         else if (object instanceof AuthorizeClient)
-            authorizeClient = ((AuthorizeClient) object).getAddress();
+            authorizeClient = (object).getAddress();
         else if (object instanceof GameService)
-            gameService = ((GameService) object).getAddress();
+            gameService = (object).getAddress();
         else if (object instanceof FrontEnd)
-            frontend = ((FrontEnd) object).getAddress();
+            frontend = (object).getAddress();
         else if(object instanceof ChatClient)
-            chatClient=((ChatClient)object).getAddress();
+            chatClient=(object).getAddress();
+        else if(object instanceof AuthorizeController)
+            authorizeController=(object).getAddress();
     }
 
     public Address getGameClientAddress() {
@@ -49,4 +54,6 @@ public final class AddressServiceImpl implements AddressService {
     public Address getChatClientAddress() {
         return chatClient;
     }
+
+    public Address getAuthorizeControllerAddress(){return authorizeController;}
 }

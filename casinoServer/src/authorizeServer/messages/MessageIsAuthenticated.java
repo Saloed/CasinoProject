@@ -46,10 +46,12 @@ public class MessageIsAuthenticated extends Message {
                         .setPassword(account.getPassword())
                         .build();
             }
+            try {
+                authorizer.getContext(account).writeAndFlush(msg).sync();
 
-            authorizer.getContext(account).writeAndFlush(msg);
-
-            
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             authorizer.removeContext(account);
         }

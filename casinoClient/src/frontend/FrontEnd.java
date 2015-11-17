@@ -1,14 +1,22 @@
 package frontend;
 
+import authorizeClient.messages.MessageAuthorizeUser;
 import base.Abonent;
 import base.Address;
+import base.Message;
+import base.MessageSystem;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import messageSystem.MessageSystemImpl;
 
 
 public class FrontEnd implements Runnable, Abonent {
   private final Address address = new Address();
     private final MessageSystemImpl messageSystem;
+    public PasswordField pass;
+    public TextField login;
 
     public FrontEnd(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
@@ -23,8 +31,11 @@ public class FrontEnd implements Runnable, Abonent {
 
 
 
+
+
     @Override
     public void run() {
+
 
         while (true) {
             messageSystem.execForAbonent(this);

@@ -36,13 +36,20 @@ public class AuthorizeClient implements Runnable, Abonent {
 
     public void channelDisconnection() {
         breaker = false;
+        try {
+
+            ch.closeFuture().sync();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sendRequest(UserAuthorizeMessage msg) {
         try {
 
             ChannelFuture channelFuture = ch.writeAndFlush(msg).sync();
-            ch.closeFuture().sync();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -61,8 +68,19 @@ public class AuthorizeClient implements Runnable, Abonent {
             client.group(group);
             client.channel(NioSocketChannel.class);
             client.handler(new AuthorizeClientInitializer(messageSystem, threadList));
+            try {
+                ch = client.connect(HOST, PORT).sync().channel();
 
-            ch = client.connect(HOST, PORT).sync().channel();
+
+
+
+            } catch (Exception e) {
+                System.err.println("Cant connect to server");
+            }
+
+
+
+
 
             while (breaker) {
                 messageSystem.execForAbonent(this);

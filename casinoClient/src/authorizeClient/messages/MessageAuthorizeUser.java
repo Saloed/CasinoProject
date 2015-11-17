@@ -21,9 +21,9 @@ public class MessageAuthorizeUser extends MessageToAuthorizeClient {
 
     public void exec(AuthorizeClient authorizeClient) {
         GameMessage.UserAuthorizeMessage msg = GameMessage.UserAuthorizeMessage.newBuilder()
-                .setUserName("user")
-                .setPassword("pass")
-                .setRegister(false)
+                .setUserName(userName)
+                .setPassword(password)
+                .setRegister(register)
                 .build();
         authorizeClient.sendRequest(msg);
     }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane id="regWin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: lightseagreen;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RegistrationController">
+   <children>
+      <TextField fx:id="loginReg" layoutX="75.0" layoutY="62.0" />
+      <PasswordField fx:id="passReg" layoutX="75.0" layoutY="105.0" />
+      <Button fx:id="signK" contentDisplay="CENTER" layoutX="105.0" layoutY="152.0" mnemonicParsing="false" onAction="#registration" prefHeight="19.0" prefWidth="94.0" text="OK" />
+      <Label layoutX="25.0" layoutY="61.0" text="Login">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="104.0" text="Pass">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

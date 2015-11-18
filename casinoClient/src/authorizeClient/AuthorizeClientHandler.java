@@ -3,7 +3,7 @@ package authorizeClient;
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
 import chatClient.messages.MessageUpdateUserName;
-import frontend.MessagePipiska;
+import frontend.messages.MessagePipiska;
 import gameService.messages.MessageNewSessionId;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

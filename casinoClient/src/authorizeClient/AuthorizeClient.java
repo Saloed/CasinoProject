@@ -3,6 +3,8 @@ package authorizeClient;
 import base.Abonent;
 import base.Address;
 import base.GameMessage.UserAuthorizeMessage;
+import base.Message;
+import frontend.messages.MessageAuthorizeError;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -34,12 +36,24 @@ public class AuthorizeClient implements Runnable, Abonent {
 
     boolean breaker = true;
 
+    public boolean readyToWork() {
+        //return Thread.currentThread().isAlive();
+        return ch != null;
+    }
+
+    public void notifyConnectionError() {
+        Message message = new MessageAuthorizeError(address,
+                messageSystem.getAddressService().getAuthorizeControllerAddress(),
+                "Cant connect to server");
+        messageSystem.sendMessage(message);
+    }
+
     public void channelDisconnection() {
         breaker = false;
         try {
-
-            ch.closeFuture().sync();
-
+            if (ch != null) {
+                ch.closeFuture().sync();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -59,28 +73,42 @@ public class AuthorizeClient implements Runnable, Abonent {
         return address;
     }
 
-    Channel ch = null;
+    private Bootstrap client;
+    private Channel ch = null;
+    private boolean needReconnect = false;
+
+    private boolean connectionTry() {
+        try {
+            ch = client.connect(HOST, PORT).sync().channel();
+
+
+        } catch (Exception e) {
+
+            ch = null;
+            return true;
+        }
+        return false;
+    }
+
+    public void reconnect() {
+        if (needReconnect) {
+            needReconnect = connectionTry();
+        }
+    }
 
     public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
-            Bootstrap client = new Bootstrap();
+            client = new Bootstrap();
             client.group(group);
             client.channel(NioSocketChannel.class);
             client.handler(new AuthorizeClientInitializer(messageSystem, threadList));
-            try {
-                ch = client.connect(HOST, PORT).sync().channel();
 
+            needReconnect = connectionTry();
 
-
-
-            } catch (Exception e) {
-                System.err.println("Cant connect to server");
+            if (needReconnect) {
+                notifyConnectionError();
             }
-
-
-
-
 
             while (breaker) {
                 messageSystem.execForAbonent(this);

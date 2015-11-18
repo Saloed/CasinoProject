@@ -1,8 +1,9 @@
-package frontend;
+package frontend.messages;
 
 import base.Abonent;
 import base.Address;
 import base.Message;
+import frontend.AuthorizeController;
 
 /**
  * Created by FedoR on 17.11.2015.

@@ -25,6 +25,11 @@ public class MessageAuthorizeUser extends MessageToAuthorizeClient {
                 .setPassword(password)
                 .setRegister(register)
                 .build();
-        authorizeClient.sendRequest(msg);
+        authorizeClient.reconnect();
+        if (authorizeClient.readyToWork()) {
+            authorizeClient.sendRequest(msg);
+        } else {
+            authorizeClient.notifyConnectionError();
+        }
     }
 }

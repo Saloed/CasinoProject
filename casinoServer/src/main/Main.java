@@ -22,11 +22,14 @@ public final class Main {
 
         final ChatServer chatServer = new ChatServer();
         final Thread chatServerThread = new Thread(chatServer);
+        chatServerThread.setDaemon(true);
 
         final GameServer gameServer = new GameServer(messageSystem);
         final Thread gameServerThread = new Thread(gameServer);
+        gameServerThread.setDaemon(true);
 
         final Thread authorizeServerThread = new Thread(new AuthorizeServer(messageSystem));
+        authorizeServerThread.setDaemon(true);
 
         try {
             authorizeServerThread.start();

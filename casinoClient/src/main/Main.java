@@ -1,16 +1,19 @@
 package main;
 
 import authorizeClient.AuthorizeClient;
-import authorizeClient.messages.MessageAuthorizeUser;
+import authorizeClient.messages.MessageDissconectAuthorizer;
+import base.Address;
 import base.Message;
 import base.MessageSystem;
 import chatClient.ChatClient;
-import frontend.FrontEnd;
+import chatClient.messages.MessageChatDisconnection;
 import frontend.AuthorizeController;
+import frontend.FrontEnd;
 import frontend.MainWindowController;
 import frontend.RegistrationController;
 import gameClient.GameClient;
 import gameService.GameService;
+import gameService.messages.MessageUserDisconect;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,13 +45,15 @@ public final class Main extends Application {
 
         ChatClient chatClient = new ChatClient(messageSystem);
         Thread chatClientThread = new Thread(chatClient);
+        chatClientThread.setDaemon(true);
 
         GameClient gameClient = new GameClient(messageSystem);
         Thread gameClientThread = new Thread(gameClient);
+        gameClientThread.setDaemon(true);
 
         GameService gameService = new GameService(messageSystem);
         Thread gameServiceThread = new Thread(gameService);
-
+        gameServiceThread.setDaemon(true);
 
         //TODO create all threads and add to List
 
@@ -58,10 +63,12 @@ public final class Main extends Application {
         threadList.add(gameServiceThread);
 
         Thread authorizeClientThread = new Thread(new AuthorizeClient(messageSystem, threadList));
+        authorizeClientThread.setDaemon(true);
         authorizeClientThread.start();
 
         FrontEnd frontEnd = new FrontEnd(messageSystem);
         Thread frontEndThread = new Thread(frontEnd);
+        frontEndThread.setDaemon(true);
 
         frontEndThread.start();
 
@@ -70,7 +77,7 @@ public final class Main extends Application {
 
     public void gotoLogin() {
         try {
-            AuthorizeController login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml","Authorization window",false);
+            AuthorizeController login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window", false);
             login.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,7 +86,8 @@ public final class Main extends Application {
 
     public void gotoMainWin() {
         try {
-            MainWindowController home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml","Casino TRI TOPORA",true);
+            MainWindowController home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml",
+                    "Casino TRI TOPORA", true);
             home.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,7 +96,8 @@ public final class Main extends Application {
 
     public void gotoReg() {
         try {
-            RegistrationController reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml","Registration window",false);
+            RegistrationController reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml",
+                    "Registration window", false);
             reg.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -108,7 +117,7 @@ public final class Main extends Application {
     }
 
     //U can pass any params in
-    private Initializable replaceSceneContent(String fxml,String title, Boolean resizable) throws Exception {
+    private Initializable replaceSceneContent(String fxml, String title, Boolean resizable) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
@@ -131,8 +140,27 @@ public final class Main extends Application {
         Application.launch(Main.class, (java.lang.String[]) null);
     }
 
-    public MessageSystem getMessageSystem()
-    {
+    @Override
+    public void stop() throws Exception {
+        Message message = new MessageChatDisconnection(new Address(),
+                messageSystem.getAddressService().getChatClientAddress());
+        messageSystem.sendMessage(message);
+        message = new MessageUserDisconect(new Address(),
+                messageSystem.getAddressService().getGameServiceAddress());
+        messageSystem.sendMessage(message);
+        message = new MessageDissconectAuthorizer(new Address(),
+                messageSystem.getAddressService().getAuthorizeClientAddress());
+        messageSystem.sendMessage(message);
+/*
+        for (Thread thread : threadList) {
+            thread.interrupt();
+        }
+  */
+
+        super.stop();
+    }
+
+    public MessageSystem getMessageSystem() {
         return messageSystem;
     }
 }

@@ -61,6 +61,12 @@ public class AuthorizeController implements Initializable, Abonent {
 
     }
 
+    public void errorHappens(String error) {
+        breaker = false;
+        errorMessage.setText(error);
+
+    }
+
     public void handleAnswer(Boolean answer) {
         breaker = false;
 

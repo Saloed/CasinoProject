@@ -3,7 +3,7 @@ package authorizeClient;
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
 import chatClient.messages.MessageUpdateUserName;
-import frontend.messages.MessagePipiska;
+import frontend.messages.MessageToAuthorizeController;
 import gameService.messages.MessageNewSessionId;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -46,7 +46,7 @@ public class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuth
                     msg.getUserName());
             messageSystem.sendMessage(message);
         }
-      Message  message = new MessagePipiska(messageSystem.getAddressService().getAuthorizeClientAddress(),
+      Message  message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
                 messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer());
         messageSystem.sendMessage(message);
 

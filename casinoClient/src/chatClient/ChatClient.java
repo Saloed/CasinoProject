@@ -56,7 +56,7 @@ public class ChatClient implements Runnable, Abonent {
             Bootstrap client = new Bootstrap();
             client.group(group);
             client.channel(NioSocketChannel.class);
-            client.handler(new ChatClientInitializer(sslCtx));
+            client.handler(new ChatClientInitializer(sslCtx,messageSystem));
 
             ch = client.connect(HOST, PORT).sync().channel();
             while (breaker) {

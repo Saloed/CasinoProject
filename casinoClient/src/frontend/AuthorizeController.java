@@ -45,8 +45,9 @@ public class AuthorizeController implements Initializable, Abonent {
 
         breaker = true;
 
-        Message msg = new MessageAuthorizeUser(messageSystem.getAddressService().getFrontEndAddress()
-                , messageSystem.getAddressService().getAuthorizeClientAddress(), login.getText(), pass.getText(), false);
+        Message msg = new MessageAuthorizeUser(messageSystem.getAddressService().getAuthorizeControllerAddress(),
+                messageSystem.getAddressService().getAuthorizeClientAddress(),
+                login.getText(), pass.getText(), false);
         messageSystem.sendMessage(msg);
 
         while (breaker) {
@@ -67,10 +68,11 @@ public class AuthorizeController implements Initializable, Abonent {
 
     }
 
-    public void handleAnswer(Boolean answer) {
+    public void handleAnswer(Boolean answer, String login) {
         breaker = false;
 
         if (answer) {
+            application.takeLogin(login);
             application.gotoMainWin();
         } else {
             errorMessage.setText("Username/Password is incorrect");

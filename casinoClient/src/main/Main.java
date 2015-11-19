@@ -8,7 +8,6 @@ import base.MessageSystem;
 import chatClient.ChatClient;
 import chatClient.messages.MessageChatDisconnection;
 import frontend.AuthorizeController;
-import frontend.FrontEnd;
 import frontend.MainWindowController;
 import frontend.RegistrationController;
 import gameClient.GameClient;
@@ -34,6 +33,7 @@ public final class Main extends Application {
     private MessageSystemImpl messageSystem;
     private LinkedList<Thread> threadList;
     private Stage stage;
+    private String login;
 
     public String l = "admin";
     public String p = "admin";
@@ -66,12 +66,13 @@ public final class Main extends Application {
         authorizeClientThread.setDaemon(true);
         authorizeClientThread.start();
 
+        /*
         FrontEnd frontEnd = new FrontEnd(messageSystem);
         Thread frontEndThread = new Thread(frontEnd);
         frontEndThread.setDaemon(true);
 
         frontEndThread.start();
-
+    */
     }
 
 
@@ -151,16 +152,25 @@ public final class Main extends Application {
         message = new MessageDissconectAuthorizer(new Address(),
                 messageSystem.getAddressService().getAuthorizeClientAddress());
         messageSystem.sendMessage(message);
-/*
+        /*
         for (Thread thread : threadList) {
             thread.interrupt();
         }
   */
+
 
         super.stop();
     }
 
     public MessageSystem getMessageSystem() {
         return messageSystem;
+    }
+
+    public void takeLogin(String login) {
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

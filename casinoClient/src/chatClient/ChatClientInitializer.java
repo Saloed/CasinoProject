@@ -1,5 +1,6 @@
 package chatClient;
 
+import base.MessageSystem;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -12,11 +13,12 @@ import io.netty.handler.ssl.SslContext;
 
 public class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
 
-
+private final MessageSystem messageSystem;
     private final SslContext sslCtx;
 
-    public ChatClientInitializer(SslContext sslCtx) {
+    public ChatClientInitializer(SslContext sslCtx,MessageSystem messageSystem) {
         this.sslCtx = sslCtx;
+        this.messageSystem=messageSystem;
     }
 
     @Override
@@ -36,6 +38,6 @@ public class ChatClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new StringEncoder());
 
         // and then business logic.
-        pipeline.addLast(new ChatClientHandler());
+        pipeline.addLast(new ChatClientHandler(messageSystem));
     }
 }

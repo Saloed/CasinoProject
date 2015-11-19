@@ -8,12 +8,12 @@ import frontend.AuthorizeController;
 /**
  * Created by FedoR on 17.11.2015.
  */
-public class MessagePipiska extends Message{
+public class MessageToAuthorizeController extends Message{
 
     private String login;
     private Boolean answer;
 
-    public MessagePipiska(Address from, Address to,String login, Boolean answer) {
+    public MessageToAuthorizeController(Address from, Address to, String login, Boolean answer) {
         super(from, to);
         this.login = login;
         this.answer = answer;
@@ -23,8 +23,8 @@ public class MessagePipiska extends Message{
     public void exec(Abonent abonent) {
         if (abonent instanceof AuthorizeController)
         {
-            AuthorizeController piska = (AuthorizeController) abonent;
-            piska.handleAnswer(answer);
+            AuthorizeController get = (AuthorizeController) abonent;
+            get.handleAnswer(answer,login);
         }
 
     }

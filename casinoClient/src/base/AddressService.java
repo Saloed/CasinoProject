@@ -16,4 +16,6 @@ public interface AddressService {
     public Address getChatClientAddress();
 
     public Address getAuthorizeControllerAddress();
+
+    Address getMainWindowControllerAdress();
 }

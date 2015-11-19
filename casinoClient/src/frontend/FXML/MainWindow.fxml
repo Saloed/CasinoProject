@@ -11,21 +11,21 @@
    <children>
       <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="530.0" prefWidth="229.0">
          <children>
-            <ListView layoutX="3.0" layoutY="2.0" prefHeight="452.0" prefWidth="225.0">
+            <ListView fx:id="chatWindow" layoutX="3.0" layoutY="2.0" prefHeight="452.0" prefWidth="225.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </ListView>
-            <Button fx:id="chatButton" alignment="CENTER" layoutX="168.0" layoutY="471.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0" text="Send" textAlignment="CENTER" />
+            <Button fx:id="chatButton" alignment="CENTER" layoutX="168.0" layoutY="471.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="40.0" prefWidth="60.0" text="Send" textAlignment="CENTER" />
             <TextField fx:id="messageTextField" layoutX="3.0" layoutY="471.0" prefHeight="40.0" prefWidth="158.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="377.0" layoutY="7.0" prefHeight="79.0" prefWidth="520.0" text=",welcome to Casino Tri Topora!">
+      <Label layoutX="370.0" layoutY="7.0" prefHeight="79.0" prefWidth="493.0" text=",welcome to Casino Tri Topora!">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="userName" contentDisplay="CENTER" layoutX="276.0" layoutY="7.0" prefHeight="79.0" prefWidth="103.0" text="Login">
+      <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="242.0" layoutY="7.0" prefHeight="79.0" prefWidth="124.0" text="derevo">
          <font>
             <Font size="36.0" />
          </font>

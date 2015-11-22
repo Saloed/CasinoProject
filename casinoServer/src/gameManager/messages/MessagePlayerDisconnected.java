@@ -20,7 +20,10 @@ public class MessagePlayerDisconnected extends MessageToGameManager {
 
     public void exec(GameManager gameManager) {
         Integer sessionId = gameManager.getPlayerSessionByContext(ctx);
-        assert sessionId != null;
+        if( sessionId == null) {
+            return;
+        }
+
         gameManager.removeGame(sessionId);
         gameManager.removeUserChannel(sessionId);
         Message message = new MessageUpdateAccount(gameManager.getAddress(),

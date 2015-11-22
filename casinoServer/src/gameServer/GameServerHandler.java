@@ -9,8 +9,8 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;
 
 
-public class GameServerHandler extends SimpleChannelInboundHandler<ServerRequest> {
-    final MessageSystemImpl messageSystem;
+class GameServerHandler extends SimpleChannelInboundHandler<ServerRequest> {
+    private final MessageSystemImpl messageSystem;
 
     public GameServerHandler(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
@@ -24,9 +24,11 @@ public class GameServerHandler extends SimpleChannelInboundHandler<ServerRequest
     @Override
     public void channelInactive(final ChannelHandlerContext ctx) {
         System.out.println("Disconnected " + ctx.toString());
+
         Message message = new MessagePlayerDisconnected(messageSystem.getAddressService().getGameManagerAddress(),
                 messageSystem.getAddressService().getGameManagerAddress(),
                 ctx);
+       // System.out.println(ctx.channel().remoteAddress());
         messageSystem.sendMessage(message);
     }
 

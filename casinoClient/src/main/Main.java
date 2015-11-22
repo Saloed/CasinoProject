@@ -5,13 +5,10 @@ import authorizeClient.messages.MessageDissconectAuthorizer;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
-import chatClient.ChatClient;
 import chatClient.messages.MessageChatDisconnection;
 import frontend.AuthorizeController;
 import frontend.MainWindowController;
 import frontend.RegistrationController;
-import gameClient.GameClient;
-import gameService.GameService;
 import gameService.messages.MessageUserDisconect;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +20,9 @@ import javafx.stage.Stage;
 import messageSystem.MessageSystemImpl;
 
 import java.io.InputStream;
-import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +30,9 @@ import java.util.logging.Logger;
 public final class Main extends Application {
 
     private MessageSystemImpl messageSystem;
-    private LinkedList<Thread> threadList;
+    // private List<Thread> threadList;
+    private ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
+    private ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
     private Stage stage;
     private String login;
 
@@ -42,7 +43,7 @@ public final class Main extends Application {
     public void init() throws Exception {
 
         messageSystem = new MessageSystemImpl();
-
+/*
         ChatClient chatClient = new ChatClient(messageSystem);
         Thread chatClientThread = new Thread(chatClient);
         chatClientThread.setDaemon(true);
@@ -55,17 +56,20 @@ public final class Main extends Application {
         Thread gameServiceThread = new Thread(gameService);
         gameServiceThread.setDaemon(true);
 
-        //TODO create all threads and add to List
 
         threadList = new LinkedList<>();
         threadList.add(chatClientThread);
         threadList.add(gameClientThread);
         threadList.add(gameServiceThread);
+        */
 
-        Thread authorizeClientThread = new Thread(new AuthorizeClient(messageSystem, threadList));
+        authorizationExecutor.execute(new AuthorizeClient(messageSystem, workThreadPool));
+
+    /*
+        Thread authorizeClientThread = new Thread(new AuthorizeClient(messageSystem, workThreadPool));
         authorizeClientThread.setDaemon(true);
         authorizeClientThread.start();
-
+    */
         /*
         FrontEnd frontEnd = new FrontEnd(messageSystem);
         Thread frontEndThread = new Thread(frontEnd);
@@ -76,7 +80,7 @@ public final class Main extends Application {
     }
 
 
-    public void gotoLogin() {
+    private void gotoLogin() {
         try {
             AuthorizeController login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window", false);
             login.setApp(this);
@@ -120,14 +124,11 @@ public final class Main extends Application {
     //U can pass any params in
     private Initializable replaceSceneContent(String fxml, String title, Boolean resizable) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = Main.class.getResourceAsStream(fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource(fxml));
         Pane page;
-        try {
-            page = (Pane) loader.load(in);
-        } finally {
-            in.close();
+        try (InputStream in = Main.class.getResourceAsStream(fxml)) {
+            page = loader.load(in);
         }
         Scene scene = new Scene(page);
         stage.setScene(scene);
@@ -143,21 +144,44 @@ public final class Main extends Application {
 
     @Override
     public void stop() throws Exception {
-        Message message = new MessageChatDisconnection(new Address(),
-                messageSystem.getAddressService().getChatClientAddress());
-        messageSystem.sendMessage(message);
-        message = new MessageUserDisconect(new Address(),
-                messageSystem.getAddressService().getGameServiceAddress());
-        messageSystem.sendMessage(message);
-        message = new MessageDissconectAuthorizer(new Address(),
+
+        System.err.println("Application stopping");
+
+        Message message = new MessageDissconectAuthorizer(new Address(),
                 messageSystem.getAddressService().getAuthorizeClientAddress());
         messageSystem.sendMessage(message);
-        /*
-        for (Thread thread : threadList) {
-            thread.interrupt();
-        }
-  */
 
+        if (messageSystem.getAddressService().getGameClientAddress() != null) {
+            message = new MessageChatDisconnection(new Address(),
+                    messageSystem.getAddressService().getChatClientAddress());
+            messageSystem.sendMessage(message);
+            message = new MessageUserDisconect(new Address(),
+                    messageSystem.getAddressService().getGameServiceAddress());
+            messageSystem.sendMessage(message);
+        }
+
+        try {
+            Thread.sleep(5000);
+
+            authorizationExecutor.shutdown();
+            workThreadPool.shutdown();
+
+
+            if (!workThreadPool.awaitTermination(5, TimeUnit.SECONDS)) {
+                workThreadPool.shutdownNow();
+                if (!workThreadPool.awaitTermination(5, TimeUnit.SECONDS))
+                    System.err.println("Work Pool did not terminate");
+            }
+            if (!authorizationExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
+                authorizationExecutor.shutdownNow();
+                if (!authorizationExecutor.awaitTermination(5, TimeUnit.SECONDS))
+                    System.err.println("Work Pool did not terminate");
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.err.println("Error when shutdown thread pool");
+        }
 
         super.stop();
     }

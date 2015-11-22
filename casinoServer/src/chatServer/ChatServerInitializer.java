@@ -11,7 +11,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.ssl.SslContext;
 
 
-public class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
+class ChatServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private final SslContext sslCtx;
 

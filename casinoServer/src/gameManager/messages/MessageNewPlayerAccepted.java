@@ -7,9 +7,9 @@ import io.netty.channel.ChannelHandlerContext;
 
 
 public class MessageNewPlayerAccepted extends MessageToGameManager {
-    final ChannelHandlerContext ctx;
-    final Integer sessionId;
-    final GameMessage.ServerRequest.GameType game;
+    private final ChannelHandlerContext ctx;
+    private final Integer sessionId;
+    private final GameMessage.ServerRequest.GameType game;
     private Integer bet = null;
     private Integer betCash = null;
 

@@ -8,7 +8,7 @@ import gameManager.GameManager;
 
 public abstract class MessageToGameManager extends Message {
 
-    public MessageToGameManager(Address from, Address to) {
+    MessageToGameManager(Address from, Address to) {
         super(from, to);
     }
 

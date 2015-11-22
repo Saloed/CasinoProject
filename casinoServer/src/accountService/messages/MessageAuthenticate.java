@@ -11,8 +11,8 @@ import base.Message;
 public final class MessageAuthenticate extends MessageToAccountService {
 
 
-    private String name;
-    private String password;
+    private final String name;
+    private final String password;
 
 
     public MessageAuthenticate(Address from, Address to, String name, String password) {

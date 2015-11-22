@@ -11,13 +11,14 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import messageSystem.MessageSystemImpl;
 
 import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
 
-public class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
+class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
 
-    private final LinkedList<Thread> threadList;
+    private final ExecutorService threadList;
     private final MessageSystemImpl messageSystem;
 
-    public AuthorizeClientInitializer(MessageSystemImpl messageSystem, LinkedList<Thread> threadList) {
+    public AuthorizeClientInitializer(MessageSystemImpl messageSystem, ExecutorService threadList) {
         this.threadList = threadList;
         this.messageSystem = messageSystem;
     }

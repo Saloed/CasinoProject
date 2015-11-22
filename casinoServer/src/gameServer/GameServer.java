@@ -13,17 +13,19 @@ import messageSystem.MessageSystemImpl;
 
 public final class GameServer implements Runnable {
 
-    final int PORT = 7777;
+    private final int PORT = 7777;
 
-final MessageSystemImpl messageSystem;
-    public GameServer(MessageSystemImpl messageSystem){
-        this.messageSystem=messageSystem;
+    private final MessageSystemImpl messageSystem;
+
+    public GameServer(MessageSystemImpl messageSystem) {
+        this.messageSystem = messageSystem;
     }
+
     public void run() {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workGroup = new NioEventLoopGroup(4);
-
+        boolean interrupted = false;
 
         try {
             ServerBootstrap server = new ServerBootstrap();
@@ -38,11 +40,15 @@ final MessageSystemImpl messageSystem;
 
             channel.channel().closeFuture().sync();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            //e.printStackTrace();
+            interrupted = true;
+            System.err.println("GameServer thread was interrupted");
         } finally {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
+            if (interrupted)
+                Thread.currentThread().interrupt();
         }
 
     }

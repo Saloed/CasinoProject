@@ -11,8 +11,8 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import messageSystem.MessageSystemImpl;
 
 
-public class GameServerInitializer extends ChannelInitializer<SocketChannel> {
-    final MessageSystemImpl messageSystem;
+class GameServerInitializer extends ChannelInitializer<SocketChannel> {
+    private final MessageSystemImpl messageSystem;
     public GameServerInitializer(MessageSystemImpl messageSystem){
         this.messageSystem=messageSystem;
     }

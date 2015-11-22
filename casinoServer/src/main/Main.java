@@ -7,43 +7,56 @@ import gameManager.GameManager;
 import gameServer.GameServer;
 import messageSystem.MessageSystemImpl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
-public final class Main {
+
+final class Main {
 
     public static void main(String[] args) {
+
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+
         final MessageSystemImpl messageSystem = new MessageSystemImpl();
 
-        final Thread accountServiceThread = new Thread(new AccountService(messageSystem));
-        accountServiceThread.setDaemon(true);
+        threadPool.execute(new AccountService(messageSystem));
+        threadPool.execute(new GameManager(messageSystem));
+        threadPool.execute(new ChatServer());
+        threadPool.execute(new GameServer(messageSystem));
+        threadPool.execute(new AuthorizeServer(messageSystem));
 
-        final Thread gameManagerThread = new Thread(new GameManager(messageSystem));
-        gameManagerThread.setDaemon(true);
+        boolean stopRequest = true;
 
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        while (stopRequest) {
+            try {
+                if ("stop server".equals(input.readLine())) {
+                    stopRequest = false;
+                    System.out.println("Server is stopping...");
+                    threadPool.shutdown();
+                    if (!threadPool.awaitTermination(10, TimeUnit.SECONDS)) {
+                        threadPool.shutdownNow();
+                        if (!threadPool.awaitTermination(10, TimeUnit.SECONDS))
+                            System.err.println("Pool did not terminate");
+                    }
 
-        final ChatServer chatServer = new ChatServer();
-        final Thread chatServerThread = new Thread(chatServer);
-        chatServerThread.setDaemon(true);
-
-        final GameServer gameServer = new GameServer(messageSystem);
-        final Thread gameServerThread = new Thread(gameServer);
-        gameServerThread.setDaemon(true);
-
-        final Thread authorizeServerThread = new Thread(new AuthorizeServer(messageSystem));
-        authorizeServerThread.setDaemon(true);
-
-        try {
-            authorizeServerThread.start();
-            gameServerThread.start();
-            chatServerThread.start();
-
-
-            accountServiceThread.start();
-            gameManagerThread.start();
-
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
+                }
+            } catch (IOException e) {
+                System.err.println("Error when read from terminal");
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                System.err.println("Error when shutdown thread pool");
+            }finally {
+                System.out.println("Server stopped.");
+            }
         }
-
+        System.exit(0);
 
     }
 }

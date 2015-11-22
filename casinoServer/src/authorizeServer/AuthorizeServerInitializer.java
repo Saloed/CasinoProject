@@ -11,10 +11,10 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
 
-public class AuthorizeServerInitializer extends ChannelInitializer<SocketChannel> {
+class AuthorizeServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
-    final MessageSystem authorizerMesasgeSystem;
+    private final MessageSystem authorizerMesasgeSystem;
 
     public AuthorizeServerInitializer(MessageSystem authorizerMessageSystem) {
         this.authorizerMesasgeSystem = authorizerMessageSystem;

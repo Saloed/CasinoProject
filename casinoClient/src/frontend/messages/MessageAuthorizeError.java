@@ -10,7 +10,7 @@ import frontend.AuthorizeController;
  */
 public class MessageAuthorizeError extends Message {
 
-    private String error;
+    private final String error;
 
     public MessageAuthorizeError(Address from, Address to, String error) {
         super(from, to);

@@ -5,7 +5,7 @@ public abstract class Message {
     private final Address from;
     private final Address to;
 
-    public Message(Address from, Address to) {
+    protected Message(Address from, Address to) {
         this.from = from;
         this.to = to;
     }

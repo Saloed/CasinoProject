@@ -14,6 +14,8 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 import messageSystem.MessageSystemImpl;
 
+import javax.net.ssl.SSLException;
+
 public class ChatClient implements Runnable, Abonent {
     static final String HOST = "127.0.0.1";
     static final int PORT = 1488;
@@ -47,16 +49,18 @@ public class ChatClient implements Runnable, Abonent {
     }
 
     private ChannelFuture lastWriteFuture = null;
-    Channel ch = null;
+    private Channel ch = null;
 
     public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
+        boolean interrupted = false;
+
         try {
             final SslContext sslCtx = SslContextBuilder.forClient().trustManager(InsecureTrustManagerFactory.INSTANCE).build();
             Bootstrap client = new Bootstrap();
             client.group(group);
             client.channel(NioSocketChannel.class);
-            client.handler(new ChatClientInitializer(sslCtx,messageSystem));
+            client.handler(new ChatClientInitializer(sslCtx, messageSystem));
 
             ch = client.connect(HOST, PORT).sync().channel();
             while (breaker) {
@@ -72,10 +76,18 @@ public class ChatClient implements Runnable, Abonent {
             if (lastWriteFuture != null) {
                 lastWriteFuture.sync();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SSLException ex) {
+            //ex.printStackTrace();
+            System.err.println("Error in chat connection sertificates");
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+            interrupted = true;
+            System.err.println("Chat Client throw interrupted");
         } finally {
             group.shutdownGracefully();
+            if (interrupted)
+                Thread.currentThread().interrupt();
+            System.err.println("Chat Client end work");
         }
 
 

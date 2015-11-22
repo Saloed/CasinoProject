@@ -13,7 +13,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import messageSystem.MessageSystemImpl;
 
-import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
 
 
 public class AuthorizeClient implements Runnable, Abonent {
@@ -22,19 +22,19 @@ public class AuthorizeClient implements Runnable, Abonent {
     private final MessageSystemImpl messageSystem;
 
 
-    static final String HOST = "127.0.0.1";
-    static final int PORT = 7776;
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 7776;
 
-    private final LinkedList<Thread> threadList;
+    private final ExecutorService threadExecutor;
 
-    public AuthorizeClient(MessageSystemImpl messageSystem, LinkedList<Thread> threadList) {
-        this.threadList = threadList;
+    public AuthorizeClient(MessageSystemImpl messageSystem, ExecutorService threadExecutor) {
+        this.threadExecutor = threadExecutor;
         this.messageSystem = messageSystem;
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
     }
 
-    boolean breaker = true;
+    private boolean breaker = true;
 
     public boolean readyToWork() {
         //return Thread.currentThread().isAlive();
@@ -52,10 +52,10 @@ public class AuthorizeClient implements Runnable, Abonent {
         breaker = false;
         try {
             if (ch != null) {
-                ch.closeFuture().sync();
+                ch.close().sync();
             }
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.err.println("Error when authorize channel close");
         }
     }
 
@@ -65,7 +65,8 @@ public class AuthorizeClient implements Runnable, Abonent {
             ChannelFuture channelFuture = ch.writeAndFlush(msg).sync();
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.err.println("Error when send authorization request");
         }
     }
 
@@ -83,7 +84,7 @@ public class AuthorizeClient implements Runnable, Abonent {
 
 
         } catch (Exception e) {
-
+            System.err.println("Server offline");
             ch = null;
             return true;
         }
@@ -98,32 +99,37 @@ public class AuthorizeClient implements Runnable, Abonent {
 
     public void run() {
         EventLoopGroup group = new NioEventLoopGroup();
+        boolean interrupted = false;
+
         try {
             client = new Bootstrap();
             client.group(group);
             client.channel(NioSocketChannel.class);
-            client.handler(new AuthorizeClientInitializer(messageSystem, threadList));
+            client.handler(new AuthorizeClientInitializer(messageSystem, threadExecutor));
 
             needReconnect = connectionTry();
 
             if (needReconnect) {
                 notifyConnectionError();
             }
+            try {
+                while (breaker) {
+                    messageSystem.execForAbonent(this);
 
-            while (breaker) {
-                messageSystem.execForAbonent(this);
-                try {
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (InterruptedException e) {
+                //  e.printStackTrace();
+                interrupted = true;
+                System.err.println("Authorize Client throw interrupted");
             }
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             group.shutdownGracefully();
+            if (interrupted)
+                Thread.currentThread().interrupt();
+            System.err.println("Authorize Client end work");
         }
     }
 }

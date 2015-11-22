@@ -11,7 +11,7 @@ import java.util.Random;
 
 public final class GameSlotMachine extends Game {
 
-    private LinkedList<Player> players = new LinkedList<>();
+    private final LinkedList<Player> players = new LinkedList<>();
 
     public GameSlotMachine(GameMessageSystem messageSystem) {
         super(messageSystem);
@@ -55,20 +55,22 @@ public final class GameSlotMachine extends Game {
 
     @Override
     public void run() {
-        while (true) {
-            messageSystem.execForAbonent(this);
+        try {
+            while (true) {
+                messageSystem.execForAbonent(this);
 
-            if (!players.isEmpty()) {
-                for (Player player : players) {
-                    play(player);
+                if (!players.isEmpty()) {
+                    players.forEach(this::play);
+                    players.clear();
                 }
-                players.clear();
-            }
-            try {
+
                 Thread.sleep(10);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+            Thread.currentThread().interrupt();
+            System.err.println("Slot machine game thread was interrupted");
         }
+
     }
 }

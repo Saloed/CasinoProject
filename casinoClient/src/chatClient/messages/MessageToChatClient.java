@@ -11,7 +11,7 @@ import gameService.GameService;
  */
 public abstract class MessageToChatClient extends Message {
 
-    public MessageToChatClient(Address from, Address to) {
+    MessageToChatClient(Address from, Address to) {
         super(from, to);
     }
 

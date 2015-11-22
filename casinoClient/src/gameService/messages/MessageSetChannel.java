@@ -8,7 +8,7 @@ import io.netty.channel.Channel;
  * Created by admin on 29.10.2015.
  */
 public class MessageSetChannel extends MessageToGameService {
-    private Channel channel;
+    private final Channel channel;
 
     public MessageSetChannel(Address from, Address to, Channel channel) {
         super(from, to);

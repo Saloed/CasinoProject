@@ -10,8 +10,8 @@ import io.netty.channel.ChannelHandlerContext;
 
 public class MessageGameResult extends MessageToGameManager {
 
-    private GameMessage.ServerAnswer msg;
-    private Integer sesionId;
+    private final GameMessage.ServerAnswer msg;
+    private final Integer sesionId;
 
     public MessageGameResult(Address from, Address to, Integer sesionId, GameMessage.ServerAnswer msg) {
         super(from, to);

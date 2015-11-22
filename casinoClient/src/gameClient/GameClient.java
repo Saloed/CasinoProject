@@ -4,7 +4,6 @@ import base.Abonent;
 import base.Address;
 import base.Message;
 import gameService.messages.MessageSetChannel;
-import gameService.messages.MessageSendRequest;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
@@ -19,8 +18,8 @@ public class GameClient implements Runnable, Abonent {
     private final Address address = new Address();
     private final MessageSystemImpl messageSystem;
 
-    static final String HOST = "127.0.0.1";
-    static final int PORT = 7777;
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 7777;
 
     public GameClient(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
@@ -36,6 +35,8 @@ public class GameClient implements Runnable, Abonent {
     public void run() {
 
         EventLoopGroup group = new NioEventLoopGroup();
+        boolean interrupted = false;
+
         try {
             Bootstrap client = new Bootstrap();
             client.group(group);
@@ -50,10 +51,15 @@ public class GameClient implements Runnable, Abonent {
 
             ch.closeFuture().sync();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            //e.printStackTrace();
+            interrupted = true;
+            System.err.println("Game Client throw interrupted");
         } finally {
             group.shutdownGracefully();
+            if (interrupted)
+                Thread.currentThread().interrupt();
+            System.err.println("Game Client end work");
         }
 
     }

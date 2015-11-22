@@ -11,8 +11,8 @@ import base.Message;
  */
 public class MessageRegister extends MessageToAccountService {
 
-    private String name;
-    private String password;
+    private final String name;
+    private final String password;
 
 
     public MessageRegister(Address from, Address to, String name, String password) {

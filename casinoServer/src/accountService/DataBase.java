@@ -14,9 +14,9 @@ public class DataBase {
     private static final String XML_FILE = "res/users.xml";
 
     private final class UserData {
-        private Integer id;
-        private String password;
-        private Integer cash;
+        private final Integer id;
+        private final String password;
+        private final Integer cash;
 
         public UserData(Integer id, String password, Integer cash) {
             this.id = id;
@@ -64,14 +64,14 @@ public class DataBase {
         }
     }
 
-    private Map<String, UserData> users = new HashMap<>();
+    private final Map<String, UserData> users = new HashMap<>();
 
     private static final QName userTagName = new QName("user");
     private static final QName idAttribName = new QName("id");
     private static final QName nameAttribName = new QName("name");
     private static final QName passwordAttribName = new QName("password");
     private static final QName cashAttribName = new QName("cash");
-    private XMLInputFactory factory = XMLInputFactory.newInstance();
+    private final XMLInputFactory factory = XMLInputFactory.newInstance();
     private Attribute id;
     private Attribute name;
     private Attribute password;
@@ -80,8 +80,12 @@ public class DataBase {
     public DataBase() {
         try {
             parse(new File(XML_FILE));
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.err.println("Cant read file " + XML_FILE);
             e.printStackTrace();
+        } catch (XMLStreamException xe) {
+            System.err.println("Error when parse XML");
+            xe.printStackTrace();
         }
     }
 
@@ -182,13 +186,9 @@ public class DataBase {
     }
 
     private void createUser() {
-        try {
-            users.put(name.getValue(), new UserData(Integer.parseInt(id.getValue()),
-                    password.getValue(),
-                    Integer.parseInt(cash.getValue())));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        users.put(name.getValue(), new UserData(Integer.parseInt(id.getValue()),
+                password.getValue(),
+                Integer.parseInt(cash.getValue())));
     }
 
 
@@ -215,8 +215,12 @@ public class DataBase {
         users.put(account.getName(), new UserData(account.getId(), account.getPassword(), account.getCash()));
         try {
             update(new File(XML_FILE));
-        } catch (Exception e) {
+        }  catch (IOException e) {
+            System.err.println("Cant open file " + XML_FILE);
             e.printStackTrace();
+        } catch (XMLStreamException xe) {
+            System.err.println("Error when parse XML");
+            xe.printStackTrace();
         }
         return account;
     }
@@ -226,8 +230,12 @@ public class DataBase {
         users.replace(account.getName(), temp);
         try {
             update(new File(XML_FILE));
-        } catch (Exception e) {
+        } catch (IOException e) {
+            System.err.println("Cant write file " + XML_FILE);
             e.printStackTrace();
+        } catch (XMLStreamException xe) {
+            System.err.println("Error when parse XML");
+            xe.printStackTrace();
         }
     }
 }

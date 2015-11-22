@@ -10,8 +10,8 @@ import frontend.AuthorizeController;
  */
 public class MessageToAuthorizeController extends Message{
 
-    private String login;
-    private Boolean answer;
+    private final String login;
+    private final Boolean answer;
 
     public MessageToAuthorizeController(Address from, Address to, String login, Boolean answer) {
         super(from, to);

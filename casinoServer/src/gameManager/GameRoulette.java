@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class GameRoulette extends Game {
 
-    private LinkedList<Player> players = new LinkedList<>();
+    private final LinkedList<Player> players = new LinkedList<>();
 
     public GameRoulette(GameMessageSystem messageSystem) {
         super(messageSystem);
@@ -54,19 +54,23 @@ public class GameRoulette extends Game {
 
     @Override
     public void run() {
-        while (true) {
-            messageSystem.execForAbonent(this);
+        try {
+            while (true) {
+                messageSystem.execForAbonent(this);
 
-            if (!players.isEmpty()) {
-                play();
-                players.clear();
-            }
-            try {
+                if (!players.isEmpty()) {
+                    play();
+                    players.clear();
+                }
+
                 Thread.sleep(10000);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            //  e.printStackTrace();
+            Thread.currentThread().interrupt();
+            System.err.println("Roulette game thread was interrupted");
         }
+
     }
 
 }

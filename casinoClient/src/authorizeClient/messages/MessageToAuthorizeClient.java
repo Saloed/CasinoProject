@@ -7,7 +7,7 @@ import base.Message;
 
 
 public abstract class MessageToAuthorizeClient extends Message {
-    public MessageToAuthorizeClient(Address from, Address to) {
+    MessageToAuthorizeClient(Address from, Address to) {
         super(from, to);
     }
 

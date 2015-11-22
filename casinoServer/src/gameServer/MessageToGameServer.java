@@ -14,7 +14,7 @@ public abstract class MessageToGameServer extends Message {
     @Override
     public void exec(Abonent abonent) {
         if (abonent instanceof GameServerHandler) {
-            exec((GameManager) abonent);
+            exec((GameServerHandler) abonent);
         }
     }
 

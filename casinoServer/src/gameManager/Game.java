@@ -6,10 +6,10 @@ import base.Address;
 import gameManager.gameMessageSystem.GameMessageSystem;
 
 public abstract class Game implements Runnable, Abonent {
-    public GameMessageSystem messageSystem;
-    Address address = new Address();
+    final GameMessageSystem messageSystem;
+    private final Address address = new Address();
 
-    public Game(GameMessageSystem messageSystem) {
+    Game(GameMessageSystem messageSystem) {
         this.messageSystem = messageSystem;
         messageSystem.addService(this);
         messageSystem.getAddressService().register(this);

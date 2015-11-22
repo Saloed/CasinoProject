@@ -2,23 +2,26 @@ package authorizeClient;
 
 import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
+import chatClient.ChatClient;
 import chatClient.messages.MessageUpdateUserName;
 import frontend.messages.MessageToAuthorizeController;
+import gameClient.GameClient;
+import gameService.GameService;
 import gameService.messages.MessageNewSessionId;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;
 
-import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
 
 
-public class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAnswerMessage> {
+class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAnswerMessage> {
 
-    private final LinkedList<Thread> threadList;
+    private final ExecutorService threadExecutor;
     private final MessageSystemImpl messageSystem;
 
-    public AuthorizeClientHandler(MessageSystemImpl messageSystem, LinkedList<Thread> threadList) {
-        this.threadList = threadList;
+    public AuthorizeClientHandler(MessageSystemImpl messageSystem, ExecutorService threadExecutor) {
+        this.threadExecutor = threadExecutor;
         this.messageSystem = messageSystem;
     }
 
@@ -33,9 +36,9 @@ public class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuth
         System.out.println(msg.getUserName() + "    " + msg.getPassword() + "  " + msg.getAnswer());
 
         if (msg.getAnswer() == true) {
-            for (Thread thread : threadList) {
-                thread.start();
-            }
+            threadExecutor.execute(new ChatClient(messageSystem));
+            threadExecutor.execute(new GameClient(messageSystem));
+            threadExecutor.execute(new GameService(messageSystem));
             Message message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
                     messageSystem.getAddressService().getGameServiceAddress(),
                     msg.getSessionId());
@@ -46,7 +49,7 @@ public class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuth
                     msg.getUserName());
             messageSystem.sendMessage(message);
         }
-      Message  message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
+        Message message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
                 messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer());
         messageSystem.sendMessage(message);
 

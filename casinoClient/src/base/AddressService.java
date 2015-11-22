@@ -3,19 +3,19 @@ package base;
 
 public interface AddressService {
 
-    public void register(Abonent object);
+    void register(Abonent object);
 
-    public Address getGameClientAddress();
+    Address getGameClientAddress();
 
-    public Address getAuthorizeClientAddress();
+    Address getAuthorizeClientAddress();
 
-    public Address getGameServiceAddress();
+    Address getGameServiceAddress();
 
-    public Address getFrontEndAddress();
+    Address getFrontEndAddress();
 
-    public Address getChatClientAddress();
+    Address getChatClientAddress();
 
-    public Address getAuthorizeControllerAddress();
+    Address getAuthorizeControllerAddress();
 
     Address getMainWindowControllerAdress();
 }

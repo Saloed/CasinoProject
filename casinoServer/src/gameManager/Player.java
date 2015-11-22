@@ -4,8 +4,8 @@ import accountService.Account;
 
 
 public class Player {
-    private Account account;
-    private Integer sessioId;
+    private final Account account;
+    private final Integer sessioId;
     private Integer bet;
     private Integer betCash;
 

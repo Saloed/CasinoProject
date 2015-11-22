@@ -7,9 +7,9 @@ import base.GameMessage;
 
 public class MessageAuthorizeUser extends MessageToAuthorizeClient {
 
-    private String userName;
-    private String password;
-    private boolean register;
+    private final String userName;
+    private final String password;
+    private final boolean register;
 
 
     public MessageAuthorizeUser(Address from, Address to, String userName, String password, boolean register) {

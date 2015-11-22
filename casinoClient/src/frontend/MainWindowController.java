@@ -31,7 +31,7 @@ public class MainWindowController implements Initializable, Abonent {
     private Main application;
     private MessageSystem messageSystem;
     private Boolean breaker = true;
-    private ObservableList<String> chatWindowData = FXCollections.observableArrayList();
+    private final ObservableList<String> chatWindowData = FXCollections.observableArrayList();
 
     public void setApp(Main application){
         this.application = application;

@@ -10,7 +10,7 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import messageSystem.MessageSystemImpl;
 
-public class GameClientInitializer extends ChannelInitializer<SocketChannel> {
+class GameClientInitializer extends ChannelInitializer<SocketChannel> {
     private final MessageSystemImpl messageSystem;
 
     public GameClientInitializer(MessageSystemImpl messageSystem) {

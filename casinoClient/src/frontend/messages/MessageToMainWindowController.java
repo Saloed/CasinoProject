@@ -11,7 +11,7 @@ import frontend.MainWindowController;
 public class MessageToMainWindowController extends Message{
 
     private String userName;
-    private String message;
+    private final String message;
 
     public MessageToMainWindowController(Address from, Address to,String message) {
         super(from, to);

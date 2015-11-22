@@ -8,9 +8,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 
-public class AuthorizeServerHandler extends SimpleChannelInboundHandler<UserAuthorizeMessage> {
+class AuthorizeServerHandler extends SimpleChannelInboundHandler<UserAuthorizeMessage> {
 
-    final MessageSystem authorizerMessageSystem;
+    private final MessageSystem authorizerMessageSystem;
 
     public AuthorizeServerHandler(MessageSystem authorizerMessageSystem) {
         this.authorizerMessageSystem = authorizerMessageSystem;
@@ -38,6 +38,11 @@ public class AuthorizeServerHandler extends SimpleChannelInboundHandler<UserAuth
                 authorizerMessageSystem.getAddressService().getAuthorizerAddress(),
                 ctx, msg);
         authorizerMessageSystem.sendMessage(mes);
+    }
+
+    @Override
+    public void channelInactive(final ChannelHandlerContext ctx) {
+        System.out.println("Channel disconnect " + ctx.toString());
     }
 
 }

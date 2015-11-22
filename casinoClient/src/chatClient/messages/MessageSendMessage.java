@@ -7,7 +7,7 @@ import chatClient.ChatClient;
  * Created by admin on 04.11.2015.
  */
 public class MessageSendMessage extends MessageToChatClient {
-    private String message;
+    private final String message;
 
     public MessageSendMessage(Address from, Address to, String message) {
         super(from, to);

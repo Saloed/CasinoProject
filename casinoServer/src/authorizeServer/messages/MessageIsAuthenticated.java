@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MessageIsAuthenticated extends Message {
 
-    final Account account;
+    private final Account account;
 
     public MessageIsAuthenticated(Address from, Address to, Account account) {
         super(from, to);

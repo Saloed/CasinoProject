@@ -8,7 +8,7 @@ import base.Message;
 
 public abstract class MessageToAccountService extends Message {
 
-    public MessageToAccountService(Address from, Address to) {
+    MessageToAccountService(Address from, Address to) {
         super(from, to);
     }
 

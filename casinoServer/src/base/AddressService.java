@@ -3,11 +3,11 @@ package base;
 
 public interface AddressService {
 
-    public void register(Abonent object);
+    void register(Abonent object);
 
-    public Address getGameManagerAddress();
+    Address getGameManagerAddress();
 
-    public Address getAccountServiceAddress();
+    Address getAccountServiceAddress();
 
-    public Address getAuthorizerAddress();
+    Address getAuthorizerAddress();
 }

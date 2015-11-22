@@ -34,13 +34,15 @@ public final class AccountService implements Abonent, Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            messageSystemImpl.execForAbonent(this);
-            try {
+        try {
+            while (true) {
+                messageSystemImpl.execForAbonent(this);
                 Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+            Thread.currentThread().interrupt();
+            System.err.println("AccountService thread was interrupted");
         }
     }
 }

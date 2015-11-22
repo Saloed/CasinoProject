@@ -11,26 +11,23 @@ import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 
-public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
+class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
-    static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
         ctx.pipeline().get(SslHandler.class).handshakeFuture().addListener(
-                new GenericFutureListener<Future<Channel>>() {
-                    @Override
-                    public void operationComplete(Future<Channel> future) throws Exception {
-                        ctx.writeAndFlush(
-                                "Welcome to casino chat service!\n");
-                       /* ctx.writeAndFlush(
-                                "Your session is protected by " +
-                                        ctx.pipeline().get(SslHandler.class).engine().getSession().getCipherSuite() +
-                                        " cipher suite.\n");*/
+                future -> {
+                    ctx.writeAndFlush(
+                            "Welcome to casino chat service!\n");
+                   /* ctx.writeAndFlush(
+                            "Your session is protected by " +
+                                    ctx.pipeline().get(SslHandler.class).engine().getSession().getCipherSuite() +
+                                    " cipher suite.\n");*/
 
-                        ctx.writeAndFlush("Good Luck and Have Fun!\n");
-                        channels.add(ctx.channel());
-                    }
+                    ctx.writeAndFlush("Good Luck and Have Fun!\n");
+                    channels.add(ctx.channel());
                 });
     }
 

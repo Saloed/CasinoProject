@@ -10,8 +10,8 @@ import gameManager.Player;
  */
 public class MessageNewUserInCurrentSession extends MessageToGameManager {
 
-    final Account account;
-    final Integer sessionId;
+    private final Account account;
+    private final Integer sessionId;
 
     public MessageNewUserInCurrentSession(Address from, Address to, Integer sessionId, Account account) {
         super(from, to);

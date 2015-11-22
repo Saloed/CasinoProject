@@ -28,11 +28,11 @@ public final class AddressServiceImpl implements AddressService {
     public void register(Abonent object) {
 
         if (object instanceof GameManager)
-            gameManager = ((GameManager) object).getAddress();
+            gameManager = object.getAddress();
         else if (object instanceof AccountService)
-            accountService = ((AccountService) object).getAddress();
+            accountService = object.getAddress();
         else if (object instanceof Authorizer)
-            authorizer = ((Authorizer) object).getAddress();
+            authorizer = object.getAddress();
 
     }
 

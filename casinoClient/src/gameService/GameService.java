@@ -15,7 +15,7 @@ public class GameService implements Runnable, Abonent {
     public enum GameType {
         SLOT,
         ROULETTE,
-        NO_GAME;
+        NO_GAME
 
     }
 
@@ -75,7 +75,8 @@ public class GameService implements Runnable, Abonent {
         try {
             channel.disconnect().sync();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.err.println("Error when disconnect game client");
         }
 
     }
@@ -90,13 +91,17 @@ public class GameService implements Runnable, Abonent {
 
     @Override
     public void run() {
-        while (true) {
-            messageSystem.execForAbonent(this);
-            try {
+        try {
+            while (true) {
+                messageSystem.execForAbonent(this);
+
                 Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            //  e.printStackTrace();
+            System.err.println("Game Service was interrupted");
+            Thread.currentThread().interrupt();
         }
+
     }
 }

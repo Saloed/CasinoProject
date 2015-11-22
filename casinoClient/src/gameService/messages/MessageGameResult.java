@@ -8,7 +8,7 @@ import gameService.GameService;
  * Created by admin on 29.10.2015.
  */
 public class MessageGameResult extends MessageToGameService {
-    private GameMessage.ServerAnswer msg;
+    private final GameMessage.ServerAnswer msg;
 
     public MessageGameResult(Address from, Address to, GameMessage.ServerAnswer msg) {
         super(from, to);

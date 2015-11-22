@@ -10,26 +10,27 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public final class AuthorizeServer implements Runnable {
 
-    final int PORT = 7776;
+    private final int PORT = 7776;
 
-    final Thread authorizerThread;
-    final MessageSystem authorizerMessageSystem;
+    private final ExecutorService authorizerThread = Executors.newSingleThreadExecutor();
+    private final MessageSystem authorizerMessageSystem;
 
-    public AuthorizeServer(MessageSystem messageSystem){
-        authorizerMessageSystem=messageSystem;
-        authorizerThread=new Thread(new Authorizer(messageSystem));
-        authorizerThread.setDaemon(true);
-        authorizerThread.start();
+    public AuthorizeServer(MessageSystem messageSystem) {
+        authorizerMessageSystem = messageSystem;
+        authorizerThread.execute(new Authorizer(messageSystem));
     }
 
     public void run() {
 
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workGroup = new NioEventLoopGroup(2);
-
+        boolean interrupted = false;
         try {
             ServerBootstrap server = new ServerBootstrap();
             server.group(bossGroup, workGroup);
@@ -43,11 +44,16 @@ public final class AuthorizeServer implements Runnable {
             channel.channel().closeFuture().sync();
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            //  e.printStackTrace();
+            interrupted = true;
+            System.err.println("AuthorizeServer thread was interrupted");
         } finally {
             bossGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
+            authorizerThread.shutdown();
+            if (interrupted)
+                Thread.currentThread().interrupt();
         }
 
     }

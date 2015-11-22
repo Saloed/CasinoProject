@@ -10,9 +10,11 @@ import io.netty.channel.ChannelHandlerContext;
 import messageSystem.MessageSystemImpl;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 public final class GameManager implements Abonent, Runnable {
@@ -23,7 +25,8 @@ public final class GameManager implements Abonent, Runnable {
     private final Map<Integer, Player> activeUsers = new HashMap<>();
     private final Map<Integer, GameType> activePlayers = new HashMap<>();
     private final Map<Integer, ChannelHandlerContext> usersChannels = new HashMap<>();
-    private final LinkedList<Thread> gameThreadList = new LinkedList<>();
+    // private final LinkedList<Thread> gameThreadList = new LinkedList<>();
+    private final ExecutorService gameThreadPool = Executors.newFixedThreadPool(2);
     private final Map<GameType, Address> gameAdresses = new HashMap<>();
 
     public GameManager(MessageSystemImpl messageSystemImpl) {
@@ -33,6 +36,9 @@ public final class GameManager implements Abonent, Runnable {
         gameMessageSystem.addService(this);
         gameMessageSystem.getAddressService().register(this);
 
+        gameThreadPool.execute(new GameSlotMachine(gameMessageSystem));
+        gameThreadPool.execute(new GameRoulette(gameMessageSystem));
+/*
         Thread slotMachineThread = new Thread(new GameSlotMachine(gameMessageSystem));
         Thread rouletteThread = new Thread(new GameRoulette(gameMessageSystem));
 
@@ -41,7 +47,7 @@ public final class GameManager implements Abonent, Runnable {
 
         slotMachineThread.start();
         rouletteThread.start();
-
+*/
         gameAdresses.put(GameType.SLOT, gameMessageSystem.getAddressService().getSlotMachineAddress());
         gameAdresses.put(GameType.ROULETTE, gameMessageSystem.getAddressService().getRouletteAddress());
 
@@ -105,11 +111,14 @@ public final class GameManager implements Abonent, Runnable {
         activeUsers.remove(sessionId);
     }
 
+
+    //TODO be care  with this function!!!!!
     public Integer getPlayerSessionByContext(ChannelHandlerContext ctx) {
         if (!usersChannels.containsValue(ctx))
             return null;
         Set<Integer> keySet = usersChannels.keySet();
         for (Integer key : keySet) {
+            //if ((usersChannels.get(key).channel().remoteAddress()).equals(ctx.channel().remoteAddress()))
             if (usersChannels.get(key).equals(ctx))
                 return key;
         }
@@ -147,25 +156,51 @@ public final class GameManager implements Abonent, Runnable {
         return address;
     }
 
+    private boolean interrupted = false;
+
     @Override
     public void run() {
-        while (true) {
-            messageSystemImpl.execForAbonent(this);
 
-            gameMessageSystem.execForAbonent(this);
+        try {
+            while (true) {
+                messageSystemImpl.execForAbonent(this);
+
+                gameMessageSystem.execForAbonent(this);
+
+                Thread.sleep(10);
+            }
+        } catch (InterruptedException consumed) {
+            // e.printStackTrace();
+            interrupted = true;
+            //Thread.currentThread().interrupt();
+            System.err.println("GameManager thread was interrupted");
+        } finally {
 
             try {
-                Thread.sleep(10);
+                gameThreadPool.shutdown();
+                if (!gameThreadPool.awaitTermination(5, TimeUnit.SECONDS)) {
+                    gameThreadPool.shutdownNow();
+                    if (!gameThreadPool.awaitTermination(5, TimeUnit.SECONDS))
+                        System.err.println("Game thread pool did not terminate");
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                System.err.println("Error when shutdown game thread pool");
+            } finally {
+                if (interrupted)
+                    Thread.currentThread().interrupt();
+                //System.err.println("GameManager thread was interrupted");
+
             }
+
         }
+
     }
 
     private enum GameType {
         SLOT,
         ROULETTE,
-        NO_GAME;
+        NO_GAME
 
     }
 }

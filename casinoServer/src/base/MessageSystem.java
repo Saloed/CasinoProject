@@ -3,11 +3,11 @@ package base;
 
 public interface MessageSystem {
 
-    public AddressService getAddressService();
+    AddressService getAddressService();
 
-    public void addService(Abonent abonent);
+    void addService(Abonent abonent);
 
-    public void sendMessage(Message message);
+    void sendMessage(Message message);
 
-    public void execForAbonent(Abonent abonent);
+    void execForAbonent(Abonent abonent);
 }

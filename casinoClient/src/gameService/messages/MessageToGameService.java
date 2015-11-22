@@ -11,7 +11,7 @@ import gameService.GameService;
 public abstract class MessageToGameService extends Message {
 
 
-    public MessageToGameService(Address from, Address to) {
+    MessageToGameService(Address from, Address to) {
         super(from, to);
     }
 

@@ -17,11 +17,11 @@ public class GameAddressService {
     public void register(Abonent object) {
 
         if (object instanceof GameManager)
-            gameManagerAddress = ((GameManager) object).getAddress();
+            gameManagerAddress = object.getAddress();
         else if (object instanceof GameRoulette)
-            rouletteAddress = ((GameRoulette) object).getAddress();
+            rouletteAddress = object.getAddress();
         else if (object instanceof GameSlotMachine)
-            slotMachineAddress = ((GameSlotMachine) object).getAddress();
+            slotMachineAddress = object.getAddress();
 
     }
 

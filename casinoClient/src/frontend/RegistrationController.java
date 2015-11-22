@@ -29,7 +29,7 @@ public class RegistrationController implements Initializable, Abonent{
     private Main application;
     private MessageSystem messageSystem;
     private Boolean breaker = true;
-private Address address=new Address();
+private final Address address=new Address();
 
     public void setApp(Main application){
         this.application = application;

@@ -7,7 +7,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import messageSystem.MessageSystemImpl;
 
-public class GameClientHandler extends SimpleChannelInboundHandler<ServerAnswer> {
+class GameClientHandler extends SimpleChannelInboundHandler<ServerAnswer> {
 
 
     private final MessageSystemImpl messageSystem;

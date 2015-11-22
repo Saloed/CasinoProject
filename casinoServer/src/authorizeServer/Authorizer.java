@@ -51,14 +51,18 @@ public class Authorizer implements Abonent, Runnable {
 
     @Override
     public void run() {
-        while (true) {
-            messageSystem.execForAbonent(this);
-            try {
+        try {
+            while (true) {
+                messageSystem.execForAbonent(this);
+
                 Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+            Thread.currentThread().interrupt();
+            System.err.println("Authorizer thread was interrupted");
         }
+
     }
 
 }

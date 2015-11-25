@@ -33,10 +33,6 @@ public final class AddressServiceImpl implements AddressService {
             authorizeController = (object).getAddress();
         else if (object instanceof MainWindowController)
             mainWindowController = object.getAddress();
-      /*
-            else if (object instanceof FrontEnd)
-            frontend = (object).getAddress();
-            */
     }
 
     public Address getGameClientAddress() {

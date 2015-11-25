@@ -35,11 +35,21 @@ class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAn
     public void channelRead0(ChannelHandlerContext ctx, UserAuthorizeAnswerMessage msg) {
         System.out.println(msg.getUserName() + "    " + msg.getPassword() + "  " + msg.getAnswer());
 
+        Message message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
+                messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer());
+        messageSystem.sendMessage(message);
+/*
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            System.err.println("Authorize Client Handler cant sleep ((((");
+        }
+*/
         if (msg.getAnswer() == true) {
             threadExecutor.execute(new ChatClient(messageSystem));
             threadExecutor.execute(new GameClient(messageSystem));
             threadExecutor.execute(new GameService(messageSystem));
-            Message message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
+            message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
                     messageSystem.getAddressService().getGameServiceAddress(),
                     msg.getSessionId());
             messageSystem.sendMessage(message);
@@ -49,9 +59,6 @@ class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAn
                     msg.getUserName());
             messageSystem.sendMessage(message);
         }
-        Message message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
-                messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer());
-        messageSystem.sendMessage(message);
 
 
     }

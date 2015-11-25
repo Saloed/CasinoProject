@@ -30,59 +30,27 @@ import java.util.logging.Logger;
 public final class Main extends Application {
 
     private MessageSystemImpl messageSystem;
-    // private List<Thread> threadList;
-    private ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
-    private ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
+    private final ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
+    private final ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
     private Stage stage;
-    private String login;
-
-    public String l = "admin";
-    public String p = "admin";
+    private String userName;
+    private AuthorizeController login = null;
+    private RegistrationController reg = null;
+    private MainWindowController home = null;
 
     @Override
     public void init() throws Exception {
 
         messageSystem = new MessageSystemImpl();
-/*
-        ChatClient chatClient = new ChatClient(messageSystem);
-        Thread chatClientThread = new Thread(chatClient);
-        chatClientThread.setDaemon(true);
-
-        GameClient gameClient = new GameClient(messageSystem);
-        Thread gameClientThread = new Thread(gameClient);
-        gameClientThread.setDaemon(true);
-
-        GameService gameService = new GameService(messageSystem);
-        Thread gameServiceThread = new Thread(gameService);
-        gameServiceThread.setDaemon(true);
-
-
-        threadList = new LinkedList<>();
-        threadList.add(chatClientThread);
-        threadList.add(gameClientThread);
-        threadList.add(gameServiceThread);
-        */
 
         authorizationExecutor.execute(new AuthorizeClient(messageSystem, workThreadPool));
 
-    /*
-        Thread authorizeClientThread = new Thread(new AuthorizeClient(messageSystem, workThreadPool));
-        authorizeClientThread.setDaemon(true);
-        authorizeClientThread.start();
-    */
-        /*
-        FrontEnd frontEnd = new FrontEnd(messageSystem);
-        Thread frontEndThread = new Thread(frontEnd);
-        frontEndThread.setDaemon(true);
-
-        frontEndThread.start();
-    */
     }
 
 
     private void gotoLogin() {
         try {
-            AuthorizeController login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window", false);
+            login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window", false);
             login.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,7 +59,7 @@ public final class Main extends Application {
 
     public void gotoMainWin() {
         try {
-            MainWindowController home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml",
+            home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml",
                     "Casino TRI TOPORA", true);
             home.setApp(this);
         } catch (Exception ex) {
@@ -101,7 +69,7 @@ public final class Main extends Application {
 
     public void gotoReg() {
         try {
-            RegistrationController reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml",
+            reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml",
                     "Registration window", false);
             reg.setApp(this);
         } catch (Exception ex) {
@@ -147,6 +115,17 @@ public final class Main extends Application {
 
         System.err.println("Application stopping");
 
+        if (login != null) {
+            login.stopController();
+        }
+        if (reg != null) {
+
+        }
+        if (home != null) {
+            home.stopController();
+        }
+
+
         Message message = new MessageDissconectAuthorizer(new Address(),
                 messageSystem.getAddressService().getAuthorizeClientAddress());
         messageSystem.sendMessage(message);
@@ -191,10 +170,10 @@ public final class Main extends Application {
     }
 
     public void takeLogin(String login) {
-        this.login = login;
+        this.userName = login;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 }

@@ -5,8 +5,10 @@ import base.Address;
 import base.Message;
 import base.MessageSystem;
 import chatClient.messages.MessageSendMessage;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -15,8 +17,10 @@ import javafx.scene.control.TextField;
 import main.Main;
 
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by FedoR on 16.11.2015.
@@ -32,22 +36,18 @@ public class MainWindowController implements Initializable, Abonent {
     private MessageSystem messageSystem;
     private Boolean breaker = true;
     private final ObservableList<String> chatWindowData = FXCollections.observableArrayList();
+    private final ExecutorService worker = Executors.newSingleThreadExecutor();
 
-    public void setApp(Main application){
+
+    public void setApp(Main application) {
         this.application = application;
         messageSystem = application.getMessageSystem();
-        userName.setText(application.getLogin());
+        userName.setText(application.getUserName());
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
-      //TODO remake
-        while (breaker) {
-            messageSystem.execForAbonent(this);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+
+        worker.execute(new WorkThread(messageSystem, this));
+
     }
 
     @Override
@@ -64,26 +64,34 @@ public class MainWindowController implements Initializable, Abonent {
     }
 
     public void sendMessage(ActionEvent event) {
-breaker=true;
         Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAdress(),
-                messageSystem.getAddressService().getChatClientAddress(),messageTextField.getText());
+                messageSystem.getAddressService().getChatClientAddress(), messageTextField.getText());
         messageSystem.sendMessage(msg);
-
-        while (breaker) {
-            messageSystem.execForAbonent(this);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
 
     }
 
-    public void getMessage(String message)
-    {
-        breaker=false;
-        chatWindowData.add(message);
-        chatWindow.setItems(chatWindowData);
+    public void getMessage(String message) {
+
+        Platform.runLater(new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+                chatWindowData.add(message);
+                chatWindow.setItems(chatWindowData);
+
+                return null;
+            }
+        });
+
+    }
+
+    public void stopController() {
+        worker.shutdown();
+        try {
+            worker.awaitTermination(100, TimeUnit.MILLISECONDS);
+            worker.shutdownNow();
+        } catch (InterruptedException e) {
+            System.err.println("Error when shuttdown MainWindow Controller");
+        }
     }
 }

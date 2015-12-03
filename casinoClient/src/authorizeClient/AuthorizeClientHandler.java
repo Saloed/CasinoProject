@@ -33,10 +33,10 @@ class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAn
 
     @Override
     public void channelRead0(ChannelHandlerContext ctx, UserAuthorizeAnswerMessage msg) {
-        System.out.println(msg.getUserName() + "    " + msg.getPassword() + "  " + msg.getAnswer());
+        System.out.println(msg.getUserName() + "    " + msg.getPassword() + "  " + msg.getAnswer() + " " + msg.getCash());
 
         Message message = new MessageToAuthorizeController(messageSystem.getAddressService().getAuthorizeClientAddress(),
-                messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer());
+                messageSystem.getAddressService().getAuthorizeControllerAddress(), msg.getUserName(), msg.getAnswer(), msg.getCash());
         messageSystem.sendMessage(message);
 /*
         try {
@@ -46,8 +46,8 @@ class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAn
         }
 */
         if (msg.getAnswer() == true) {
-            threadExecutor.execute(new ChatClient(messageSystem));
             threadExecutor.execute(new GameClient(messageSystem));
+            threadExecutor.execute(new ChatClient(messageSystem));
             threadExecutor.execute(new GameService(messageSystem));
             message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
                     messageSystem.getAddressService().getGameServiceAddress(),

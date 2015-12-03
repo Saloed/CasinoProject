@@ -19,7 +19,7 @@ class ChatClientHandler extends SimpleChannelInboundHandler<String> {
     public void channelRead0(ChannelHandlerContext ctx, String msg) {
         System.err.println(msg);
         Message message=new MessageToMainWindowController(messageSystem.getAddressService().getChatClientAddress(),
-                messageSystem.getAddressService().getMainWindowControllerAdress(),
+                messageSystem.getAddressService().getMainWindowControllerAddress(),
                 msg);
         messageSystem.sendMessage(message);
     }

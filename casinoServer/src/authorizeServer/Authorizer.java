@@ -8,6 +8,7 @@ import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 
 public class Authorizer implements Abonent, Runnable {
@@ -42,6 +43,19 @@ public class Authorizer implements Abonent, Runnable {
 
     public void removeContext(Account account) {
         accountMap.remove(account.getName());
+    }
+
+    public boolean checkAccount(Account account) {
+        Set<Integer> keys = currentSession.keySet();
+        for (Integer key : keys) {
+            if (currentSession.get(key).getName().equals(account.getName()))
+                return false;
+        }
+        return true;
+    }
+
+    public void removeUserFromSession(Integer sessionId) {
+        currentSession.remove(sessionId);
     }
 
     @Override

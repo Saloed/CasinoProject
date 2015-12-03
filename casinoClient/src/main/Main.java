@@ -6,9 +6,7 @@ import base.Address;
 import base.Message;
 import base.MessageSystem;
 import chatClient.messages.MessageChatDisconnection;
-import frontend.AuthorizeController;
-import frontend.MainWindowController;
-import frontend.RegistrationController;
+import frontend.*;
 import gameService.messages.MessageUserDisconect;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +35,9 @@ public final class Main extends Application {
     private AuthorizeController login = null;
     private RegistrationController reg = null;
     private MainWindowController home = null;
+    private SlotWindowController slotMachine = null;
+    private RouletteWindowController roulette = null;
+    private int cash;
 
     @Override
     public void init() throws Exception {
@@ -48,9 +49,9 @@ public final class Main extends Application {
     }
 
 
-    private void gotoLogin() {
+    public void gotoLogin() {
         try {
-            login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window", false);
+            login = (AuthorizeController) replaceSceneContent("/frontend/FXML/AuthorizeWindow.fxml", "Authorization window");
             login.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,9 +60,39 @@ public final class Main extends Application {
 
     public void gotoMainWin() {
         try {
-            home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml",
-                    "Casino TRI TOPORA", true);
+
+            if (login != null) {
+                login.stopController();
+                login = null;
+            }
+            if (reg != null) {
+                reg = null;
+            }
+
+            Message message = new MessageDissconectAuthorizer(new Address(),
+                    messageSystem.getAddressService().getAuthorizeClientAddress());
+            messageSystem.sendMessage(message);
+            authorizationExecutor.shutdown();
+            home = (MainWindowController) replaceSceneContent("/frontend/FXML/MainWindow.fxml", "Casino TRI TOPORA");
             home.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoSlotWin() {
+        try {
+            slotMachine = (SlotWindowController) replaceSceneContent("/frontend/FXML/SlotWindow.fxml", "YOU SHALL NOT WIN");
+            slotMachine.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoRouletteWin() {
+        try {
+            roulette = (RouletteWindowController) replaceSceneContent("/frontend/FXML/RouletteWindow.fxml", "YOU SHALL NOT WIN");
+            roulette.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,8 +100,7 @@ public final class Main extends Application {
 
     public void gotoReg() {
         try {
-            reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml",
-                    "Registration window", false);
+            reg = (RegistrationController) replaceSceneContent("/frontend/FXML/Registration.fxml", "Registration window");
             reg.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +120,7 @@ public final class Main extends Application {
     }
 
     //U can pass any params in
-    private Initializable replaceSceneContent(String fxml, String title, Boolean resizable) throws Exception {
+    private Initializable replaceSceneContent(String fxml, String title) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setBuilderFactory(new JavaFXBuilderFactory());
         loader.setLocation(Main.class.getResource(fxml));
@@ -101,7 +131,7 @@ public final class Main extends Application {
         Scene scene = new Scene(page);
         stage.setScene(scene);
         stage.setTitle(title);
-        stage.setResizable(resizable);
+        stage.setResizable(false);
         stage.sizeToScene();
         return (Initializable) loader.getController();
     }
@@ -114,35 +144,49 @@ public final class Main extends Application {
     public void stop() throws Exception {
 
         System.err.println("Application stopping");
-
-        if (login != null) {
-            login.stopController();
-        }
-        if (reg != null) {
-
-        }
-        if (home != null) {
-            home.stopController();
-        }
-
-
-        Message message = new MessageDissconectAuthorizer(new Address(),
-                messageSystem.getAddressService().getAuthorizeClientAddress());
-        messageSystem.sendMessage(message);
-
-        if (messageSystem.getAddressService().getGameClientAddress() != null) {
-            message = new MessageChatDisconnection(new Address(),
-                    messageSystem.getAddressService().getChatClientAddress());
-            messageSystem.sendMessage(message);
-            message = new MessageUserDisconect(new Address(),
-                    messageSystem.getAddressService().getGameServiceAddress());
-            messageSystem.sendMessage(message);
-        }
-
         try {
+            if (login != null) {
+                login.stopController();
+            }
+            if (reg != null) {
+
+            }
+            if (home != null) {
+                home.stopController();
+            }
+            if (slotMachine != null) {
+                slotMachine.stopController();
+            }
+            if (roulette != null) {
+                roulette.stopController();
+            }
+
+            if (!authorizationExecutor.isShutdown()) {
+
+                Message message = new MessageDissconectAuthorizer(new Address(),
+                        messageSystem.getAddressService().getAuthorizeClientAddress());
+                messageSystem.sendMessage(message);
+
+                authorizationExecutor.shutdown();
+                if (!authorizationExecutor.awaitTermination(1, TimeUnit.SECONDS)) {
+                    authorizationExecutor.shutdownNow();
+                    if (!authorizationExecutor.awaitTermination(1, TimeUnit.SECONDS))
+                        System.err.println("Work Pool did not terminate");
+                }
+            }
+
+            if (messageSystem.getAddressService().getGameClientAddress() != null) {
+                Message message = new MessageChatDisconnection(new Address(),
+                        messageSystem.getAddressService().getChatClientAddress());
+                messageSystem.sendMessage(message);
+                message = new MessageUserDisconect(new Address(),
+                        messageSystem.getAddressService().getGameServiceAddress());
+                messageSystem.sendMessage(message);
+            }
+
+
             Thread.sleep(5000);
 
-            authorizationExecutor.shutdown();
             workThreadPool.shutdown();
 
 
@@ -151,11 +195,7 @@ public final class Main extends Application {
                 if (!workThreadPool.awaitTermination(5, TimeUnit.SECONDS))
                     System.err.println("Work Pool did not terminate");
             }
-            if (!authorizationExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
-                authorizationExecutor.shutdownNow();
-                if (!authorizationExecutor.awaitTermination(5, TimeUnit.SECONDS))
-                    System.err.println("Work Pool did not terminate");
-            }
+
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -175,5 +215,13 @@ public final class Main extends Application {
 
     public String getUserName() {
         return userName;
+    }
+
+    public void takeCash(int cash) {
+        this.cash = cash;
+    }
+
+    public int getCash() {
+        return cash;
     }
 }

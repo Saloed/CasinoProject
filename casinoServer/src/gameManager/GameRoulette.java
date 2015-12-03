@@ -31,6 +31,7 @@ public class GameRoulette extends Game {
 
         for (Player player : players) {
             int resultCash = player.getBetCash();
+            player.getAccount().setCash(player.getAccount().getCash() - resultCash);
             if (player.getBet() == null)
                 throw new IllegalArgumentException("Bet null");
             if (player.getBet().equals(result))
@@ -39,7 +40,7 @@ public class GameRoulette extends Game {
                 resultCash = 0;
 
             resultCash = resultCash + player.getAccount().getCash();
-
+            player.getAccount().setCash(resultCash);
             GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
                     .setCash(resultCash)
                     .addGameData(result)

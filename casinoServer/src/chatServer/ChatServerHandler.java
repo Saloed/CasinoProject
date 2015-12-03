@@ -6,14 +6,18 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.ssl.SslHandler;
-import io.netty.util.concurrent.Future;
-import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
 
 class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+
+    @Override
+    public void channelInactive(final ChannelHandlerContext ctx) {
+        System.out.println("Chat user disconnected " + ctx);
+
+    }
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {

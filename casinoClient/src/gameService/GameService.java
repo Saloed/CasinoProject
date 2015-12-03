@@ -3,6 +3,7 @@ package gameService;
 import base.Abonent;
 import base.Address;
 import base.GameMessage;
+import base.MessageSystem;
 import io.netty.channel.Channel;
 import messageSystem.MessageSystemImpl;
 
@@ -81,6 +82,10 @@ public class GameService implements Runnable, Abonent {
 
     }
 
+    public MessageSystem getMessageSystem() {
+        return messageSystem;
+    }
+
     public void changeSessionId(Integer sessionId) {
         this.sessionId = sessionId;
     }
@@ -91,6 +96,7 @@ public class GameService implements Runnable, Abonent {
 
     @Override
     public void run() {
+        boolean interrupt = false;
         try {
             while (true) {
                 messageSystem.execForAbonent(this);
@@ -100,7 +106,11 @@ public class GameService implements Runnable, Abonent {
         } catch (InterruptedException e) {
             //  e.printStackTrace();
             System.err.println("Game Service was interrupted");
-            Thread.currentThread().interrupt();
+            interrupt = true;
+        } finally {
+            if (interrupt)
+                Thread.currentThread().interrupt();
+
         }
 
     }

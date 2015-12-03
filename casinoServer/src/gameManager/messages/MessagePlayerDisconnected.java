@@ -1,6 +1,7 @@
 package gameManager.messages;
 
 import accountService.messages.MessageUpdateAccount;
+import authorizeServer.messages.MessageUserEndSession;
 import base.Address;
 import base.Message;
 import gameManager.GameManager;
@@ -29,6 +30,10 @@ public class MessagePlayerDisconnected extends MessageToGameManager {
         Message message = new MessageUpdateAccount(gameManager.getAddress(),
                 gameManager.getMessageSystem().getAddressService().getAccountServiceAddress(),
                 gameManager.getPlayer(sessionId).getAccount());
+        gameManager.getMessageSystem().sendMessage(message);
+        message = new MessageUserEndSession(gameManager.getAddress(),
+                gameManager.getMessageSystem().getAddressService().getAuthorizerAddress(),
+                sessionId);
         gameManager.getMessageSystem().sendMessage(message);
         gameManager.removeUser(sessionId);
     }

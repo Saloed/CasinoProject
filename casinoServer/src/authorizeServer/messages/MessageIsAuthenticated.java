@@ -31,6 +31,7 @@ public class MessageIsAuthenticated extends Message {
                         .setAnswer(true)
                         .setUserName(account.getName())
                         .setPassword(account.getPassword())
+                        .setCash(account.getCash())
                         .setSessionId(sessionId)
                         .build();
 

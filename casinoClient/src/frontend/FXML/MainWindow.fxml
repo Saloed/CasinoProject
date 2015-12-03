@@ -1,50 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0"
       prefWidth="911.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="frontend.MainWindowController">
-   <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="530.0" prefWidth="229.0">
-      <ListView fx:id="chatWindow" layoutX="3.0" layoutY="2.0" prefHeight="452.0" prefWidth="225.0">
-         <opaqueInsets>
-            <Insets/>
-         </opaqueInsets>
-      </ListView>
-      <Button fx:id="chatButton" alignment="CENTER" layoutX="168.0" layoutY="471.0" mnemonicParsing="false"
-              onAction="#sendMessage" prefHeight="40.0" prefWidth="60.0" text="Send" textAlignment="CENTER"/>
-      <TextField fx:id="messageTextField" layoutX="3.0" layoutY="471.0" prefHeight="40.0" prefWidth="158.0"/>
-   </AnchorPane>
-   <Label layoutX="370.0" layoutY="7.0" prefHeight="79.0" prefWidth="493.0" text=",welcome to Casino Tri Topora!">
-      <font>
-         <Font size="36.0"/>
-      </font>
-   </Label>
-   <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="242.0" layoutY="7.0"
-          prefHeight="79.0" prefWidth="124.0" text="derevo">
-      <font>
-         <Font size="36.0"/>
-      </font>
-   </Label>
-   <Label layoutX="276.0" layoutY="86.0" prefHeight="35.0" prefWidth="103.0" text="\$CASH$:">
-      <font>
-         <Font size="24.0"/>
-      </font>
-   </Label>
-   <Label layoutX="465.0" layoutY="131.0" prefHeight="35.0" prefWidth="172.0" text="Choose game:">
-      <font>
-         <Font size="24.0"/>
-      </font>
-   </Label>
-   <Button layoutX="332.0" layoutY="228.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="124.0"
-           text="SlotMachine"/>
-   <Button layoutX="637.0" layoutY="220.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="124.0" text="Roulette"/>
-   <Label fx:id="cash" layoutX="370.0" layoutY="86.0" prefHeight="35.0" prefWidth="191.0" text="100500$">
-      <font>
-         <Font size="24.0"/>
-      </font>
-   </Label>
+   <children>
+      <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="530.0" prefWidth="229.0">
+         <children>
+            <ListView fx:id="chatWindow" layoutX="3.0" layoutY="2.0" prefHeight="452.0" prefWidth="225.0">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+            </ListView>
+            <Button fx:id="chatButton" alignment="CENTER" layoutX="168.0" layoutY="471.0" mnemonicParsing="false"
+                    onAction="#sendMessage" prefHeight="40.0" prefWidth="60.0" text="Send" textAlignment="CENTER"/>
+            <TextField fx:id="messageTextField" layoutX="3.0" layoutY="471.0" prefHeight="40.0" prefWidth="158.0"/>
+         </children>
+      </AnchorPane>
+      <Label layoutX="370.0" layoutY="7.0" prefHeight="79.0" prefWidth="493.0" text=",welcome to Casino Tri Topora!">
+         <font>
+            <Font size="36.0"/>
+         </font>
+      </Label>
+      <Label fx:id="userName" alignment="CENTER_RIGHT" contentDisplay="CENTER" layoutX="242.0" layoutY="7.0"
+             prefHeight="79.0" prefWidth="124.0" text="derevo">
+         <font>
+            <Font size="36.0"/>
+         </font>
+      </Label>
+      <Label layoutX="276.0" layoutY="86.0" prefHeight="35.0" prefWidth="103.0" text="\$CASH$:">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Label>
+      <Label layoutX="465.0" layoutY="131.0" prefHeight="35.0" prefWidth="172.0" text="Choose game:">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Label>
+      <Button fx:id="startSlotWinButton" layoutX="332.0" layoutY="228.0" mnemonicParsing="false"
+              onAction="#goToSlotWindow" prefHeight="72.0" prefWidth="124.0" text="SlotMachine"/>
+      <Button layoutX="637.0" layoutY="220.0" mnemonicParsing="false" onAction="#goToRouletteWindow" prefHeight="72.0"
+              prefWidth="124.0" text="Roulette"/>
+      <Label fx:id="cash" layoutX="370.0" layoutY="86.0" prefHeight="35.0" prefWidth="191.0" text="100500$">
+         <font>
+            <Font size="24.0"/>
+         </font>
+      </Label>
+   </children>
 </Pane>

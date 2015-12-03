@@ -34,11 +34,13 @@ public final class GameSlotMachine extends Game {
         if (third < 0)
             third = third * (-1);
         int resultCash = player.getBetCash();
+        player.getAccount().setCash(player.getAccount().getCash() - resultCash);
         if (first == secound && secound == third)
             resultCash = resultCash * 5;
         else
             resultCash = 0;
         resultCash = resultCash + player.getAccount().getCash();
+        player.getAccount().setCash(resultCash);
 
         GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
                 .setCash(resultCash)

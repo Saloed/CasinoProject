@@ -17,5 +17,9 @@ public interface AddressService {
 
     Address getAuthorizeControllerAddress();
 
-    Address getMainWindowControllerAdress();
+    Address getMainWindowControllerAddress();
+
+    Address getSlotWindowControllerAddress();
+
+    Address getRouletteWindowControllerAddress();
 }

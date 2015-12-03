@@ -32,7 +32,6 @@ public class AuthorizeController implements Initializable, Abonent {
     public Button sign;
     private Main application;
     private MessageSystem messageSystem;
-    private final Boolean breaker = true;
 
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
 
@@ -58,7 +57,7 @@ public class AuthorizeController implements Initializable, Abonent {
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
 
-        worker.execute(new WorkThread(messageSystem, this));
+        worker.execute(new WorkThread(messageSystem, this, "Authorize"));
 
     }
 
@@ -91,14 +90,14 @@ public class AuthorizeController implements Initializable, Abonent {
         });
     }
 
-    public void handleAnswer(Boolean answer, String login) {
+    public void handleAnswer(Boolean answer, String login, int cash) {
         Platform.runLater(new Task<Void>() {
             @Override
             protected Void call() throws Exception {
 
 
                 if (answer) {
-
+                    application.takeCash(cash);
                     application.takeLogin(login);
                     application.gotoMainWin();
                 } else {

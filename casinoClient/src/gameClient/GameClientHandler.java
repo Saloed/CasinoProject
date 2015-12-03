@@ -27,5 +27,13 @@ class GameClientHandler extends SimpleChannelInboundHandler<ServerAnswer> {
         Message message = new MessageGameResult(messageSystem.getAddressService().getGameClientAddress(),
                 messageSystem.getAddressService().getGameServiceAddress(), msg);
         messageSystem.sendMessage(message);
+
+/*
+
+*/
+        //if(ROULETTE)
+        //....msg
+        //if(SLOT)
+        //....msg
     }
 }

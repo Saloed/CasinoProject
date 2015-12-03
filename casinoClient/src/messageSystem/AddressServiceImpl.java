@@ -7,6 +7,8 @@ import base.AddressService;
 import chatClient.ChatClient;
 import frontend.AuthorizeController;
 import frontend.MainWindowController;
+import frontend.RouletteWindowController;
+import frontend.SlotWindowController;
 import gameClient.GameClient;
 import gameService.GameService;
 
@@ -18,6 +20,8 @@ public final class AddressServiceImpl implements AddressService {
     private Address chatClient;
     private Address authorizeController;
     private Address mainWindowController;
+    private Address slotWindowController;
+    private Address rouletteWindowController;
 
     public void register(Abonent object) {
 
@@ -33,6 +37,10 @@ public final class AddressServiceImpl implements AddressService {
             authorizeController = (object).getAddress();
         else if (object instanceof MainWindowController)
             mainWindowController = object.getAddress();
+        else if (object instanceof SlotWindowController)
+            slotWindowController = object.getAddress();
+        else if (object instanceof RouletteWindowController)
+            rouletteWindowController = object.getAddress();
     }
 
     public Address getGameClientAddress() {
@@ -59,8 +67,19 @@ public final class AddressServiceImpl implements AddressService {
         return authorizeController;
     }
 
-
-    public Address getMainWindowControllerAdress() {
+    public Address getMainWindowControllerAddress() {
         return mainWindowController;
     }
+
+    public Address getSlotWindowControllerAddress() {
+        return slotWindowController;
+    }
+
+    ;
+
+    public Address getRouletteWindowControllerAddress() {
+        return rouletteWindowController;
+    }
+
+    ;
 }

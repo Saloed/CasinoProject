@@ -11,12 +11,18 @@ class WorkThread implements Runnable {
     private final MessageSystem messageSystem;
     //private final Address address;
     private final Abonent instance;
+    private String name = "";
 
     WorkThread(MessageSystem messageSystem, Abonent instance) {
         this.messageSystem = messageSystem;
         this.instance = instance;
     }
 
+    WorkThread(MessageSystem messageSystem, Abonent instance, String name) {
+        this.messageSystem = messageSystem;
+        this.instance = instance;
+        this.name = name;
+    }
 
     @Override
     public void run() {
@@ -32,7 +38,7 @@ class WorkThread implements Runnable {
             System.err.println("Worker thread was interrupted");
             interrupted = true;
         } finally {
-            System.err.println("Worker end work");
+            System.err.println("Worker " + name + " end work");
             if (interrupted)
                 Thread.currentThread().interrupt();
         }

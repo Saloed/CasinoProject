@@ -110,6 +110,7 @@ public class AuthorizeClient implements Runnable, Abonent {
             needReconnect = connectionTry();
 
             if (needReconnect) {
+                Thread.sleep(20);
                 notifyConnectionError();
             }
             try {
@@ -124,7 +125,9 @@ public class AuthorizeClient implements Runnable, Abonent {
                 System.err.println("Authorize Client throw interrupted");
             }
 
-
+        } catch (InterruptedException e) {
+            interrupted = true;
+            System.err.println("Authorize Client throw interrupted");
         } finally {
             group.shutdownGracefully();
             if (interrupted)

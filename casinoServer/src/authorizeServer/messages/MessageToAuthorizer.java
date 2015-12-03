@@ -30,15 +30,22 @@ public class MessageToAuthorizer extends Message {
 
             Account account = new Account(msg.getUserName(), msg.getPassword());
             authorizer.addAccount(account, ctx);
-            if (!msg.getRegister()) {
-                Message mes = new MessageAuthenticate(authorizer.getAddress(),
-                        authorizer.getMessageSystem().getAddressService().getAccountServiceAddress(),
-                        account.getName(), account.getPassword());
-                authorizer.getMessageSystem().sendMessage(mes);
+            if (authorizer.checkAccount(account)) {
+                if (!msg.getRegister()) {
+                    Message mes = new MessageAuthenticate(authorizer.getAddress(),
+                            authorizer.getMessageSystem().getAddressService().getAccountServiceAddress(),
+                            account.getName(), account.getPassword());
+                    authorizer.getMessageSystem().sendMessage(mes);
+                } else {
+                    Message message = new MessageRegister(authorizer.getAddress(),
+                            authorizer.getMessageSystem().getAddressService().getAccountServiceAddress(),
+                            account.getName(), account.getPassword());
+                    authorizer.getMessageSystem().sendMessage(message);
+                }
             } else {
-                Message message = new MessageRegister(authorizer.getAddress(),
-                        authorizer.getMessageSystem().getAddressService().getAccountServiceAddress(),
-                        account.getName(), account.getPassword());
+                account = new Account(0, account.getName(), account.getPassword(), 0);
+                Message message = new MessageIsAuthenticated(authorizer.getAddress(), authorizer.getAddress(),
+                        account);
                 authorizer.getMessageSystem().sendMessage(message);
             }
         }

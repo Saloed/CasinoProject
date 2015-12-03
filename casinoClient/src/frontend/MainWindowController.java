@@ -34,7 +34,7 @@ public class MainWindowController implements Initializable, Abonent {
     public ListView chatWindow;
     private Main application;
     private MessageSystem messageSystem;
-    private Boolean breaker = true;
+    private int moneyCount;
     private final ObservableList<String> chatWindowData = FXCollections.observableArrayList();
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
 
@@ -43,18 +43,18 @@ public class MainWindowController implements Initializable, Abonent {
         this.application = application;
         messageSystem = application.getMessageSystem();
         userName.setText(application.getUserName());
+        moneyCount = application.getCash();
+        cash.setText("" + moneyCount);
         messageSystem.getAddressService().register(this);
         messageSystem.addService(this);
-
-        worker.execute(new WorkThread(messageSystem, this));
-
+        worker.execute(new WorkThread(messageSystem, this, "Main Window"));
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         messageTextField.setPromptText("Enter message...");
-        cash.setText("1 000 000$"); //$$$
+        cash.setText(Integer.toString(moneyCount)); //$$$
 
 
     }
@@ -64,10 +64,11 @@ public class MainWindowController implements Initializable, Abonent {
     }
 
     public void sendMessage(ActionEvent event) {
-        Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAdress(),
+        Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAddress(),
                 messageSystem.getAddressService().getChatClientAddress(), messageTextField.getText());
         messageSystem.sendMessage(msg);
 
+        messageTextField.clear();
     }
 
     public void getMessage(String message) {
@@ -93,5 +94,14 @@ public class MainWindowController implements Initializable, Abonent {
         } catch (InterruptedException e) {
             System.err.println("Error when shuttdown MainWindow Controller");
         }
+    }
+
+    public void goToSlotWindow(ActionEvent event) {
+        application.gotoSlotWin();
+    }
+
+
+    public void goToRouletteWindow(ActionEvent event) {
+        application.gotoRouletteWin();
     }
 }

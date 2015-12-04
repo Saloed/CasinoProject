@@ -82,6 +82,10 @@ public final class Main extends Application {
 
     public void gotoSlotWin() {
         try {
+            if (home != null) {
+                home.stopController();
+                home = null;
+            }
             slotMachine = (SlotWindowController) replaceSceneContent("/frontend/FXML/SlotWindow.fxml", "YOU SHALL NOT WIN");
             slotMachine.setApp(this);
         } catch (Exception ex) {
@@ -91,6 +95,10 @@ public final class Main extends Application {
 
     public void gotoRouletteWin() {
         try {
+            if (home != null) {
+                home.stopController();
+                home = null;
+            }
             roulette = (RouletteWindowController) replaceSceneContent("/frontend/FXML/RouletteWindow.fxml", "YOU SHALL NOT WIN");
             roulette.setApp(this);
         } catch (Exception ex) {
@@ -190,9 +198,9 @@ public final class Main extends Application {
             workThreadPool.shutdown();
 
 
-            if (!workThreadPool.awaitTermination(5, TimeUnit.SECONDS)) {
+            if (!workThreadPool.awaitTermination(1, TimeUnit.SECONDS)) {
                 workThreadPool.shutdownNow();
-                if (!workThreadPool.awaitTermination(5, TimeUnit.SECONDS))
+                if (!workThreadPool.awaitTermination(1, TimeUnit.SECONDS))
                     System.err.println("Work Pool did not terminate");
             }
 

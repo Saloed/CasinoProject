@@ -8,8 +8,6 @@ import base.GameMessage.UserAuthorizeAnswerMessage;
 import base.Message;
 import gameManager.messages.MessageNewUserInCurrentSession;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 
 public class MessageIsAuthenticated extends Message {
 
@@ -26,19 +24,19 @@ public class MessageIsAuthenticated extends Message {
             UserAuthorizeAnswerMessage msg;
 
             if (account.getId() != 0) {
-                Integer sessionId = new AtomicInteger().incrementAndGet();
+                //Integer sessionId = new AtomicInteger().incrementAndGet();
                 msg = UserAuthorizeAnswerMessage.newBuilder()
                         .setAnswer(true)
                         .setUserName(account.getName())
                         .setPassword(account.getPassword())
                         .setCash(account.getCash())
-                        .setSessionId(sessionId)
+                        .setSessionId(account.getId())
                         .build();
 
-                authorizer.addUserToCurrentSession(sessionId, account);
+                authorizer.addUserToCurrentSession(account.getId(), account);
                 Message message = new MessageNewUserInCurrentSession(authorizer.getAddress(),
                         authorizer.getMessageSystem().getAddressService().getGameManagerAddress(),
-                        sessionId, account);
+                        account.getId(), account);
                 authorizer.getMessageSystem().sendMessage(message);
             } else {
                 msg = UserAuthorizeAnswerMessage.newBuilder()

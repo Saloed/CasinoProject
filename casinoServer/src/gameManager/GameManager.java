@@ -178,9 +178,9 @@ public final class GameManager implements Abonent, Runnable {
 
             try {
                 gameThreadPool.shutdown();
-                if (!gameThreadPool.awaitTermination(5, TimeUnit.SECONDS)) {
+                if (!gameThreadPool.awaitTermination(1, TimeUnit.SECONDS)) {
                     gameThreadPool.shutdownNow();
-                    if (!gameThreadPool.awaitTermination(5, TimeUnit.SECONDS))
+                    if (!gameThreadPool.awaitTermination(1, TimeUnit.SECONDS))
                         System.err.println("Game thread pool did not terminate");
                 }
             } catch (InterruptedException e) {

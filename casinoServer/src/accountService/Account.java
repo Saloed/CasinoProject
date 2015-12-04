@@ -69,7 +69,7 @@ public final class Account {
                         return true;
                 } else {
                     assert name != null;
-                    assert password!=null;
+                    assert password != null;
                     if (name.equals(other.name) && password.equals(other.password) && cash == other.cash)
                         return true;
                 }

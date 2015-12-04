@@ -57,6 +57,8 @@ public final class GameSlotMachine extends Game {
 
     @Override
     public void run() {
+        boolean interrupted = false;
+
         try {
             while (true) {
                 messageSystem.execForAbonent(this);
@@ -70,8 +72,11 @@ public final class GameSlotMachine extends Game {
             }
         } catch (InterruptedException e) {
             // e.printStackTrace();
-            Thread.currentThread().interrupt();
+            interrupted = true;
             System.err.println("Slot machine game thread was interrupted");
+        } finally {
+            if (interrupted)
+                Thread.currentThread().interrupt();
         }
 
     }

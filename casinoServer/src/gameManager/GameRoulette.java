@@ -55,6 +55,7 @@ public class GameRoulette extends Game {
 
     @Override
     public void run() {
+        boolean interrupted = false;
         try {
             while (true) {
                 messageSystem.execForAbonent(this);
@@ -68,8 +69,12 @@ public class GameRoulette extends Game {
             }
         } catch (InterruptedException e) {
             //  e.printStackTrace();
-            Thread.currentThread().interrupt();
+            //Thread.currentThread().interrupt();
+            interrupted = true;
             System.err.println("Roulette game thread was interrupted");
+        } finally {
+            if (interrupted)
+                Thread.currentThread().interrupt();
         }
 
     }

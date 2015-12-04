@@ -26,6 +26,7 @@ class WorkThread implements Runnable {
 
     @Override
     public void run() {
+        Thread.currentThread().setName(name);
         Boolean interrupted = false;
         try {
             while (true) {

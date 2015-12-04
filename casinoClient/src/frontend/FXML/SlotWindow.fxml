@@ -54,6 +54,6 @@
                 <Font size="24.0"/>
             </font>
         </Label>
-        <Label fx:id="errorNoBet" layoutX="279.0" layoutY="215.0" prefHeight="25.0" prefWidth="94.0" textFill="RED"/>
+        <Label fx:id="errorNoBet" layoutX="279.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" textFill="RED"/>
     </children>
 </Pane>

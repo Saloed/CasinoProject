@@ -63,6 +63,10 @@ public class MainWindowController implements Initializable, Abonent {
         return address;
     }
 
+    //TODO add payment system
+    //for update cash send MessageSendRequest (from geme service package)
+    //set money as betCash
+
     public void sendMessage(ActionEvent event) {
         Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAddress(),
                 messageSystem.getAddressService().getChatClientAddress(), messageTextField.getText());

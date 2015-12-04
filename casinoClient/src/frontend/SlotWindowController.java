@@ -73,19 +73,23 @@ public class SlotWindowController implements Initializable, Abonent {
 
         if ("".equals(bet.getText()))
             return;
-
-
+        if (bet.getText().matches("[A-Za-z]*")) {
+            errorNoBet.setText("Bet must be number");
+            return;
+        }
+        Integer currentBet = Integer.parseInt(bet.getText());
+        if (currentBet <= 0) {
+            errorNoBet.setText("Bet must be > 0");
+            return;
+        }
+        if (currentBet > application.getCash()) {
+            errorNoBet.setText("Your bet bigger then your cash");
+            return;
+        }
         Message msg = new MessageSendRequest(messageSystem.getAddressService().getSlotWindowControllerAddress(),
-                messageSystem.getAddressService().getGameServiceAddress(), Integer.parseInt(bet.getText()), null);
+                messageSystem.getAddressService().getGameServiceAddress(), currentBet, null);
         messageSystem.sendMessage(msg);
-        //if (!bet.getText().matches("[A-Za-z]")) {
 
-        //String.matches NE RABOTAET ?!
-
-        //else
-        //{
-        //errorNoBet.setText("Invalid bet");
-        //}
         startButton.disarm();
 
     }

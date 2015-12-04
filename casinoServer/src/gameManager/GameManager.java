@@ -57,6 +57,14 @@ public final class GameManager implements Abonent, Runnable {
     //TODO check and rework
     public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer betCash, Integer bet) {
         GameType parsedGameType = GameType.valueOf(gameType.toString());
+
+        if (GameType.NO_GAME.equals(parsedGameType)) {
+            if (betCash != null) {
+                changeAccountCash(sessionId, activeUsers.get(sessionId).getAccount().getCash() + betCash);
+                return;
+            }
+        }
+
         if (!activePlayers.containsKey(sessionId)) {
             if (betCash != null) {
                 activePlayers.put(sessionId, parsedGameType);

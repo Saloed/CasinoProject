@@ -40,6 +40,8 @@ public final class GameSlotMachine extends Game {
         else
             resultCash = 0;
         resultCash = resultCash + player.getAccount().getCash();
+        if (resultCash < 0)
+            resultCash = 0;
         player.getAccount().setCash(resultCash);
 
         GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()

@@ -24,11 +24,11 @@ public class MessageNewPlayerAccepted extends MessageToGameManager {
             this.betCash = null;
         } else {
 
-            this.betCash = msg.getBet(0);
-            if (msg.getBetCount() >= 2)
-                this.bet = msg.getBet(1);
-            else
+            this.betCash = msg.getBet(0).getCash();
+            if (msg.getBet(0).getCoefficient() == 0)
                 this.bet = null;
+            else
+                this.bet = msg.getBet(0).getBet(0);
         }
     }
 

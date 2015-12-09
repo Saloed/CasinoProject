@@ -9,8 +9,14 @@ message ServerRequest {
         ROULETTE = 2;
     }
 
+    message Bet {
+        required int32 cash = 4;
+        optional int32 coefficient = 5 [default = 0];
+        repeated int32 bet = 6;
+    }
+
     required GameType game = 2;
-    repeated int32 bet = 3;
+    repeated Bet bet = 3;
 }
 
 message ServerAnswer {

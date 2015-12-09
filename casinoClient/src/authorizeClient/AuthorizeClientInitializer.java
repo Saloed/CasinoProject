@@ -1,6 +1,6 @@
 package authorizeClient;
 
-import base.GameMessage.UserAuthorizeAnswerMessage;
+import base.GameMessage;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -10,7 +10,6 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import messageSystem.MessageSystemImpl;
 
-import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 
 class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
@@ -29,7 +28,7 @@ class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
 
         //Decoder
         pipeline.addLast("frameDecoder", new ProtobufVarint32FrameDecoder());
-        pipeline.addLast("protobufDecoder", new ProtobufDecoder(UserAuthorizeAnswerMessage.getDefaultInstance()));
+        pipeline.addLast("protobufDecoder", new ProtobufDecoder(GameMessage.UserAuthorizeAnswerMessage.getDefaultInstance()));
 
         //Encoder
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());

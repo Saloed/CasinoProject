@@ -32,12 +32,18 @@ public class MessageSendRequest extends MessageToGameService {
         } else if (bet == null) {
             builder.setSessionId(gameService.getSessionId());
             builder.setGame(game);
-            builder.addBet(betCash);
+            GameMessage.ServerRequest.Bet.Builder betBuilder = GameMessage.ServerRequest.Bet.newBuilder();
+            betBuilder.setCash(betCash);
+            builder.addBet(betBuilder.build());
         } else {
+            //TODO remake for roulette
             builder.setSessionId(gameService.getSessionId());
             builder.setGame(game);
-            builder.addBet(betCash);
-            builder.addBet(bet);
+            GameMessage.ServerRequest.Bet.Builder betBuilder = GameMessage.ServerRequest.Bet.newBuilder();
+            betBuilder.setCash(betCash);
+            betBuilder.setCoefficient(1);
+            betBuilder.addBet(bet);
+            builder.addBet(betBuilder.build());
         }
 
         GameMessage.ServerRequest msg = builder.build();

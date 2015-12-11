@@ -1,59 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0"
-      prefWidth="640.0" style="-fx-background-color: darkseagreen;" xmlns="http://javafx.com/javafx/8"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SlotWindowController">
-    <children>
-        <Button fx:id="startButton" layoutX="247.0" layoutY="269.0" mnemonicParsing="false" onAction="#startRolling"
-                prefHeight="114.0" prefWidth="115.0" style="-fx-background-radius: 360; -fx-background-color: red;"
-                text="GO">
-            <font>
-                <Font name="System Bold" size="36.0"/>
-            </font>
-        </Button>
-        <Label layoutX="129.0" layoutY="14.0" text="Current $cash$:">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
-        <Label fx:id="currentCash" layoutX="294.0" layoutY="14.0" prefHeight="35.0" prefWidth="222.0">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
-        <Button fx:id="returnButton" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#goBack"
-                text="&lt;-Back"/>
-        <Pane layoutX="20.0" layoutY="49.0" minHeight="150.0" minWidth="600.0" opacity="0.65" prefHeight="160.0"
-              prefWidth="600.0"
-              style="-fx-background-color: rgba(56, 176, 209); -fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20;">
-            <children>
-                <HBox fx:id="horBox" alignment="CENTER" layoutY="5.0" minHeight="150.0" minWidth="600.0">
-                    <children>
-                        <ImageView fx:id="slot0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
-                                   preserveRatio="true"/>
-                        <ImageView fx:id="slot1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
-                                   preserveRatio="true"/>
-                        <ImageView fx:id="slot2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
-                                   preserveRatio="true"/>
-                    </children>
-                </HBox>
-            </children>
-        </Pane>
-        <TextField fx:id="bet" alignment="CENTER_RIGHT" layoutX="185.0" layoutY="215.0" prefHeight="25.0"
-                   prefWidth="86.0"/>
-        <Label layoutX="20.0" layoutY="210.0" text="Enter your bet:">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
-        <Label fx:id="errorNoBet" layoutX="279.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" textFill="RED"/>
-    </children>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: darkseagreen;"
+      xmlns="http://javafx.com/javafx/8" fx:controller="frontend.SlotWindowController">
+    <Button fx:id="startButton" layoutX="247.0" layoutY="269.0" mnemonicParsing="false" onAction="#startRolling"
+            prefHeight="114.0" prefWidth="115.0" style="-fx-background-radius: 360; -fx-background-color: red;"
+            text="GO">
+        <font>
+            <Font name="System Bold" size="36.0"/>
+        </font>
+    </Button>
+    <Label layoutX="129.0" layoutY="14.0" text="Current $cash$:">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label fx:id="currentCash" layoutX="294.0" layoutY="14.0" prefHeight="35.0" prefWidth="222.0">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Button fx:id="returnButton" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#goBack"
+            text="&lt;-Back"/>
+    <Pane layoutX="20.0" layoutY="49.0" minHeight="150.0" minWidth="600.0" opacity="0.65" prefHeight="160.0"
+          prefWidth="600.0"
+          style="-fx-background-color: rgba(56, 176, 209); -fx-background-radius: 20; -fx-border-color: black; -fx-border-radius: 20;">
+        <HBox fx:id="horBox" alignment="CENTER" layoutY="5.0" minHeight="150.0" minWidth="600.0">
+            <ImageView fx:id="slot0" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+            <ImageView fx:id="slot1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+            <ImageView fx:id="slot2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                       preserveRatio="true"/>
+        </HBox>
+    </Pane>
+    <TextField fx:id="bet" alignment="CENTER_RIGHT" layoutX="185.0" layoutY="215.0" prefHeight="25.0"
+               prefWidth="86.0"/>
+    <Label layoutX="20.0" layoutY="210.0" text="Enter your bet:">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label fx:id="errorNoBet" layoutX="279.0" layoutY="215.0" prefHeight="25.0" prefWidth="200.0" textFill="RED"/>
 </Pane>

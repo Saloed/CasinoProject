@@ -5,15 +5,12 @@ import base.Address;
 import base.Message;
 import frontend.SlotWindowController;
 
-/**
- * Created by FedoR on 29.11.2015.
- */
 public class MessageToSlotWindowController extends Message {
 
-    private int first;
-    private int second;
-    private int third;
-    private int resultCash;
+    private final int first;
+    private final int second;
+    private final int third;
+    private final int resultCash;
 
     public MessageToSlotWindowController(Address from, Address to, int first, int second, int third, int resultCash) {
         super(from, to);

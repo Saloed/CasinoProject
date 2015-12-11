@@ -5,9 +5,6 @@ import base.Address;
 import gameManager.GameManager;
 import gameManager.Player;
 
-/**
- * Created by admin on 28.10.2015.
- */
 public class MessageNewUserInCurrentSession extends MessageToGameManager {
 
     private final Account account;

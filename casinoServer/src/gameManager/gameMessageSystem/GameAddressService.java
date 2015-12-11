@@ -6,9 +6,6 @@ import gameManager.GameManager;
 import gameManager.GameRoulette;
 import gameManager.GameSlotMachine;
 
-/**
- * Created by user on 04.11.15.
- */
 public class GameAddressService {
     private Address slotMachineAddress;
     private Address rouletteAddress;

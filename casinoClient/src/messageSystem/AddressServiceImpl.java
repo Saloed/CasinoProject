@@ -16,7 +16,6 @@ public final class AddressServiceImpl implements AddressService {
     private Address gameClient;
     private Address authorizeClient;
     private Address gameService;
-    private Address frontend;
     private Address chatClient;
     private Address authorizeController;
     private Address mainWindowController;
@@ -55,10 +54,6 @@ public final class AddressServiceImpl implements AddressService {
         return gameService;
     }
 
-    public Address getFrontEndAddress() {
-        return frontend;
-    }
-
     public Address getChatClientAddress() {
         return chatClient;
     }
@@ -75,11 +70,8 @@ public final class AddressServiceImpl implements AddressService {
         return slotWindowController;
     }
 
-    ;
-
     public Address getRouletteWindowControllerAddress() {
         return rouletteWindowController;
     }
 
-    ;
 }

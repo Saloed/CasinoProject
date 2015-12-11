@@ -4,11 +4,7 @@ import base.Abonent;
 import base.Address;
 import base.Message;
 import chatClient.ChatClient;
-import gameService.GameService;
 
-/**
- * Created by user on 04.11.15.
- */
 public abstract class MessageToChatClient extends Message {
 
     MessageToChatClient(Address from, Address to) {

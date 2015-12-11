@@ -5,9 +5,6 @@ import base.Address;
 import base.Message;
 import gameService.GameService;
 
-/**
- * Created by admin on 28.10.2015.
- */
 public abstract class MessageToGameService extends Message {
 
 

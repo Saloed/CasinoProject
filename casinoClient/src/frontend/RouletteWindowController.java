@@ -21,10 +21,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by FedoR on 01.12.2015.
- */
 public class RouletteWindowController implements Initializable, Abonent {
+    private final Address address = new Address();
+    private final ExecutorService worker = Executors.newSingleThreadExecutor();
     public Button r1;
     public Button b2;
     public Button r3;
@@ -61,15 +60,9 @@ public class RouletteWindowController implements Initializable, Abonent {
     public Button r34;
     public Button b35;
     public Button r36;
-
-
     public Label cashField;
-
-
     private Main application;
     private MessageSystem messageSystem;
-    private final Address address = new Address();
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private int[] array = new int[36];
 
 

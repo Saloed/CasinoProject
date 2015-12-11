@@ -32,12 +32,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 
-/**
- * Created by FedoR on 26.11.2015.
- */
 public class SlotWindowController implements Initializable, Abonent {
 
 
+    private final Address address = new Address();
+    private final Random random = new Random();
+    private final ExecutorService worker = Executors.newSingleThreadExecutor();
     public ImageView slot0;
     public ImageView slot1;
     public ImageView slot2;
@@ -48,11 +48,6 @@ public class SlotWindowController implements Initializable, Abonent {
     public Button startButton;
     private Main application;
     private MessageSystem messageSystem;
-    private final Address address = new Address();
-    private final Random random = new Random();
-
-
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
 
     public void setApp(Main application) {
         this.application = application;

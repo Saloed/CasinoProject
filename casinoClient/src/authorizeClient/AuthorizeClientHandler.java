@@ -45,7 +45,7 @@ class AuthorizeClientHandler extends SimpleChannelInboundHandler<UserAuthorizeAn
             System.err.println("Authorize Client Handler cant sleep ((((");
         }
 */
-        if (msg.getAnswer() == true) {
+        if (msg.getAnswer()) {
             threadExecutor.execute(new GameClient(messageSystem));
             threadExecutor.execute(new ChatClient(messageSystem));
             threadExecutor.execute(new GameService(messageSystem));

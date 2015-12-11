@@ -51,7 +51,7 @@ final class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 System.err.println("Error when shutdown thread pool");
-            }finally {
+            } finally {
                 System.out.println("Server stopped.");
             }
         }

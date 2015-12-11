@@ -5,13 +5,10 @@ import base.Address;
 import base.Message;
 import frontend.RouletteWindowController;
 
-/**
- * Created by FedoR on 01.12.2015.
- */
 public class MessageToRouletteWindowController extends Message {
 
-    private int resultCash;
-    private int result;
+    private final int resultCash;
+    private final int result;
 
     public MessageToRouletteWindowController(Address from, Address to, int resultCash, int result) {
         super(from, to);

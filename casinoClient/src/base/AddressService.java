@@ -11,8 +11,6 @@ public interface AddressService {
 
     Address getGameServiceAddress();
 
-    Address getFrontEndAddress();
-
     Address getChatClientAddress();
 
     Address getAuthorizeControllerAddress();

@@ -6,9 +6,6 @@ import authorizeServer.messages.MessageIsAuthenticated;
 import base.Address;
 import base.Message;
 
-/**
- * Created by admin on 28.10.2015.
- */
 public class MessageRegister extends MessageToAccountService {
 
     private final String name;

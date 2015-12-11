@@ -1,9 +1,7 @@
 package gameManager.messages;
 
-import accountService.messages.MessageUpdateAccount;
 import base.Address;
 import base.GameMessage;
-import base.Message;
 import gameManager.GameManager;
 import io.netty.channel.ChannelHandlerContext;
 
@@ -23,7 +21,7 @@ public class MessageGameResult extends MessageToGameManager {
         ChannelHandlerContext ctx = gameManager.getUserChannel(sesionId);
         gameManager.changeAccountCash(sesionId, msg.getCash());
         ctx.writeAndFlush(msg);
-       // gameManager.removeGame(sesionId);
+        // gameManager.removeGame(sesionId);
         //gameManager.removeUserChannel(sesionId);
 
     }

@@ -5,14 +5,11 @@ import base.Address;
 import base.Message;
 import frontend.AuthorizeController;
 
-/**
- * Created by FedoR on 17.11.2015.
- */
 public class MessageToAuthorizeController extends Message{
 
     private final String login;
     private final Boolean answer;
-    private int cash;
+    private final int cash;
 
     public MessageToAuthorizeController(Address from, Address to, String login, Boolean answer, int cash) {
         super(from, to);

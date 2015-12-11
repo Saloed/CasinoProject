@@ -28,6 +28,8 @@ public final class GameManager implements Abonent, Runnable {
     // private final LinkedList<Thread> gameThreadList = new LinkedList<>();
     private final ExecutorService gameThreadPool = Executors.newFixedThreadPool(2);
     private final Map<GameType, Address> gameAdresses = new HashMap<>();
+    private boolean interrupted = false;
+
 
     public GameManager(MessageSystemImpl messageSystemImpl) {
         this.messageSystemImpl = messageSystemImpl;
@@ -52,7 +54,6 @@ public final class GameManager implements Abonent, Runnable {
         gameAdresses.put(GameType.ROULETTE, gameMessageSystem.getAddressService().getRouletteAddress());
 
     }
-
 
     //TODO check and rework
     public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer betCash, Integer bet) {
@@ -119,7 +120,6 @@ public final class GameManager implements Abonent, Runnable {
         activeUsers.remove(sessionId);
     }
 
-
     //TODO be care  with this function!!!!!
     public Integer getPlayerSessionByContext(ChannelHandlerContext ctx) {
         if (!usersChannels.containsValue(ctx))
@@ -163,8 +163,6 @@ public final class GameManager implements Abonent, Runnable {
     public Address getAddress() {
         return address;
     }
-
-    private boolean interrupted = false;
 
     @Override
     public void run() {

@@ -7,9 +7,6 @@ import base.Message;
 import gameManager.GameManager;
 import io.netty.channel.ChannelHandlerContext;
 
-/**
- * Created by admin on 04.11.2015.
- */
 public class MessagePlayerDisconnected extends MessageToGameManager {
 
     private final ChannelHandlerContext ctx;
@@ -21,7 +18,7 @@ public class MessagePlayerDisconnected extends MessageToGameManager {
 
     public void exec(GameManager gameManager) {
         Integer sessionId = gameManager.getPlayerSessionByContext(ctx);
-        if( sessionId == null) {
+        if (sessionId == null) {
             return;
         }
 

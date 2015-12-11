@@ -5,9 +5,6 @@ import base.Address;
 import base.Message;
 import frontend.AuthorizeController;
 
-/**
- * Created by admin on 18.11.2015.
- */
 public class MessageAuthorizeError extends Message {
 
     private final String error;

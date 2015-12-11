@@ -22,12 +22,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by FedoR on 16.11.2015.
- */
 public class MainWindowController implements Initializable, Abonent {
 
     private final Address address = new Address();
+    private final ObservableList<String> chatWindowData = FXCollections.observableArrayList();
+    private final ExecutorService worker = Executors.newSingleThreadExecutor();
     public TextField messageTextField;
     public Label userName;
     public Label cash;
@@ -35,9 +34,6 @@ public class MainWindowController implements Initializable, Abonent {
     private Main application;
     private MessageSystem messageSystem;
     private int moneyCount;
-    private final ObservableList<String> chatWindowData = FXCollections.observableArrayList();
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
-
 
     public void setApp(Main application) {
         this.application = application;

@@ -3,9 +3,6 @@ package frontend;
 import base.Abonent;
 import base.MessageSystem;
 
-/**
- * Created by admin on 25.11.2015.
- */
 class WorkThread implements Runnable {
 
     private final MessageSystem messageSystem;

@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-/**
- * Created by user on 04.11.15.
- */
 public class GameMessageSystem {
 
 

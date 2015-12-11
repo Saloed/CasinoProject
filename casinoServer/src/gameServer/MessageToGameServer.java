@@ -3,7 +3,6 @@ package gameServer;
 import base.Abonent;
 import base.Address;
 import base.Message;
-import gameManager.GameManager;
 
 
 public abstract class MessageToGameServer extends Message {

@@ -12,65 +12,12 @@ import java.util.Set;
 public class DataBase {
 
     private static final String XML_FILE = "res/users.xml";
-
-    private final class UserData {
-        private final Integer id;
-        private final String password;
-        private final Integer cash;
-
-        public UserData(Integer id, String password, Integer cash) {
-            this.id = id;
-            this.cash = cash;
-            this.password = password;
-        }
-
-        public Integer getId() {
-            return id;
-        }
-
-        public Integer getCash() {
-            return cash;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 17;
-            hash = hash * id.hashCode();
-            hash = hash * cash.hashCode();
-            hash = hash * password.hashCode();
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object object) {
-            if (object instanceof UserData) {
-                UserData other = (UserData) object;
-                if (id == null && password == null && cash == null) {
-                    if (other.id == null && other.password == null && other.cash == null)
-                        return true;
-                } else {
-                    assert id != null;
-                    assert password != null;
-                    assert cash != null;
-                    if (id.equals(other.id) && password.equals(other.password) && cash.equals(other.cash))
-                        return true;
-                }
-            }
-            return false;
-        }
-    }
-
-    private final Map<String, UserData> users = new HashMap<>();
-
     private static final QName userTagName = new QName("user");
     private static final QName idAttribName = new QName("id");
     private static final QName nameAttribName = new QName("name");
     private static final QName passwordAttribName = new QName("password");
     private static final QName cashAttribName = new QName("cash");
+    private final Map<String, UserData> users = new HashMap<>();
     private final XMLInputFactory factory = XMLInputFactory.newInstance();
     private Attribute id;
     private Attribute name;
@@ -89,7 +36,28 @@ public class DataBase {
         }
     }
 
-    private void update(File file) throws IOException, XMLStreamException {
+    private static void createNode(XMLEventWriter eventWriter, String name, Integer id,
+                                   String pass, Integer cash) throws XMLStreamException {
+        XMLEventFactory xmlEventFactory = XMLEventFactory.newInstance();
+        XMLEvent end = xmlEventFactory.createDTD("\n");
+        XMLEvent tab = xmlEventFactory.createDTD("\t");
+        //Create Start node
+        StartElement sElement = xmlEventFactory.createStartElement("", "", "user");
+        eventWriter.add(tab);
+        eventWriter.add(sElement);
+
+        eventWriter.add(xmlEventFactory.createAttribute(new QName("name"), name));
+        eventWriter.add(xmlEventFactory.createAttribute(new QName("id"), id.toString()));
+        eventWriter.add(xmlEventFactory.createAttribute(new QName("password"), pass));
+        eventWriter.add(xmlEventFactory.createAttribute(new QName("cash"), cash.toString()));
+        // Create End node
+        EndElement eElement = xmlEventFactory.createEndElement("", "", "user");
+        eventWriter.add(eElement);
+        eventWriter.add(end);
+
+    }
+
+    private void update(File file) throws IOException {
         if (!file.canWrite())
             throw new IOException("Cant write to file");
         try {
@@ -121,27 +89,6 @@ public class DataBase {
         } catch (FileNotFoundException | XMLStreamException e) {
             e.printStackTrace();
         }
-
-    }
-
-    private static void createNode(XMLEventWriter eventWriter, String name, Integer id,
-                                   String pass, Integer cash) throws XMLStreamException {
-        XMLEventFactory xmlEventFactory = XMLEventFactory.newInstance();
-        XMLEvent end = xmlEventFactory.createDTD("\n");
-        XMLEvent tab = xmlEventFactory.createDTD("\t");
-        //Create Start node
-        StartElement sElement = xmlEventFactory.createStartElement("", "", "user");
-        eventWriter.add(tab);
-        eventWriter.add(sElement);
-
-        eventWriter.add(xmlEventFactory.createAttribute(new QName("name"), name));
-        eventWriter.add(xmlEventFactory.createAttribute(new QName("id"), id.toString()));
-        eventWriter.add(xmlEventFactory.createAttribute(new QName("password"), pass));
-        eventWriter.add(xmlEventFactory.createAttribute(new QName("cash"), cash.toString()));
-        // Create End node
-        EndElement eElement = xmlEventFactory.createEndElement("", "", "user");
-        eventWriter.add(eElement);
-        eventWriter.add(end);
 
     }
 
@@ -191,13 +138,11 @@ public class DataBase {
                 Integer.parseInt(cash.getValue())));
     }
 
-
     private void cleanup() {
         id = null;
         name = null;
         password = null;
     }
-
 
     public Account authenticate(String name, String password) {
         if (users.containsKey(name)) {
@@ -215,13 +160,14 @@ public class DataBase {
         users.put(account.getName(), new UserData(account.getId(), account.getPassword(), account.getCash()));
         try {
             update(new File(XML_FILE));
-        }  catch (IOException e) {
+        } catch (IOException e) {
             System.err.println("Cant open file " + XML_FILE);
             e.printStackTrace();
-        } catch (XMLStreamException xe) {
+        }
+        /*catch (XMLStreamException xe) {
             System.err.println("Error when parse XML");
             xe.printStackTrace();
-        }
+        }*/
         return account;
     }
 
@@ -233,9 +179,60 @@ public class DataBase {
         } catch (IOException e) {
             System.err.println("Cant write file " + XML_FILE);
             e.printStackTrace();
-        } catch (XMLStreamException xe) {
+        }/* catch (XMLStreamException xe) {
             System.err.println("Error when parse XML");
             xe.printStackTrace();
+        }*/
+    }
+
+    private final class UserData {
+        private final Integer id;
+        private final String password;
+        private final Integer cash;
+
+        public UserData(Integer id, String password, Integer cash) {
+            this.id = id;
+            this.cash = cash;
+            this.password = password;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public Integer getCash() {
+            return cash;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 17;
+            hash = hash * id.hashCode();
+            hash = hash * cash.hashCode();
+            hash = hash * password.hashCode();
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object object) {
+            if (object instanceof UserData) {
+                UserData other = (UserData) object;
+                if (id == null && password == null && cash == null) {
+                    if (other.id == null && other.password == null && other.cash == null)
+                        return true;
+                } else {
+                    assert id != null;
+                    assert password != null;
+                    assert cash != null;
+                    if (id.equals(other.id) && password.equals(other.password) && cash.equals(other.cash))
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -3,9 +3,6 @@ package gameService.messages;
 import base.Address;
 import gameService.GameService;
 
-/**
- * Created by admin on 04.11.2015.
- */
 public class MessageChangeCurrentGame extends MessageToGameService {
 
     private final GameService.GameType game;

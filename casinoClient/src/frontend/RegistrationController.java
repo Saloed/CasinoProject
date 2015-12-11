@@ -14,17 +14,14 @@ import main.Main;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by FedoR on 16.11.2015.
- */
 public class RegistrationController implements Initializable, Abonent {
 
+    private final Address address = new Address();
     public TextField loginReg;
     public PasswordField passReg;
     private Main application;
     private MessageSystem messageSystem;
     private Boolean breaker = true;
-    private final Address address = new Address();
 
     public void setApp(Main application) {
         this.application = application;

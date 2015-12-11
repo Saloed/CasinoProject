@@ -7,9 +7,6 @@ import gameManager.GameRoulette;
 import gameManager.GameSlotMachine;
 import gameManager.Player;
 
-/**
- * Created by user on 04.11.15.
- */
 public class MessageNewPLayer extends Message {
     private final Player player;
 

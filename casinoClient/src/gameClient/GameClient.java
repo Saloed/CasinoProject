@@ -11,15 +11,11 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import messageSystem.MessageSystemImpl;
 
-/**
- * Created by admin on 28.10.2015.
- */
 public class GameClient implements Runnable, Abonent {
-    private final Address address = new Address();
-    private final MessageSystemImpl messageSystem;
-
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 7777;
+    private final Address address = new Address();
+    private final MessageSystemImpl messageSystem;
 
     public GameClient(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;

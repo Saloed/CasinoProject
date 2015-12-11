@@ -3,9 +3,6 @@ package chatClient.messages;
 import base.Address;
 import chatClient.ChatClient;
 
-/**
- * Created by admin on 04.11.2015.
- */
 public class MessageSendMessage extends MessageToChatClient {
     private final String message;
 

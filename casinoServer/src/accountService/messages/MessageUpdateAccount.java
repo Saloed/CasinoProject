@@ -4,9 +4,6 @@ import accountService.Account;
 import accountService.AccountService;
 import base.Address;
 
-/**
- * Created by admin on 29.10.2015.
- */
 public class MessageUpdateAccount extends MessageToAccountService {
 
     private final Account account;

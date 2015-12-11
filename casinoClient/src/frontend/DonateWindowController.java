@@ -10,9 +10,6 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by FedoR on 09.12.2015.
- */
 public class DonateWindowController implements Initializable {
 
 

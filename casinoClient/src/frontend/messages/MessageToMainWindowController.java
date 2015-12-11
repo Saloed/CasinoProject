@@ -5,13 +5,10 @@ import base.Address;
 import base.Message;
 import frontend.MainWindowController;
 
-/**
- * Created by FedoR on 19.11.2015.
- */
 public class MessageToMainWindowController extends Message{
 
-    private String userName;
     private final String message;
+    private String userName;
 
     public MessageToMainWindowController(Address from, Address to,String message) {
         super(from, to);

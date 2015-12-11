@@ -30,9 +30,9 @@ import java.util.logging.Logger;
 
 public final class Main extends Application {
 
-    private MessageSystemImpl messageSystem;
     private final ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
     private final ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
+    private MessageSystemImpl messageSystem;
     private Stage stage;
     private String userName;
     private AuthorizeController login = null;
@@ -42,6 +42,10 @@ public final class Main extends Application {
     private RouletteWindowController roulette = null;
     private int cash;
 
+    public static void main(String[] args) {
+        Application.launch(Main.class, (java.lang.String[]) null);
+    }
+
     @Override
     public void init() throws Exception {
 
@@ -50,7 +54,6 @@ public final class Main extends Application {
         authorizationExecutor.execute(new AuthorizeClient(messageSystem, workThreadPool));
 
     }
-
 
     public void gotoLogin() {
         try {
@@ -166,10 +169,6 @@ public final class Main extends Application {
         stage.initOwner(((Node) event.getSource()).getScene().getWindow());
         stage.show();
         return (Initializable) loader.getController();
-    }
-
-    public static void main(String[] args) {
-        Application.launch(Main.class, (java.lang.String[]) null);
     }
 
     @Override

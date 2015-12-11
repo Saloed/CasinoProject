@@ -31,7 +31,7 @@ public class MainWindowController implements Initializable, Abonent {
     public TextField messageTextField;
     public Label userName;
     public Label cash;
-    public ListView chatWindow;
+    public ListView<String> chatWindow;
     private Main application;
     private MessageSystem messageSystem;
     private int moneyCount;
@@ -104,8 +104,19 @@ public class MainWindowController implements Initializable, Abonent {
         application.gotoSlotWin();
     }
 
-
     public void goToRouletteWindow(ActionEvent event) {
         application.gotoRouletteWin();
     }
+
+    public void startDonateWindow(ActionEvent event) throws Exception {
+
+        DonateWindowController donate = (DonateWindowController) application.replaceSceneContent("/frontend/FXML/DonateWindow.fxml", event, "$$$");
+        donate.setApp(this);
+
+    }
+
+    public MessageSystem getMessageSystem() {
+        return messageSystem;
+    }
+
 }

@@ -9,11 +9,14 @@ import chatClient.messages.MessageChatDisconnection;
 import frontend.*;
 import gameService.messages.MessageUserDisconect;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import messageSystem.MessageSystemImpl;
 
@@ -141,6 +144,27 @@ public final class Main extends Application {
         stage.setTitle(title);
         stage.setResizable(false);
         stage.sizeToScene();
+        return (Initializable) loader.getController();
+    }
+
+    //For modal windows
+    public Initializable replaceSceneContent(String fxml, ActionEvent event, String title) throws Exception {
+
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setBuilderFactory(new JavaFXBuilderFactory());
+        loader.setLocation(MainWindowController.class.getResource(fxml));
+        Pane page;
+        try (InputStream in = MainWindowController.class.getResourceAsStream(fxml)) {
+            page = loader.load(in);
+        }
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle(title);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+        stage.show();
         return (Initializable) loader.getController();
     }
 

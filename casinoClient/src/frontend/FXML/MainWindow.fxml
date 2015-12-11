@@ -55,5 +55,7 @@
             <Font size="24.0"/>
          </font>
       </Label>
+      <Button fx:id="donateButton" layoutX="845.0" layoutY="504.0" mnemonicParsing="false" onAction="#startDonateWindow"
+              text="donate"/>
    </children>
 </Pane>

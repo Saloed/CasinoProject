@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
 
@@ -39,9 +38,9 @@ final class Main {
                     stopRequest = false;
                     System.out.println("Server is stopping...");
                     threadPool.shutdown();
-                    if (!threadPool.awaitTermination(10, TimeUnit.SECONDS)) {
+                    if (!threadPool.awaitTermination(1, TimeUnit.SECONDS)) {
                         threadPool.shutdownNow();
-                        if (!threadPool.awaitTermination(10, TimeUnit.SECONDS))
+                        if (!threadPool.awaitTermination(1, TimeUnit.SECONDS))
                             System.err.println("Pool did not terminate");
                     }
 

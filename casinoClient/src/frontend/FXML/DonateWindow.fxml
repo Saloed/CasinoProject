@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0"
+      prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="frontend.DonateWindowController">
+    <children>
+        <Button fx:id="sndMoneyBtn" layoutX="134.0" layoutY="128.0" mnemonicParsing="false" onAction="#sendMoney"
+                text="SEND"/>
+        <TextField fx:id="moneyCount" layoutX="86.0" layoutY="95.0"/>
+        <Label alignment="CENTER" layoutX="88.0" layoutY="78.0" prefHeight="17.0" prefWidth="149.0"
+               text="GIVE US UR MONEY!!!"/>
+    </children>
+</Pane>

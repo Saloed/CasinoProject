@@ -33,7 +33,7 @@ public final class GameSlotMachine extends Game {
         int third = random.nextInt() % 5 + random.nextInt() % 5;
         if (third < 0)
             third = third * (-1);
-        int resultCash = player.getBetCash();
+        int resultCash = player.getBet().get(0).getCash();
         player.getAccount().setCash(player.getAccount().getCash() - resultCash);
         if (first == secound && secound == third)
             resultCash = resultCash * 5;

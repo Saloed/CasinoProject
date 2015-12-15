@@ -139,6 +139,7 @@ public class SlotWindowController implements Initializable, Abonent {
 
 
                 currentCash.setText(Integer.toString(resultCash));
+                application.takeCash(resultCash);
                 startButton.arm();
                 if (first == second && second == third) {
                     AudioClip johnCena = new AudioClip(new File("cena.mp3").toURI().toString());

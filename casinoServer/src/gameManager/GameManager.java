@@ -8,8 +8,10 @@ import gameManager.gameMessageSystem.GameMessageSystem;
 import gameManager.messages.MessageNewPLayer;
 import io.netty.channel.ChannelHandlerContext;
 import messageSystem.MessageSystemImpl;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -56,50 +58,46 @@ public final class GameManager implements Abonent, Runnable {
     }
 
     //TODO check and rework
-    public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId, Integer betCash, Integer bet) {
+    public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId,
+                             @Nullable List<GameMessage.ServerRequest.Bet> playerBet) {
         GameType parsedGameType = GameType.valueOf(gameType.toString());
 
-        if (GameType.NO_GAME.equals(parsedGameType)) {
-            if (betCash != null) {
-                changeAccountCash(sessionId, activeUsers.get(sessionId).getAccount().getCash() + betCash);
+        if (activePlayers.containsKey(sessionId)) {
+            if (playerBet == null) {
+                activePlayers.replace(sessionId, GameType.NO_GAME);
                 return;
             }
-        }
-
-        if (!activePlayers.containsKey(sessionId)) {
-            if (betCash != null) {
-                activePlayers.put(sessionId, parsedGameType);
-
+            if (GameType.NO_GAME.equals(parsedGameType)) {
+                changeAccountCash(sessionId, activeUsers.get(sessionId).getAccount().getCash()
+                        + playerBet.get(0).getCash());
+                return;
+            }
+            if (activePlayers.get(sessionId).equals(parsedGameType)) {
                 Address target = gameAdresses.get(parsedGameType);
 
-                activeUsers.get(sessionId).changeBet(bet, betCash);
+                activeUsers.get(sessionId).changeBet(playerBet);
+                Message msg = new MessageNewPLayer(address, target,
+                        getPlayer(sessionId));
+                gameMessageSystem.sendMessage(msg);
+            } else {
+                Address target = gameAdresses.get(parsedGameType);
+                activePlayers.replace(sessionId, parsedGameType);
+                activeUsers.get(sessionId).changeBet(playerBet);
                 Message msg = new MessageNewPLayer(address, target,
                         getPlayer(sessionId));
                 gameMessageSystem.sendMessage(msg);
             }
-        } else {
-            if (activePlayers.get(sessionId).equals(parsedGameType)) {
-                if (betCash != null) {
-                    Address target = gameAdresses.get(parsedGameType);
 
-                    activeUsers.get(sessionId).changeBet(bet, betCash);
-                    Message msg = new MessageNewPLayer(address, target,
-                            getPlayer(sessionId));
-                    gameMessageSystem.sendMessage(msg);
-                } else {
-                    activePlayers.replace(sessionId, GameType.NO_GAME);
-                }
-            } else {
-                if (betCash != null) {
-                    Address target = gameAdresses.get(parsedGameType);
-                    activePlayers.replace(sessionId, parsedGameType);
-                    activeUsers.get(sessionId).changeBet(bet, betCash);
-                    Message msg = new MessageNewPLayer(address, target,
-                            getPlayer(sessionId));
-                    gameMessageSystem.sendMessage(msg);
-                } else {
-                    activePlayers.replace(sessionId, GameType.NO_GAME);
-                }
+        } else {
+            if (playerBet != null) {
+                activePlayers.put(sessionId, parsedGameType);
+
+                Address target = gameAdresses.get(parsedGameType);
+
+                activeUsers.get(sessionId).changeBet(playerBet);
+                Message msg = new MessageNewPLayer(address, target,
+                        getPlayer(sessionId));
+                gameMessageSystem.sendMessage(msg);
             }
         }
     }

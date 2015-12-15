@@ -94,7 +94,7 @@ public class RouletteWindowController implements Initializable, Abonent {
         Platform.runLater(new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-
+                application.takeCash(resultCash);
                 cashField.setText(Integer.toString(resultCash));
                 System.out.println(result);
 

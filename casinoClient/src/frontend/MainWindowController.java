@@ -111,6 +111,12 @@ public class MainWindowController implements Initializable, Abonent {
 
     }
 
+    public void updateCash(int cash) {
+        application.takeCash(application.getCash() + cash);
+        moneyCount = application.getCash();
+        this.cash.setText("" + moneyCount);
+    }
+
     public MessageSystem getMessageSystem() {
         return messageSystem;
     }

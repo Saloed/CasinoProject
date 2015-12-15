@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizeController implements Initializable, Abonent {
 
     private final Address address = new Address();
+    private final ExecutorService worker = Executors.newSingleThreadExecutor();
     public TextField login;
     public PasswordField pass;
     public Label errorMessage;
@@ -33,24 +34,6 @@ public class AuthorizeController implements Initializable, Abonent {
     private Main application;
     private MessageSystem messageSystem;
 
-    private final ExecutorService worker = Executors.newSingleThreadExecutor();
-
-    /*
-        final Task waitForMessages = new Task() {
-            @Override
-            protected Boolean call() throws InterruptedException {
-
-                    while (true) {
-                        messageSystem.execForAbonent();
-
-                        Thread.sleep(10);
-
-                    }
-
-
-            }
-        };
-    */
     public void setApp(Main application) {
         this.application = application;
         messageSystem = application.getMessageSystem();

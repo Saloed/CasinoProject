@@ -40,10 +40,9 @@ final class Main {
                     threadPool.shutdown();
                     if (!threadPool.awaitTermination(1, TimeUnit.SECONDS)) {
                         threadPool.shutdownNow();
-                        if (!threadPool.awaitTermination(1, TimeUnit.SECONDS))
+                        if (!threadPool.awaitTermination(10, TimeUnit.SECONDS))
                             System.err.println("Pool did not terminate");
                     }
-
                 }
             } catch (IOException e) {
                 System.err.println("Error when read from terminal");

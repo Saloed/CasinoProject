@@ -30,16 +30,17 @@ public class GameRoulette extends Game {
             result = result * (-1);
 
         for (Player player : players) {
-            int resultCash = player.getBetCash();
-            player.getAccount().setCash(player.getAccount().getCash() - resultCash);
             if (player.getBet() == null)
                 throw new IllegalArgumentException("Bet null");
-            if (player.getBet().equals(result))
-                resultCash = resultCash * 5;
-            else
-                resultCash = 0;
+            int resultCash = player.getAccount().getCash();
+            for (GameMessage.ServerRequest.Bet bet : player.getBet()) {
+                resultCash -= bet.getCash();
 
-            resultCash = resultCash + player.getAccount().getCash();
+                for (Integer position : bet.getBetList()) {
+                    if (position.equals(result))
+                        resultCash += bet.getCash() * bet.getCoefficient();
+                }
+            }
             if (resultCash < 0)
                 resultCash = 0;
             player.getAccount().setCash(resultCash);

@@ -1,24 +1,22 @@
 package gameManager;
 
 import accountService.Account;
+import base.GameMessage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Player {
     private final Account account;
     private final Integer sessioId;
-    private Integer bet;
-    private Integer betCash;
+    private List<GameMessage.ServerRequest.Bet> bet;
 
-    public Player(Account account, Integer sessioId, Integer bet) {
-        this.account = account;
-        this.bet = bet;
-        this.sessioId = sessioId;
-    }
 
     public Player(Account account, Integer sessioId) {
         this.account = account;
         this.sessioId = sessioId;
-        this.bet = null;
+        this.bet = new ArrayList<>();
     }
 
     public Account getAccount() {
@@ -29,51 +27,34 @@ public class Player {
         return sessioId;
     }
 
-    public Integer getBet() {
+    public List<GameMessage.ServerRequest.Bet> getBet() {
         return bet;
     }
 
-    public Integer getBetCash() {
-        return betCash;
+
+    public void changeBet(List<GameMessage.ServerRequest.Bet> bet) {
+        this.bet = bet;
     }
 
-    public void changeBet(Integer bet, Integer betCash) {
-        this.bet = bet;
-        this.betCash = betCash;
+    @Override
+    public int hashCode() {
+        int result = account.hashCode();
+        result = 31 * result + sessioId.hashCode();
+        result = 31 * result + bet.hashCode();
+        return result;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Player) {
-            Player other = (Player) object;
-            if (account == null && sessioId == null && betCash == null && bet == null) {
-                if (other.account == null && other.sessioId == null && other.bet == null && other.betCash == null)
-                    return true;
-            }
-            assert account != null;
-            if (account.equals(other.account) && sessioId.equals(other.sessioId)) {
-                if (bet == null && betCash == null) {
-                    if (other.bet == null && other.betCash == null)
-                        return true;
-                } else {
-                    if (bet == null && other.bet == null) {
-                        if (betCash.equals(other.betCash))
-                            return true;
-                    } else if (betCash == null && other.betCash == null) {
-                        if (bet.equals(other.bet))
-                            return true;
-                    } else {
-                        assert bet != null;
-                        assert betCash != null;
-                        if (bet.equals(other.bet) && betCash.equals(other.betCash))
-                            return true;
-                    }
-                }
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-            }
+        Player player = (Player) object;
 
-        }
+        if (account != null ? !account.equals(player.account) : player.account != null) return false;
+        if (sessioId != null ? !sessioId.equals(player.sessioId) : player.sessioId != null) return false;
+        return bet != null ? bet.equals(player.bet) : player.bet == null;
 
-        return false;
     }
+
 }

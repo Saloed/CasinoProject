@@ -28,6 +28,7 @@ public class DonateWindowController implements Initializable {
         if ("".equals(moneyCount.getText()))
             return;
 
+        application.updateCash(Integer.parseInt(moneyCount.getText()));
         Message msg = new MessageSendRequest(messageSystem.getAddressService().getMainWindowControllerAddress(),
                 messageSystem.getAddressService().getGameServiceAddress(), Integer.parseInt(moneyCount.getText()), null);
         messageSystem.sendMessage(msg);

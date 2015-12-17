@@ -5,8 +5,13 @@ import authorizeClient.messages.MessageDissconectAuthorizer;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
+import chatClient.ChatClient;
 import chatClient.messages.MessageChatDisconnection;
+import chatClient.messages.MessageUpdateUserName;
 import frontend.*;
+import gameClient.GameClient;
+import gameService.GameService;
+import gameService.messages.MessageNewSessionId;
 import gameService.messages.MessageUserDisconect;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -32,7 +37,7 @@ public final class Main extends Application {
 
     private final ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
     private final ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
-    private MessageSystemImpl messageSystem;
+    private final MessageSystemImpl messageSystem = new MessageSystemImpl();
     private Stage stage;
     private String userName;
     private AuthorizeController login = null;
@@ -41,6 +46,8 @@ public final class Main extends Application {
     private SlotWindowController slotMachine = null;
     private RouletteWindowController roulette = null;
     private int cash;
+    private int sessionId;
+    private boolean applicationStarted = false;
 
     public static void main(String[] args) {
         Application.launch(Main.class, (java.lang.String[]) null);
@@ -48,10 +55,7 @@ public final class Main extends Application {
 
     @Override
     public void init() throws Exception {
-
-        messageSystem = new MessageSystemImpl();
-
-        authorizationExecutor.execute(new AuthorizeClient(messageSystem, workThreadPool));
+        authorizationExecutor.execute(new AuthorizeClient(messageSystem));
 
     }
 
@@ -96,6 +100,24 @@ public final class Main extends Application {
             slotMachine.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void startServices() {
+        if (!applicationStarted) {
+            applicationStarted = true;
+            workThreadPool.execute(new GameClient(messageSystem));
+            workThreadPool.execute(new ChatClient(messageSystem));
+            workThreadPool.execute(new GameService(messageSystem));
+            Message message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
+                    messageSystem.getAddressService().getGameServiceAddress(),
+                    sessionId);
+            messageSystem.sendMessage(message);
+
+            message = new MessageUpdateUserName(messageSystem.getAddressService().getAuthorizeClientAddress(),
+                    messageSystem.getAddressService().getChatClientAddress(),
+                    getUserName());
+            messageSystem.sendMessage(message);
         }
     }
 
@@ -254,5 +276,9 @@ public final class Main extends Application {
 
     public int getCash() {
         return cash;
+    }
+
+    public void setSessionId(int sessionId) {
+        this.sessionId = sessionId;
     }
 }

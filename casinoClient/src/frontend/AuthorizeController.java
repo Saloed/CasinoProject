@@ -73,13 +73,14 @@ public class AuthorizeController implements Initializable, Abonent {
         });
     }
 
-    public void handleAnswer(Boolean answer, String login, int cash) {
+    public void handleAnswer(Boolean answer, String login, int cash, int sessionId) {
         Platform.runLater(new Task<Void>() {
             @Override
             protected Void call() throws Exception {
 
 
                 if (answer) {
+                    application.setSessionId(sessionId);
                     application.takeCash(cash);
                     application.takeLogin(login);
                     application.gotoMainWin();

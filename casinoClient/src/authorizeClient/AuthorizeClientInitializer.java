@@ -10,15 +10,11 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import messageSystem.MessageSystemImpl;
 
-import java.util.concurrent.ExecutorService;
-
 class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
 
-    private final ExecutorService threadList;
     private final MessageSystemImpl messageSystem;
 
-    public AuthorizeClientInitializer(MessageSystemImpl messageSystem, ExecutorService threadList) {
-        this.threadList = threadList;
+    public AuthorizeClientInitializer(MessageSystemImpl messageSystem) {
         this.messageSystem = messageSystem;
     }
 
@@ -34,7 +30,7 @@ class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast("protubufEncoder", new ProtobufEncoder());
 
-        pipeline.addLast("serverHandler", new AuthorizeClientHandler(messageSystem, threadList));
+        pipeline.addLast("serverHandler", new AuthorizeClientHandler(messageSystem));
     }
 
 

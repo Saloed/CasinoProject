@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
 public final class AuthorizeServer implements Runnable {
 
     private final int PORT = 7776;
-
+    //thread for authorizer
     private final ExecutorService authorizerThread = Executors.newSingleThreadExecutor();
     private final MessageSystem authorizerMessageSystem;
 
@@ -27,7 +27,7 @@ public final class AuthorizeServer implements Runnable {
     }
 
     public void run() {
-
+        //thread pools
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
         EventLoopGroup workGroup = new NioEventLoopGroup(2);
         boolean interrupted = false;

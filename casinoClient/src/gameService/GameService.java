@@ -12,14 +12,6 @@ public class GameService implements Runnable, Abonent {
     private final MessageSystemImpl messageSystem;
     private Channel channel;
     private Integer sessionId = 0;
-
-    public enum GameType {
-        SLOT,
-        ROULETTE,
-        NO_GAME
-
-    }
-
     private GameType currentGame = GameType.NO_GAME;
 
     public GameService(MessageSystemImpl messageSystem) {
@@ -38,8 +30,13 @@ public class GameService implements Runnable, Abonent {
 
     public void setChannel(Channel channel) {
         this.channel = channel;
-    }
+        GameMessage.ServerRequest request = GameMessage.ServerRequest.newBuilder()
+                .setSessionId(sessionId)
+                .setGame(GameMessage.ServerRequest.GameType.NO_GAME)
+                .build();
+        sendRequest(request);
 
+    }
 
     public void sendRequest(GameMessage.ServerRequest msg) {
 
@@ -112,6 +109,13 @@ public class GameService implements Runnable, Abonent {
                 Thread.currentThread().interrupt();
 
         }
+
+    }
+
+    public enum GameType {
+        SLOT,
+        ROULETTE,
+        NO_GAME
 
     }
 }

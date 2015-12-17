@@ -21,7 +21,6 @@ public class RegistrationController implements Initializable, Abonent {
     public PasswordField passReg;
     private Main application;
     private MessageSystem messageSystem;
-    private Boolean breaker = true;
 
     public void setApp(Main application) {
         this.application = application;

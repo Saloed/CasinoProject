@@ -10,10 +10,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import main.Main;
 
 import java.net.URL;
@@ -31,6 +34,8 @@ public class MainWindowController implements Initializable, Abonent {
     public Label userName;
     public Label cash;
     public ListView<String> chatWindow;
+    public ImageView rouletteBtn;
+    public ImageView slotBtn;
     private Main application;
     private MessageSystem messageSystem;
     private int moneyCount;
@@ -38,11 +43,12 @@ public class MainWindowController implements Initializable, Abonent {
     public void setApp(Main application) {
         this.application = application;
         messageSystem = application.getMessageSystem();
+        messageSystem.getAddressService().register(this);
+        messageSystem.addService(this);
+        application.startServices();
         userName.setText(application.getUserName());
         moneyCount = application.getCash();
         cash.setText("" + moneyCount);
-        messageSystem.getAddressService().register(this);
-        messageSystem.addService(this);
         worker.execute(new WorkThread(messageSystem, this, "Main Window"));
     }
 
@@ -51,6 +57,9 @@ public class MainWindowController implements Initializable, Abonent {
 
         messageTextField.setPromptText("Enter message...");
         cash.setText(Integer.toString(moneyCount)); //$$$
+        rouletteBtn.setImage(new Image("/frontend/res/roulette.png"));
+        rouletteBtn.setStyle("-fx-background-color: transparent");
+        slotBtn.setImage(new Image("/frontend/res/slot-machine.png"));
 
 
     }
@@ -59,9 +68,6 @@ public class MainWindowController implements Initializable, Abonent {
         return address;
     }
 
-    //TODO add payment system
-    //for update cash send MessageSendRequest (from geme service package)
-    //set money as betCash
 
     public void sendMessage(ActionEvent event) {
         Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAddress(),
@@ -96,11 +102,12 @@ public class MainWindowController implements Initializable, Abonent {
         }
     }
 
-    public void goToSlotWindow(ActionEvent event) {
+    public void goToSlotWindow(Event event) {
         application.gotoSlotWin();
     }
 
-    public void goToRouletteWindow(ActionEvent event) {
+
+    public void goToRouletteWindow(Event event) {
         application.gotoRouletteWin();
     }
 
@@ -120,5 +127,6 @@ public class MainWindowController implements Initializable, Abonent {
     public MessageSystem getMessageSystem() {
         return messageSystem;
     }
+
 
 }

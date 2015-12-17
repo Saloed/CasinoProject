@@ -13,6 +13,7 @@ class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     private static final ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
+
     @Override
     public void channelInactive(final ChannelHandlerContext ctx) {
         System.out.println("Chat user disconnected " + ctx);
@@ -45,8 +46,8 @@ class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                 c.writeAndFlush("[you] " + msg + '\n');
             }*/
 
-            c.writeAndFlush(msg+'\n');
-            
+            c.writeAndFlush(msg + '\n');
+
         }
         /*
         // Close the connection if the client has sent '/exit'.

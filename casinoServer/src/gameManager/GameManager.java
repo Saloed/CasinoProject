@@ -90,6 +90,11 @@ public final class GameManager implements Abonent, Runnable {
 
         } else {
             if (playerBet != null) {
+                if (GameType.NO_GAME.equals(parsedGameType)) {
+                    changeAccountCash(sessionId, activeUsers.get(sessionId).getAccount().getCash()
+                            + playerBet.get(0).getCash());
+                    return;
+                }
                 activePlayers.put(sessionId, parsedGameType);
 
                 Address target = gameAdresses.get(parsedGameType);

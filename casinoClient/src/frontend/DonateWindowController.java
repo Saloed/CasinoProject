@@ -5,7 +5,9 @@ import base.MessageSystem;
 import gameService.messages.MessageSendRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +16,7 @@ public class DonateWindowController implements Initializable {
 
 
     public TextField moneyCount;
+    public Button sndMoneyBtn;
     private MessageSystem messageSystem;
     private MainWindowController application;
 
@@ -32,6 +35,8 @@ public class DonateWindowController implements Initializable {
         Message msg = new MessageSendRequest(messageSystem.getAddressService().getMainWindowControllerAddress(),
                 messageSystem.getAddressService().getGameServiceAddress(), Integer.parseInt(moneyCount.getText()), null);
         messageSystem.sendMessage(msg);
+        Stage Stage = (Stage) sndMoneyBtn.getScene().getWindow();
+        Stage.close();
 
 
     }

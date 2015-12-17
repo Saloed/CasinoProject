@@ -5,850 +5,1076 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-      minWidth="-Infinity"
-      prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: darkgreen;"
+      minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: darkgreen;"
       xmlns="http://javafx.com/javafx/8" fx:controller="frontend.RouletteWindowController">
-    <Button fx:id="returnButton" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#goBack"
-            text="&lt;-Back"/>
-    <HBox layoutX="209.0" layoutY="183.0" prefHeight="402.0" prefWidth="724.0"
-          style="-fx-background-color: forestgreen; -fx-background-radius: 30;">
-        <AnchorPane prefHeight="485.0" prefWidth="864.0">
-            <VBox layoutX="731.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_36_35" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r36" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r36" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="36" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b35" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b35" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="35" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r34" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r34" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="34" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_35_34" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="t_34_35_36" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
+    <children>
+        <Button fx:id="returnButton" layoutX="20.0" layoutY="441.0" mnemonicParsing="false" onAction="#goBack"
+                text="&lt;-Back"/>
+        <HBox layoutX="209.0" layoutY="183.0" prefHeight="402.0" prefWidth="724.0"
+              style="-fx-background-color: forestgreen; -fx-background-radius: 30;">
+            <children>
+                <AnchorPane prefHeight="485.0" prefWidth="864.0">
+                    <children>
+                        <VBox layoutX="731.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_36_35" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_36_35"
+                                                onMouseEntered="#actvie_35_36" onMouseExited="#disable_35_36"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r36" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r36" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="36" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b35" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b35" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="35" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r34" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r34" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="34" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_35_34" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_35_34"
+                                                onMouseEntered="#actvie_34_35" onMouseExited="#disable_34_35"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="t_34_35_36" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_34_35_36"
+                                                onMouseEntered="#active_34_35_36" onMouseExited="#disbale_34_35_36"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"></Button>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="672.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_33_32" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_33_32"
+                                                onMouseEntered="#actvie_32_33" onMouseExited="#disable_32_33"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="b33" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_b33" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="33" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r32" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_r32" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="32" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b31" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b31" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="31" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_32_31" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_32_31"
+                                                onMouseEntered="#actvie_31_32" onMouseExited="#disable_31_32"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_31_34" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_31_34"
+                                                onMouseEntered="#actvie_31_34" onMouseExited="#disable_31_34"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_32_35" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_32_35"
+                                                onMouseEntered="#actvie_32_35" onMouseExited="#disable_32_35"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_33_36" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_33_36"
+                                                onMouseEntered="#actvie_33_36" onMouseExited="#disable_33_36"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_32_33_35_36" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_32_33_35_36" onMouseEntered="#active_32_33_35_36"
+                                                onMouseExited="#disable_32_33_35_36" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_31_32_34_35" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_31_32_34_35" onMouseEntered="#active_31_32_34_35"
+                                                onMouseExited="#disable_31_32_34_35" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_31_32_33" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_31_32_33"
+                                                onMouseEntered="#active_31_32_33" onMouseExited="#disable_31_32_33"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_31_32_33_34_35_36" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_31_32_33_34_35_36"
+                                                onMouseEntered="#active_31_32_33_34_35_36"
+                                                onMouseExited="#disable_31_32_33_34_35_36" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="613.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_30_29" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_30_29"
+                                                onMouseEntered="#actvie_29_30" onMouseExited="#disable_29_30"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r30" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r30" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="30" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b29" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b29" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="29" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b28" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b28" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="28" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_29_28" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_29_28"
+                                                onMouseEntered="#actvie_28_29" onMouseExited="#disable_28_29"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_28_31" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_28_31"
+                                                onMouseEntered="#actvie_28_31" onMouseExited="#disable_28_31"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_29_32" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_29_32"
+                                                onMouseEntered="#actvie_29_32" onMouseExited="#disable_29_32"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_30_33" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_30_33"
+                                                onMouseEntered="#actvie_30_33" onMouseExited="#disable_30_33"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_29_30_32_33" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_29_30_32_33" onMouseEntered="#active_29_30_32_33"
+                                                onMouseExited="#disable_29_30_32_33" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_28_29_31_32" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_28_29_31_32" onMouseEntered="#active_28_29_31_32"
+                                                onMouseExited="#disable_28_29_31_32" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_28_29_30" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_28_29_30"
+                                                onMouseEntered="#active_28_29_30" onMouseExited="#disable_28_29_30"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_28_29_30_31_32_33" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_28_29_30_31_32_33"
+                                                onMouseEntered="#active_28_29_30_31_32_33"
+                                                onMouseExited="#disable_28_29_30_31_32_33" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="554.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_27_26" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_27_26"
+                                                onMouseEntered="#actvie_26_27" onMouseExited="#disable_26_27"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r27" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r27" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="27" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b26" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b26" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="26" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r25" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r25" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="25" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_26_25" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_26_25"
+                                                onMouseEntered="#actvie_25_26" onMouseExited="#disable_25_26"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_25_28" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_25_28"
+                                                onMouseEntered="#actvie_25_28" onMouseExited="#disable_25_28"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_26_29" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_26_29"
+                                                onMouseEntered="#actvie_26_29" onMouseExited="#disable_26_29"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_27_30" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_27_30"
+                                                onMouseEntered="#actvie_27_30" onMouseExited="#disable_27_30"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_26_27_29_30" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_26_27_29_30" onMouseEntered="#active_26_27_29_30"
+                                                onMouseExited="#disable_26_27_29_30" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_25_26_28_29" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_25_26_28_29" onMouseEntered="#active_25_26_28_29"
+                                                onMouseExited="#disable_25_26_28_29" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_25_26_27" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_25_26_27"
+                                                onMouseEntered="#active_25_26_27" onMouseExited="#disable_25_26_27"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_25_26_27_28_29_30" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_25_26_27_28_29_30"
+                                                onMouseEntered="#active_25_26_27_28_29_30"
+                                                onMouseExited="#disable_25_26_27_28_29_30" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="495.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_24_23" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_24_23"
+                                                onMouseEntered="#actvie_23_24" onMouseExited="#disable_23_24"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="b24" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_b24" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="24" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r23" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_r23" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="23" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b22" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b22" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="22" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_23_22" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_23_22"
+                                                onMouseEntered="#actvie_22_23" onMouseExited="#disable_22_23"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_22_25" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_22_25"
+                                                onMouseEntered="#actvie_22_25" onMouseExited="#disable_22_25"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_23_26" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_23_26"
+                                                onMouseEntered="#actvie_23_26" onMouseExited="#disable_23_26"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_24_27" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_24_27"
+                                                onMouseEntered="#actvie_24_27" onMouseExited="#disable_24_27"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_23_24_26_27" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_23_24_26_27" onMouseEntered="#active_23_24_26_27"
+                                                onMouseExited="#disable_23_24_26_27" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_22_23_25_26" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_22_23_25_26" onMouseEntered="#active_22_23_25_26"
+                                                onMouseExited="#disable_22_23_25_26" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_22_23_24" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_22_23_24"
+                                                onMouseEntered="#active_22_23_24" onMouseExited="#disable_22_23_24"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_22_23_24_25_26_27" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_22_23_24_25_26_27"
+                                                onMouseEntered="#active_22_23_24_25_26_27"
+                                                onMouseExited="#disable_22_23_24_25_26_27" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="436.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_21_20" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_21_20"
+                                                onMouseEntered="#actvie_20_21" onMouseExited="#disable_20_21"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r21" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r21" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="21" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b20" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b20" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="20" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r19" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r19" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="19" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_20_19" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_20_19"
+                                                onMouseEntered="#actvie_19_20" onMouseExited="#disable_19_20"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_19_22" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_19_22"
+                                                onMouseEntered="#actvie_19_22" onMouseExited="#disable_19_22"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_20_23" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_20_23"
+                                                onMouseEntered="#actvie_20_23" onMouseExited="#disable_20_23"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_21_24" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_21_24"
+                                                onMouseEntered="#actvie_21_24" onMouseExited="#disable_21_24"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_20_21_23_24" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_20_21_23_24" onMouseEntered="#active_20_21_23_24"
+                                                onMouseExited="#disable_20_21_23_24" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_19_20_22_23" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_19_20_22_23" onMouseEntered="#active_19_20_22_23"
+                                                onMouseExited="#disable_19_20_22_23" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_19_20_21" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_19_20_21"
+                                                onMouseEntered="#active_19_20_21" onMouseExited="#disable_19_20_21"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_19_20_21_22_23_24" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_19_20_21_22_23_24"
+                                                onMouseEntered="#active_19_20_21_22_23_24"
+                                                onMouseExited="#disable_19_20_21_22_23_24" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="377.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_18_17" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_18_17"
+                                                onMouseEntered="#actvie_17_18" onMouseExited="#disable_17_18"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r18" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r18" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="18" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b17" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b17" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="17" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r16" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r16" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="16" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_17_16" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_17_16"
+                                                onMouseEntered="#actvie_16_17" onMouseExited="#disable_16_17"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_16_19" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_16_19"
+                                                onMouseEntered="#actvie_16_19" onMouseExited="#disable_16_19"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_17_20" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_17_20"
+                                                onMouseEntered="#actvie_17_20" onMouseExited="#disable_17_20"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_18_21" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_18_21"
+                                                onMouseEntered="#actvie_18_21" onMouseExited="#disable_18_21"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_17_18_20_21" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_17_18_20_21" onMouseEntered="#active_17_18_20_21"
+                                                onMouseExited="#disable_17_18_20_21" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_16_17_19_20" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_16_17_19_20" onMouseEntered="#active_16_17_19_20"
+                                                onMouseExited="#disable_16_17_19_20" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_16_17_18" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_16_17_18"
+                                                onMouseEntered="#active_16_17_18" onMouseExited="#disable_16_17_18"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_16_17_18_19_20_21" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_16_17_18_19_20_21"
+                                                onMouseEntered="#active_16_17_18_19_20_21"
+                                                onMouseExited="#disable_16_17_18_19_20_21" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="318.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_15_14" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_15_14"
+                                                onMouseEntered="#actvie_14_15" onMouseExited="#disable_14_15"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="b15" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_b15" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="15" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r14" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_r14" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="14" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b13" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b13" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="13" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_14_13" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_14_13"
+                                                onMouseEntered="#actvie_13_14" onMouseExited="#disable_13_14"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_13_16" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_13_16"
+                                                onMouseEntered="#actvie_13_16" onMouseExited="#disable_13_16"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_14_17" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_14_17"
+                                                onMouseEntered="#actvie_14_17" onMouseExited="#disable_14_17"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_15_18" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_15_18"
+                                                onMouseEntered="#actvie_15_18" onMouseExited="#disable_15_18"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_14_15_17_18" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_14_15_17_18" onMouseEntered="#active_14_15_17_18"
+                                                onMouseExited="#disable_14_15_17_18" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_13_14_16_17" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_13_14_16_17" onMouseEntered="#active_13_14_16_17"
+                                                onMouseExited="#disable_13_14_16_17" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_13_14_15" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_13_14_15"
+                                                onMouseEntered="#active_13_14_15" onMouseExited="#disable_13_14_15"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_13_14_15_16_17_18" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_13_14_15_16_17_18"
+                                                onMouseEntered="#active_13_14_15_16_17_18"
+                                                onMouseExited="#disable_13_14_15_16_17_18" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="259.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_12_11" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_12_11"
+                                                onMouseEntered="#actvie_11_12" onMouseExited="#disable_11_12"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r12" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r12" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="12" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b11" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b11" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="11" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b10" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b10" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="10" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_11_10" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_11_10"
+                                                onMouseEntered="#actvie_10_11" onMouseExited="#disable_10_11"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_10_13" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_10_13"
+                                                onMouseEntered="#actvie_10_13" onMouseExited="#disable_10_13"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_11_14" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_11_14"
+                                                onMouseEntered="#actvie_11_14" onMouseExited="#disable_11_14"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_12_15" layoutX="63.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_12_15"
+                                                onMouseEntered="#actvie_12_15" onMouseExited="#disable_12_15"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_11_12_14_15" layoutX="60.0" layoutY="52.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_11_12_14_15" onMouseEntered="#active_11_12_14_15"
+                                                onMouseExited="#disable_11_12_14_15" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_10_11_13_14" layoutX="60.0" layoutY="109.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_10_11_13_14" onMouseEntered="#active_10_11_13_14"
+                                                onMouseExited="#disable_10_11_13_14" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_10_11_12" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_10_11_12"
+                                                onMouseEntered="#active_10_11_12" onMouseExited="#disable_10_11_12"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_10_11_12_13_14_15" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_10_11_12_13_14_15"
+                                                onMouseEntered="#active_10_11_12_13_14_15"
+                                                onMouseExited="#disable_10_11_12_13_14_15" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="200.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_9_8" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_8_9"
+                                                onMouseEntered="#actvie_8_9" onMouseExited="#disable_8_9"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r9" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r9" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="9" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b8" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b8" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="8" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r7" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r7" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="7" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_8_7" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_7_8"
+                                                onMouseEntered="#actvie_7_8" onMouseExited="#disable_7_8"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_7_10" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_7_10"
+                                                onMouseEntered="#actvie_7_10" onMouseExited="#disable_7_10"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_8_11" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_8_11"
+                                                onMouseEntered="#actvie_8_11" onMouseExited="#disable_8_11"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_9_12" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
+                                                mnemonicParsing="false" onAction="#bet_9_12"
+                                                onMouseEntered="#actvie_9_12" onMouseExited="#disable_9_12"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_8_9_11_12" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_8_9_11_12"
+                                                onMouseEntered="#active_8_9_11_12" onMouseExited="#disable_8_9_11_12"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_7_8_10_11" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_7_8_10_11"
+                                                onMouseEntered="#active_7_8_10_11" onMouseExited="#disable_7_8_10_11"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_7_8_9" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_7_8_9"
+                                                onMouseEntered="#active_7_8_9" onMouseExited="#disable_7_8_9"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_7_8_9_10_11_12" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_7_8_9_10_11_12" onMouseEntered="#active_7_8_9_10_11_12"
+                                                onMouseExited="#disable_7_8_9_10_11_12" prefHeight="12.0"
+                                                prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="141.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_6_5" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_5_6"
+                                                onMouseEntered="#actvie_5_6" onMouseExited="#disable_5_6"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="b6" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_b6" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="6" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r5" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_r5" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="5" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b4" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_b4" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="4" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_5_4" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_4_5"
+                                                onMouseEntered="#actvie_4_5" onMouseExited="#disable_4_5"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_4_7" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_4_7"
+                                                onMouseEntered="#actvie_4_7" onMouseExited="#disable_4_7"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_5_8" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_5_8"
+                                                onMouseEntered="#actvie_5_8" onMouseExited="#disable_5_8"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_6_9" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
+                                                mnemonicParsing="false" onAction="#bet_6_9" onMouseEntered="#actvie_6_9"
+                                                onMouseExited="#disable_6_9" prefHeight="54.0" prefWidth="5.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_5_6_8_9" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_5_6_8_9"
+                                                onMouseEntered="#active_5_6_8_9" onMouseExited="#disable_5_6_8_9"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_4_5_7_8" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_4_5_7_8"
+                                                onMouseEntered="#active_4_5_7_8" onMouseExited="#disable_4_5_7_8"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_4_5_6" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_4_5_6"
+                                                onMouseEntered="#active_4_5_6" onMouseExited="#disable_4_5_6"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_4_5_6_7_8_9" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_4_5_6_7_8_9" onMouseEntered="#active_4_5_6_7_8_9"
+                                                onMouseExited="#disable_4_5_6_7_8_9" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <VBox layoutX="82.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                            <children>
+                                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
+                                            prefWidth="72.0">
+                                    <children>
+                                        <Button fx:id="d_0_1" layoutX="4.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_0_1"
+                                                onMouseEntered="#active_0_1" onMouseExited="#disable_0_1"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_3_2" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_2_3"
+                                                onMouseEntered="#actvie_2_3" onMouseExited="#disable_2_3"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="r3" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
+                                                onAction="#bet_r3" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="3" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="b2" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
+                                                onAction="#bet_b2" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: black;" text="2" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="r1" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
+                                                onAction="#bet_r1" prefHeight="53.0" prefWidth="54.0"
+                                                style="-fx-background-color: darkred;" text="1" textFill="#fffcfc">
+                                            <font>
+                                                <Font name="System Bold" size="18.0"/>
+                                            </font>
+                                        </Button>
+                                        <Button fx:id="d_2_1" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_1_2"
+                                                onMouseEntered="#actvie_1_2" onMouseExited="#disable_1_2"
+                                                prefHeight="54.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_1_4" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_1_4"
+                                                onMouseEntered="#actvie_1_4" onMouseExited="#disable_1_4"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_2_5" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_2_5"
+                                                onMouseEntered="#actvie_2_5" onMouseExited="#disable_2_5"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_3_6" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
+                                                mnemonicParsing="false" onAction="#bet_3_6" onMouseEntered="#active3_6"
+                                                onMouseExited="#disable3_6" prefHeight="54.0" prefWidth="5.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="q_2_3_5_6" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_2_3_5_6"
+                                                onMouseEntered="#active_2_3_5_6" onMouseExited="#disable_2_3_5_6"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_1_2_4_5" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_1_2_4_5"
+                                                onMouseEntered="#active_1_2_4_5" onMouseExited="#disable_1_2_4_5"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="d_0_2" layoutX="4.0" layoutY="64.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_0_2"
+                                                onMouseEntered="#active_0_2" onMouseExited="#disable_0_2"
+                                                prefHeight="54.0" prefWidth="5.0" style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="d_0_3" layoutX="4.0" minHeight="-Infinity" minWidth="-Infinity"
+                                                mnemonicParsing="false" onAction="#bet_0_3" onMouseEntered="#active_0_3"
+                                                onMouseExited="#disable_0_3" prefHeight="54.0" prefWidth="5.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="t_0_1_2" layoutX="1.0" layoutY="109.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_0_2_1"
+                                                onMouseEntered="#active_0_2_1" onMouseExited="#disable_0_2_1"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_0_2_3" layoutX="1.0" layoutY="52.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_0_2_3"
+                                                onMouseEntered="#active_0_2_3" onMouseExited="#disable_0_2_3"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="t_1_2_3" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_1_2_3"
+                                                onMouseEntered="#active_1_2_3" onMouseExited="#disable_1_2_3"
+                                                prefHeight="60.0" prefWidth="5.0" rotate="90.0"
+                                                style="-fx-background-radius: 0;"/>
+                                        <Button fx:id="s_1_2_3_4_5_6" layoutX="60.0" layoutY="164.0"
+                                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#bet_1_2_3_4_5_6" onMouseEntered="#active_1_2_3_4_5_6"
+                                                onMouseExited="#disable_1_2_3_4_5_6" prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                        <Button fx:id="q_0_1_2_3" layoutX="1.0" layoutY="164.0" minHeight="-Infinity"
+                                                minWidth="-Infinity" mnemonicParsing="false" onAction="#bet_0_1_2_3"
+                                                onMouseEntered="#active_0_2_1_3" onMouseExited="#disable_0_2_1_3"
+                                                prefHeight="12.0" prefWidth="12.0"
+                                                style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                        <Button fx:id="f_h" layoutX="87.0" layoutY="340.0" mnemonicParsing="false" onAction="#bet_f_h"
+                                onMouseEntered="#active_1_18" onMouseExited="#disable_1_18" prefHeight="81.0"
+                                prefWidth="115.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="1-18" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="even" layoutX="207.0" layoutY="340.0" mnemonicParsing="false"
+                                onAction="#bet_even" onMouseEntered="#active_even" onMouseExited="#disable_even"
+                                prefHeight="81.0" prefWidth="115.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="EVEN" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="f_12" layoutX="87.0" layoutY="256.0" mnemonicParsing="false" onAction="#betf_12"
+                                onMouseEntered="#active_1_12" onMouseExited="#disable_1_12" prefHeight="81.0"
+                                prefWidth="235.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="1st 12" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="s_12" layoutX="325.0" layoutY="256.0" mnemonicParsing="false"
+                                onAction="#bet_s_12" onMouseEntered="#active_12_24" onMouseExited="#disable_12_24"
+                                prefHeight="81.0" prefWidth="236.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="2d 12" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="t_12" layoutX="564.0" layoutY="256.0" mnemonicParsing="false"
+                                onAction="#bet_t_12" onMouseEntered="#active_24_36" onMouseExited="#disable_24_36"
+                                prefHeight="81.0" prefWidth="235.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="3d 12" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="red" layoutX="326.0" layoutY="340.0" mnemonicParsing="false" onAction="#bet_red"
+                                onMouseEntered="#active_r" onMouseExited="#disable_r" prefHeight="81.0"
+                                prefWidth="115.0"
+                                style="-fx-background-color: darkred; -fx-border-color: white; -fx-border-width: 3;"
+                                textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="black" layoutX="446.0" layoutY="340.0" mnemonicParsing="false"
+                                onAction="#bet_black" onMouseEntered="#active_b" onMouseExited="#disable_b"
+                                prefHeight="81.0" prefWidth="115.0"
+                                style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 3;">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="odd" layoutX="565.0" layoutY="340.0" mnemonicParsing="false" onAction="#bet_odd"
+                                onMouseEntered="#active_odd" onMouseExited="#disable_odd" prefHeight="81.0"
+                                prefWidth="115.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="ODD" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="s_h" layoutX="685.0" layoutY="340.0" mnemonicParsing="false" onAction="#bet_s_h"
+                                onMouseEntered="#active_19_36" onMouseExited="#disable_19_36" prefHeight="81.0"
+                                prefWidth="115.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="19-36" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="zer0" layoutX="-48.0" layoutY="124.0" mnemonicParsing="false"
+                                onAction="#bet_zer0" prefHeight="81.0" prefWidth="178.0" rotate="90.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="0" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="24.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="top_12" layoutX="804.0" layoutY="77.0" mnemonicParsing="false"
+                                onAction="#bet_top_12" onMouseEntered="#active_top" onMouseExited="#disable_top"
+                                prefHeight="55.0" prefWidth="56.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="2-1" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="middle_12" layoutX="804.0" layoutY="137.0" mnemonicParsing="false"
+                                onAction="#bet_middle_12" onMouseEntered="#active_mid" onMouseExited="#disable_mid"
+                                prefHeight="55.0" prefWidth="56.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="2-1" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="bottom_12" layoutX="804.0" layoutY="197.0" mnemonicParsing="false"
+                                onAction="#bet_bottom_12" onMouseEntered="#active_bot" onMouseExited="#disable_bot"
+                                prefHeight="55.0" prefWidth="56.0"
+                                style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
+                                text="2-1" textFill="#ebebeb">
+                            <font>
+                                <Font name="System Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Separator layoutX="440.0" layoutY="-278.0" minHeight="-Infinity" minWidth="-Infinity"
+                                   orientation="VERTICAL" prefHeight="712.0" prefWidth="5.0" rotate="90.0"
+                                   style="-fx-background-color: white;"/>
+                        <Separator layoutX="794.0" layoutY="76.0" minHeight="-Infinity" minWidth="-Infinity"
+                                   orientation="VERTICAL" prefHeight="177.0" prefWidth="5.0"
+                                   style="-fx-background-color: white;"/>
+                    </children>
                 </AnchorPane>
-            </VBox>
-            <VBox layoutX="672.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_33_32" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="b33" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_b33" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="33" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r32" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_r32" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="32" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b31" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b31" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="31" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_32_31" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_31_34" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_32_35" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_33_36" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_32_33_35_36" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_31_32_34_35" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_31_32_33" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_31_32_33_34_35_36" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="613.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_30_29" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r30" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r30" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="30" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b29" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b29" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="29" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b28" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b28" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="28" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_29_28" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_28_31" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_29_32" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_30_33" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_29_30_32_33" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_28_29_31_32" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_28_29_30" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_28_29_30_31_32_33" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="554.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_27_26" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r27" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r27" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="27" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b26" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b26" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="26" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r25" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r25" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="25" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_26_25" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_25_28" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_26_29" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_27_30" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_26_27_29_30" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_25_26_28_29" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_25_26_27" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_25_26_27_28_29_30" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="495.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_24_23" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="b24" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_b24" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="24" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r23" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_r23" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="23" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b22" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b22" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="22" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_23_22" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_22_25" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_23_26" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_24_27" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_23_24_26_27" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_22_23_25_26" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_22_23_24" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_22_23_24_25_26_27" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="436.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_21_20" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r21" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r21" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="21" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b20" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b20" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="20" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r19" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r19" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="19" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_20_19" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_19_22" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_20_23" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_21_24" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_20_21_23_24" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_19_20_22_23" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_19_20_21" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_19_20_21_22_23_24" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="377.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_18_17" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r18" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r18" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="18" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b17" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b17" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="17" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r16" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r16" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="16" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_17_16" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_16_19" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_17_20" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_18_21" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_17_18_20_21" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_16_17_19_20" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_16_17_18" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_16_17_18_19_20_21" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="318.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_15_14" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="b15" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_b15" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="15" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r14" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_r14" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="14" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b13" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b13" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="13" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_14_13" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_13_16" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_14_17" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_15_18" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_14_15_17_18" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_13_14_16_17" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_13_14_15" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_13_14_15_16_17_18" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="259.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_12_11" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r12" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r12" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="12" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b11" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b11" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="11" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b10" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b10" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="10" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_11_10" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_10_13" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_11_14" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_12_15" layoutX="63.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_11_12_14_15" layoutX="60.0" layoutY="52.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_10_11_13_14" layoutX="60.0" layoutY="109.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_10_11_12" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_10_11_12_13_14_15" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="200.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_9_8" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r9" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r9" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="9" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b8" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b8" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="8" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r7" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r7" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="7" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_8_7" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_7_10" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_8_11" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_9_12" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
-                            mnemonicParsing="false" prefHeight="54.0" prefWidth="5.0"
-                            style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_8_9_11_12" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_7_8_10_11" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_7_8_9" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_7_8_9_10_11_12" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="141.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_6_5" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="b6" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_b6" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="6" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r5" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_r5" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="5" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b4" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_b4" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="4" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_5_4" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_4_7" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_5_8" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_6_9" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
-                            mnemonicParsing="false" prefHeight="54.0" prefWidth="5.0"
-                            style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_5_6_8_9" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_4_5_7_8" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_4_5_6" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_4_5_6_7_8_9" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <VBox layoutX="82.0" layoutY="78.0" prefHeight="180.0" prefWidth="49.0">
-                <opaqueInsets>
-                    <Insets/>
-                </opaqueInsets>
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0"
-                            prefWidth="72.0">
-                    <Button fx:id="d_0_1" layoutX="4.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_3_2" layoutX="34.0" layoutY="30.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="r3" layoutX="9.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#bet_r3" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="3" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="b2" layoutX="9.0" layoutY="60.0" mnemonicParsing="false"
-                            onAction="#bet_b2" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: black;" text="2" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="r1" layoutX="9.0" layoutY="116.0" mnemonicParsing="false"
-                            onAction="#bet_r1" prefHeight="53.0" prefWidth="54.0"
-                            style="-fx-background-color: darkred;" text="1" textFill="#fffcfc">
-                        <font>
-                            <Font name="System Bold" size="18.0"/>
-                        </font>
-                    </Button>
-                    <Button fx:id="d_2_1" layoutX="34.0" layoutY="89.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_1_4" layoutX="63.0" layoutY="115.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_2_5" layoutX="63.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_3_6" layoutX="63.0" minHeight="-Infinity" minWidth="-Infinity"
-                            mnemonicParsing="false" prefHeight="54.0" prefWidth="5.0"
-                            style="-fx-background-radius: 0;"/>
-                    <Button fx:id="q_2_3_5_6" layoutX="60.0" layoutY="52.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_1_2_4_5" layoutX="60.0" layoutY="109.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="d_0_2" layoutX="4.0" layoutY="64.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="54.0"
-                            prefWidth="5.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="d_0_3" layoutX="4.0" minHeight="-Infinity" minWidth="-Infinity"
-                            mnemonicParsing="false" prefHeight="54.0" prefWidth="5.0"
-                            style="-fx-background-radius: 0;"/>
-                    <Button fx:id="t_0_1_2" layoutX="1.0" layoutY="109.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_0_2_3" layoutX="1.0" layoutY="52.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="t_1_2_3" layoutX="32.0" layoutY="143.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="60.0"
-                            prefWidth="5.0" rotate="90.0" style="-fx-background-radius: 0;"/>
-                    <Button fx:id="s_1_2_3_4_5_6" layoutX="60.0" layoutY="164.0"
-                            minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                            prefHeight="12.0" prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                    <Button fx:id="q_0_1_2_3" layoutX="1.0" layoutY="164.0" minHeight="-Infinity"
-                            minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0"
-                            prefWidth="12.0"
-                            style="-fx-background-radius: 360; -fx-background-color: yellow;"/>
-                </AnchorPane>
-            </VBox>
-            <Button fx:id="f_h" layoutX="87.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="1-18" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="even" layoutX="207.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="EVEN" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="f_12" layoutX="87.0" layoutY="256.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="235.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="1st 12" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="s_12" layoutX="325.0" layoutY="256.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="236.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="2d 12" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="t_12" layoutX="564.0" layoutY="256.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="235.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="3d 12" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="red" layoutX="326.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: darkred; -fx-border-color: white; -fx-border-width: 3;"
-                    textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="black" layoutX="446.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 3;">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="odd" layoutX="565.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="ODD" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="s_h" layoutX="685.0" layoutY="340.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="115.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="19-36" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="zer0" layoutX="-48.0" layoutY="124.0" mnemonicParsing="false" prefHeight="81.0"
-                    prefWidth="178.0" rotate="90.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="0" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="24.0"/>
-                </font>
-            </Button>
-            <Button fx:id="top_12" layoutX="804.0" layoutY="77.0" mnemonicParsing="false" prefHeight="55.0"
-                    prefWidth="56.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="2-1" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="14.0"/>
-                </font>
-            </Button>
-            <Button fx:id="middle_12" layoutX="804.0" layoutY="137.0" mnemonicParsing="false"
-                    prefHeight="55.0" prefWidth="56.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="2-1" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="14.0"/>
-                </font>
-            </Button>
-            <Button fx:id="bottom_12" layoutX="804.0" layoutY="197.0" mnemonicParsing="false"
-                    prefHeight="55.0" prefWidth="56.0"
-                    style="-fx-background-color: darekgreen; -fx-border-color: white; -fx-border-width: 3;"
-                    text="2-1" textFill="#ebebeb">
-                <font>
-                    <Font name="System Bold" size="14.0"/>
-                </font>
-            </Button>
-            <Separator layoutX="440.0" layoutY="-278.0" minHeight="-Infinity" minWidth="-Infinity"
-                       orientation="VERTICAL" prefHeight="712.0" prefWidth="5.0" rotate="90.0"
-                       style="-fx-background-color: white;"/>
-            <Separator layoutX="794.0" layoutY="76.0" minHeight="-Infinity" minWidth="-Infinity"
-                       orientation="VERTICAL" prefHeight="177.0" prefWidth="5.0"
-                       style="-fx-background-color: white;"/>
-        </AnchorPane>
-    </HBox>
-    <Label layoutX="428.0" layoutY="115.0" prefHeight="53.0" prefWidth="101.0" text="\$CASH$:">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
-    <Label fx:id="cashField" layoutX="522.0" layoutY="115.0" prefHeight="53.0" prefWidth="132.0">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
-    <Button layoutX="654.0" layoutY="665.0" mnemonicParsing="false" onAction="#startRoulette" prefHeight="53.0"
-            prefWidth="101.0" text="START!"/>
-    <TextField fx:id="bet" layoutX="493.0" layoutY="674.0" prefHeight="35.0" prefWidth="139.0"/>
-    <Label fx:id="cashField1" layoutX="324.0" layoutY="664.0" prefHeight="53.0" prefWidth="155.0"
-           text="Enter your bet">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
+            </children>
+        </HBox>
+        <Label layoutX="428.0" layoutY="115.0" prefHeight="53.0" prefWidth="101.0" text="\$CASH$:">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <Label fx:id="cashField" layoutX="522.0" layoutY="115.0" prefHeight="53.0" prefWidth="132.0">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <Button layoutX="654.0" layoutY="665.0" mnemonicParsing="false" onAction="#startRoulette" prefHeight="53.0"
+                prefWidth="101.0" text="START!"/>
+        <TextField fx:id="bet" layoutX="493.0" layoutY="674.0" prefHeight="35.0" prefWidth="139.0"/>
+        <Label fx:id="cashField1" layoutX="324.0" layoutY="664.0" prefHeight="53.0" prefWidth="155.0"
+               text="Enter your bet">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+    </children>
 </Pane>

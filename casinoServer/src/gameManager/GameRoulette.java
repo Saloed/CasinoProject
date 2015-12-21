@@ -33,7 +33,7 @@ public class GameRoulette extends Game {
             if (player.getBet() == null)
                 throw new IllegalArgumentException("Bet null");
             int resultCash = player.getAccount().getCash();
-            for (GameMessage.ServerRequest.Bet bet : player.getBet()) {
+            for (GameMessage.Request.ServerRequest.Bet bet : player.getBet()) {
                 resultCash -= bet.getCash();
 
                 for (Integer position : bet.getBetList()) {
@@ -44,14 +44,14 @@ public class GameRoulette extends Game {
             if (resultCash < 0)
                 resultCash = 0;
             player.getAccount().setCash(resultCash);
-            GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
+            GameMessage.Answer.ServerAnswer msg = GameMessage.Answer.ServerAnswer.newBuilder()
                     .setCash(resultCash)
                     .addGameData(result)
                     .build();
 
             Message message = new MessageGameResult(messageSystem.getAddressService().getRouletteAddress(),
                     messageSystem.getAddressService().getGameManagerAddress(),
-                    player.getSessioId(), msg);
+                    player.getSessionId(), msg);
             messageSystem.sendMessage(message);
         }
     }
@@ -68,7 +68,7 @@ public class GameRoulette extends Game {
                     players.clear();
                 }
 
-                Thread.sleep(10000);
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             //  e.printStackTrace();

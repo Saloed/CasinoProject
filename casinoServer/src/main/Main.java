@@ -2,7 +2,6 @@ package main;
 
 import accountService.AccountService;
 import authorizeServer.AuthorizeServer;
-import chatServer.ChatServer;
 import gameManager.GameManager;
 import gameServer.GameServer;
 import messageSystem.MessageSystemImpl;
@@ -19,13 +18,12 @@ final class Main {
 
     public static void main(String[] args) {
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+        ExecutorService threadPool = Executors.newFixedThreadPool(4);
 
         final MessageSystemImpl messageSystem = new MessageSystemImpl();
 
         threadPool.execute(new AccountService(messageSystem));
         threadPool.execute(new GameManager(messageSystem));
-        threadPool.execute(new ChatServer());
         threadPool.execute(new GameServer(messageSystem));
         threadPool.execute(new AuthorizeServer(messageSystem));
 

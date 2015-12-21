@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <users>
-	<user name="derevo" id="1488" password="her" cash="7"></user>
+	<user name="mouse" id="3" password="cheese" cash="83"></user>
+	<user name="derevo" id="1488" password="her" cash="91"></user>
 	<user name="admin" id="1337" password="root" cash="10"></user>
-	<user name="user" id="4" password="pass" cash="259"></user>
+	<user name="user" id="4" password="pass" cash="79"></user>
 	<user name="novenkiy" id="4" password="parol" cash="0"></user>
 	<user name="Suka" id="0" password="Padla" cash="10"></user>
 </users>

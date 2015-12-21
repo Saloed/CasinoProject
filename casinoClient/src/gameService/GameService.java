@@ -30,38 +30,18 @@ public class GameService implements Runnable, Abonent {
 
     public void setChannel(Channel channel) {
         this.channel = channel;
-        GameMessage.ServerRequest request = GameMessage.ServerRequest.newBuilder()
+        GameMessage.Request request = GameMessage.Request.newBuilder()
                 .setSessionId(sessionId)
-                .setGame(GameMessage.ServerRequest.GameType.NO_GAME)
+                .setRequestType(GameMessage.Request.RequestType.GAME)
+                .setGameRequest(GameMessage.Request.ServerRequest.newBuilder()
+                        .setGame(GameMessage.Request.ServerRequest.GameType.NO_GAME)
+                        .build())
                 .build();
         sendRequest(request);
 
     }
 
-    public void sendRequest(GameMessage.ServerRequest msg) {
-
-       /* //SLOT test
-        GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
-                .setSessionId(sessionId)
-                .setGame(GameMessage.ServerRequest.GameType.SLOT)
-                .addBet(30)
-                .build();
-        */
-       /* //ROULETT test
-        GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
-                .setSessionId(sessionId)
-                .setGame(GameMessage.ServerRequest.GameType.ROULETTE)
-                .addBet(30) //set null to leave game
-                .addBet(17)
-                .build();
-*/
-        /*//leave test
-        GameMessage.ServerRequest msg = GameMessage.ServerRequest.newBuilder()
-                .setSessionId(sessionId)
-                .setGame(GameMessage.ServerRequest.GameType.SLOT)
-                .build();
-         */
-
+    public void sendRequest(GameMessage.Request msg) {
         channel.writeAndFlush(msg);
     }
 

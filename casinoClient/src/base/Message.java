@@ -10,12 +10,12 @@ public abstract class Message {
         this.to = to;
     }
 
-    public Address getFrom() {
-        return from;
-    }
-
     public Address getTo() {
         return to;
+    }
+
+    public Address getFrom() {
+        return from;
     }
 
     public abstract void exec(Abonent abonent);

@@ -1,28 +1,59 @@
 option java_outer_classname = "GameMessage";
 
-message ServerRequest {
+
+message Request {
 
     required int32 sessionId = 1;
+    required RequestType requestType = 2;
 
-    enum GameType {
-        SLOT = 1;
-        ROULETTE = 2;
-        NO_GAME = 3;
+    optional ServerRequest gameRequest = 3;
+    optional ChatMessage chatMessage = 4;
+
+
+    enum RequestType {
+        CHAT = 1;
+        GAME = 2;
     }
 
-    message Bet {
-        required int32 cash = 4;
-        optional int32 coefficient = 5 [default = 0];
-        repeated int32 bet = 6;
+    message ChatMessage {
+        required string message = 1;
     }
 
-    required GameType game = 2;
-    repeated Bet bet = 3;
+    message ServerRequest {
+
+        enum GameType {
+            SLOT = 1;
+            ROULETTE = 2;
+            NO_GAME = 3;
+        }
+
+        message Bet {
+            required int32 cash = 4;
+            optional int32 coefficient = 5 [default = 0];
+            repeated int32 bet = 6;
+        }
+
+        required GameType game = 2;
+        repeated Bet bet = 3;
+    }
 }
 
-message ServerAnswer {
-    required int32 cash = 1;
-    repeated int32 gameData = 2;
+message Answer {
+    required int32 sessionId = 1;
+    required RequestType answerType = 2;
+    optional ChatAnswer chatMessage = 3;
+    optional ServerAnswer gameAnswer = 4;
+    enum RequestType {
+        CHAT = 1;
+        GAME = 2;
+    }
+    message ChatAnswer {
+        required string message = 1;
+    }
+    message ServerAnswer {
+        required int32 cash = 1;
+        repeated int32 gameData = 2;
+    }
 }
 
 message UserAuthorizeMessage {

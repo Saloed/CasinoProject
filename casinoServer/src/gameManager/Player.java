@@ -9,13 +9,13 @@ import java.util.List;
 
 public class Player {
     private final Account account;
-    private final Integer sessioId;
-    private List<GameMessage.ServerRequest.Bet> bet;
+    private final Integer sessionId;
+    private List<GameMessage.Request.ServerRequest.Bet> bet;
 
 
-    public Player(Account account, Integer sessioId) {
+    public Player(Account account, Integer sessionId) {
         this.account = account;
-        this.sessioId = sessioId;
+        this.sessionId = sessionId;
         this.bet = new ArrayList<>();
     }
 
@@ -23,23 +23,23 @@ public class Player {
         return account;
     }
 
-    public Integer getSessioId() {
-        return sessioId;
+    public Integer getSessionId() {
+        return sessionId;
     }
 
-    public List<GameMessage.ServerRequest.Bet> getBet() {
+    public List<GameMessage.Request.ServerRequest.Bet> getBet() {
         return bet;
     }
 
 
-    public void changeBet(List<GameMessage.ServerRequest.Bet> bet) {
+    public void changeBet(List<GameMessage.Request.ServerRequest.Bet> bet) {
         this.bet = bet;
     }
 
     @Override
     public int hashCode() {
         int result = account.hashCode();
-        result = 31 * result + sessioId.hashCode();
+        result = 31 * result + sessionId.hashCode();
         result = 31 * result + bet.hashCode();
         return result;
     }
@@ -51,9 +51,10 @@ public class Player {
 
         Player player = (Player) object;
 
-        if (account != null ? !account.equals(player.account) : player.account != null) return false;
-        if (sessioId != null ? !sessioId.equals(player.sessioId) : player.sessioId != null) return false;
-        return bet != null ? bet.equals(player.bet) : player.bet == null;
+        return account != null ?
+                account.equals(player.account) : player.account == null && (sessionId != null ?
+                sessionId.equals(player.sessionId) : player.sessionId == null && (bet != null ?
+                bet.equals(player.bet) : player.bet == null));
 
     }
 

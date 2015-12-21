@@ -27,15 +27,15 @@ public final class GameSlotMachine extends Game {
         int first = random.nextInt() % 5 + random.nextInt() % 5;
         if (first < 0)
             first = first * (-1);
-        int secound = random.nextInt() % 5 + random.nextInt() % 5;
-        if (secound < 0)
-            secound = secound * (-1);
+        int second = random.nextInt() % 5 + random.nextInt() % 5;
+        if (second < 0)
+            second = second * (-1);
         int third = random.nextInt() % 5 + random.nextInt() % 5;
         if (third < 0)
             third = third * (-1);
         int resultCash = player.getBet().get(0).getCash();
         player.getAccount().setCash(player.getAccount().getCash() - resultCash);
-        if (first == secound && secound == third)
+        if (first == second && second == third)
             resultCash = resultCash * 5;
         else
             resultCash = 0;
@@ -44,16 +44,16 @@ public final class GameSlotMachine extends Game {
             resultCash = 0;
         player.getAccount().setCash(resultCash);
 
-        GameMessage.ServerAnswer msg = GameMessage.ServerAnswer.newBuilder()
+        GameMessage.Answer.ServerAnswer msg = GameMessage.Answer.ServerAnswer.newBuilder()
                 .setCash(resultCash)
                 .addGameData(first)
-                .addGameData(secound)
+                .addGameData(second)
                 .addGameData(third)
                 .build();
 
         Message message = new MessageGameResult(messageSystem.getAddressService().getSlotMachineAddress(),
                 messageSystem.getAddressService().getGameManagerAddress(),
-                player.getSessioId(), msg);
+                player.getSessionId(), msg);
         messageSystem.sendMessage(message);
     }
 
@@ -70,7 +70,7 @@ public final class GameSlotMachine extends Game {
                     players.clear();
                 }
 
-                Thread.sleep(10);
+                Thread.sleep(100);
             }
         } catch (InterruptedException e) {
             // e.printStackTrace();

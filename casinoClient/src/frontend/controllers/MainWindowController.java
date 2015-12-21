@@ -1,10 +1,11 @@
-package frontend;
+package frontend.controllers;
 
 import base.Abonent;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
-import chatClient.messages.MessageSendMessage;
+import frontend.WorkThread;
+import gameService.messages.MessageSendMessage;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,7 +72,7 @@ public class MainWindowController implements Initializable, Abonent {
 
     public void sendMessage(ActionEvent event) {
         Message msg = new MessageSendMessage(messageSystem.getAddressService().getMainWindowControllerAddress(),
-                messageSystem.getAddressService().getChatClientAddress(), messageTextField.getText());
+                messageSystem.getAddressService().getGameServiceAddress(), messageTextField.getText());
         messageSystem.sendMessage(msg);
 
         messageTextField.clear();

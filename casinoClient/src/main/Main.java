@@ -5,10 +5,7 @@ import authorizeClient.messages.MessageDissconectAuthorizer;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
-import chatClient.ChatClient;
-import chatClient.messages.MessageChatDisconnection;
-import chatClient.messages.MessageUpdateUserName;
-import frontend.*;
+import frontend.controllers.*;
 import gameClient.GameClient;
 import gameService.GameService;
 import gameService.messages.MessageNewSessionId;
@@ -36,7 +33,7 @@ import java.util.logging.Logger;
 public final class Main extends Application {
 
     private final ExecutorService authorizationExecutor = Executors.newSingleThreadExecutor();
-    private final ExecutorService workThreadPool = Executors.newFixedThreadPool(3);
+    private final ExecutorService workThreadPool = Executors.newFixedThreadPool(2);
     private final MessageSystemImpl messageSystem = new MessageSystemImpl();
     private Stage stage;
     private String userName;
@@ -107,16 +104,10 @@ public final class Main extends Application {
         if (!applicationStarted) {
             applicationStarted = true;
             workThreadPool.execute(new GameClient(messageSystem));
-            workThreadPool.execute(new ChatClient(messageSystem));
             workThreadPool.execute(new GameService(messageSystem));
             Message message = new MessageNewSessionId(messageSystem.getAddressService().getAuthorizeClientAddress(),
                     messageSystem.getAddressService().getGameServiceAddress(),
                     sessionId);
-            messageSystem.sendMessage(message);
-
-            message = new MessageUpdateUserName(messageSystem.getAddressService().getAuthorizeClientAddress(),
-                    messageSystem.getAddressService().getChatClientAddress(),
-                    getUserName());
             messageSystem.sendMessage(message);
         }
     }
@@ -202,7 +193,7 @@ public final class Main extends Application {
                 login.stopController();
             }
             if (reg != null) {
-
+                reg = null;
             }
             if (home != null) {
                 home.stopController();
@@ -229,10 +220,7 @@ public final class Main extends Application {
             }
 
             if (messageSystem.getAddressService().getGameClientAddress() != null) {
-                Message message = new MessageChatDisconnection(new Address(),
-                        messageSystem.getAddressService().getChatClientAddress());
-                messageSystem.sendMessage(message);
-                message = new MessageUserDisconect(new Address(),
+                Message message = new MessageUserDisconect(new Address(),
                         messageSystem.getAddressService().getGameServiceAddress());
                 messageSystem.sendMessage(message);
             }

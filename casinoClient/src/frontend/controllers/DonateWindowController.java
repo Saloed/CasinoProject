@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 import base.Message;
 import base.MessageSystem;

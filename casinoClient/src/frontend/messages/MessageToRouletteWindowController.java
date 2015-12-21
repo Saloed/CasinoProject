@@ -3,7 +3,7 @@ package frontend.messages;
 import base.Abonent;
 import base.Address;
 import base.Message;
-import frontend.RouletteWindowController;
+import frontend.controllers.RouletteWindowController;
 
 public class MessageToRouletteWindowController extends Message {
 

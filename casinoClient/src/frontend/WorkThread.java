@@ -3,19 +3,14 @@ package frontend;
 import base.Abonent;
 import base.MessageSystem;
 
-class WorkThread implements Runnable {
+public class WorkThread implements Runnable {
 
     private final MessageSystem messageSystem;
     //private final Address address;
     private final Abonent instance;
     private String name = "";
 
-    WorkThread(MessageSystem messageSystem, Abonent instance) {
-        this.messageSystem = messageSystem;
-        this.instance = instance;
-    }
-
-    WorkThread(MessageSystem messageSystem, Abonent instance, String name) {
+    public WorkThread(MessageSystem messageSystem, Abonent instance, String name) {
         this.messageSystem = messageSystem;
         this.instance = instance;
         this.name = name;

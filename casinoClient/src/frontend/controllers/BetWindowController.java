@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 import base.GameMessage;
 import base.MessageSystem;
@@ -36,14 +36,8 @@ public class BetWindowController implements Initializable {
 
         String bid = "You bet " + betCount.getText() + " on " + betPlace;
         application.collectBid(bid);
-
-
-        /*
-        Message msg = new MessageSendRequest(messageSystem.getAddressService().getSlotWindowControllerAddress(),
-                messageSystem.getAddressService().getGameServiceAddress(), 35, Integer.parseInt(betCount.toString()));
-        messageSystem.sendMessage(msg);*/
         int cash = Integer.parseInt(betCount.getText());
-        GameMessage.ServerRequest.Bet bet = GameMessage.ServerRequest.Bet.newBuilder()
+        GameMessage.Request.ServerRequest.Bet bet = GameMessage.Request.ServerRequest.Bet.newBuilder()
                 .setCash(cash)
                 .setCoefficient(36 / betPlace.size())
                 .addAllBet(betPlace)

@@ -14,10 +14,10 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 class AuthorizeServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
-    private final MessageSystem authorizerMesasgeSystem;
+    private final MessageSystem authorizerMessageSystem;
 
     public AuthorizeServerInitializer(MessageSystem authorizerMessageSystem) {
-        this.authorizerMesasgeSystem = authorizerMessageSystem;
+        this.authorizerMessageSystem = authorizerMessageSystem;
     }
 
     @Override
@@ -30,8 +30,8 @@ class AuthorizeServerInitializer extends ChannelInitializer<SocketChannel> {
 
         //Encoder
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
-        pipeline.addLast("protubufEncoder", new ProtobufEncoder());
+        pipeline.addLast("protobufEncoder", new ProtobufEncoder());
 
-        pipeline.addLast("serverHandler", new AuthorizeServerHandler(authorizerMesasgeSystem));
+        pipeline.addLast("serverHandler", new AuthorizeServerHandler(authorizerMessageSystem));
     }
 }

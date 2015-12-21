@@ -11,18 +11,18 @@ import java.util.List;
 public class MessageNewPlayerAccepted extends MessageToGameManager {
     private final ChannelHandlerContext ctx;
     private final Integer sessionId;
-    private final GameMessage.ServerRequest.GameType game;
-    private final List<GameMessage.ServerRequest.Bet> playerBet;
+    private final GameMessage.Request.ServerRequest.GameType game;
+    private final List<GameMessage.Request.ServerRequest.Bet> playerBet;
     //private Integer bet = null;
     //private Integer betCash = null;
 
     public MessageNewPlayerAccepted(Address from, Address to,
-                                    ChannelHandlerContext ctx, GameMessage.ServerRequest msg) {
+                                    ChannelHandlerContext ctx, GameMessage.Request msg) {
         super(from, to);
         this.ctx = ctx;
         this.sessionId = msg.getSessionId();
-        this.game = msg.getGame();
-        this.playerBet = msg.getBetList();
+        this.game = msg.getGameRequest().getGame();
+        this.playerBet = msg.getGameRequest().getBetList();
         /*if (msg.getBetCount() == 0) {
             this.bet = null;
             this.betCash = null;

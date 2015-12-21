@@ -2,6 +2,7 @@ package gameService.messages;
 
 import base.Address;
 import base.GameMessage;
+import base.GameMessage.Request;
 import gameService.GameService;
 
 public class MessageSendRequest extends MessageToGameService {
@@ -22,31 +23,29 @@ public class MessageSendRequest extends MessageToGameService {
     }
 
     public void exec(GameService gameService) {
-        GameMessage.ServerRequest.Builder builder = GameMessage.ServerRequest.newBuilder();
-        GameMessage.ServerRequest.GameType game =
-                GameMessage.ServerRequest.GameType.valueOf(gameService.getCurrentGame().toString());
+        GameMessage.Request.Builder request = GameMessage.Request.newBuilder();
+        request.setSessionId(gameService.getSessionId());
+        request.setRequestType(Request.RequestType.GAME);
+        GameMessage.Request.ServerRequest.Builder builder = GameMessage.Request.ServerRequest.newBuilder();
+        GameMessage.Request.ServerRequest.GameType game =
+                GameMessage.Request.ServerRequest.GameType.valueOf(gameService.getCurrentGame().toString());
         if (bet == null && betCash == null) {
-            builder.setSessionId(gameService.getSessionId());
             builder.setGame(game);
             gameService.changeCurrentGame(GameService.GameType.NO_GAME);
         } else if (bet == null) {
-            builder.setSessionId(gameService.getSessionId());
             builder.setGame(game);
-            GameMessage.ServerRequest.Bet.Builder betBuilder = GameMessage.ServerRequest.Bet.newBuilder();
+            GameMessage.Request.ServerRequest.Bet.Builder betBuilder = GameMessage.Request.ServerRequest.Bet.newBuilder();
             betBuilder.setCash(betCash);
             builder.addBet(betBuilder.build());
         } else {
-            //TODO remake for roulette
-            builder.setSessionId(gameService.getSessionId());
             builder.setGame(game);
-            GameMessage.ServerRequest.Bet.Builder betBuilder = GameMessage.ServerRequest.Bet.newBuilder();
+            GameMessage.Request.ServerRequest.Bet.Builder betBuilder = GameMessage.Request.ServerRequest.Bet.newBuilder();
             betBuilder.setCash(betCash);
             betBuilder.setCoefficient(1);
             betBuilder.addBet(bet);
             builder.addBet(betBuilder.build());
         }
-
-        GameMessage.ServerRequest msg = builder.build();
-        gameService.sendRequest(msg);
+        request.setGameRequest(builder.build());
+        gameService.sendRequest(request.build());
     }
 }

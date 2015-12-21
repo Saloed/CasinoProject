@@ -1,10 +1,11 @@
-package frontend;
+package frontend.controllers;
 
 import base.*;
+import frontend.WorkThread;
 import gameService.GameService;
 import gameService.messages.MessageChangeCurrentGame;
 import gameService.messages.MessageSendRequest;
-import gameService.messages.MessageSendRouletteReuest;
+import gameService.messages.MessageSendRouletteRequest;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class RouletteWindowController implements Initializable, Abonent {
     private final Address address = new Address();
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
-    private final List<GameMessage.ServerRequest.Bet> betList = new ArrayList<>();
+    private final List<GameMessage.Request.ServerRequest.Bet> betList = new ArrayList<>();
     private final List<Integer> betPlace = new ArrayList<>();
     private final ObservableList<String> bidWindowData = FXCollections.observableArrayList();
     public Button zer0;
@@ -97,12 +98,11 @@ public class RouletteWindowController implements Initializable, Abonent {
         if (betList.isEmpty()) {
             return;
         }
-        GameMessage.ServerRequest request = GameMessage.ServerRequest.newBuilder()
-                .setGame(GameMessage.ServerRequest.GameType.ROULETTE)
+        GameMessage.Request.ServerRequest request = GameMessage.Request.ServerRequest.newBuilder()
+                .setGame(GameMessage.Request.ServerRequest.GameType.ROULETTE)
                 .addAllBet(betList)
-                .setSessionId(0)
                 .build();
-        Message msg = new MessageSendRouletteReuest(address,
+        Message msg = new MessageSendRouletteRequest(address,
                 messageSystem.getAddressService().getGameServiceAddress(),
                 request);
         messageSystem.sendMessage(msg);
@@ -164,7 +164,7 @@ public class RouletteWindowController implements Initializable, Abonent {
         }
     }
 
-    public void acceptBet(GameMessage.ServerRequest.Bet bet) {
+    public void acceptBet(GameMessage.Request.ServerRequest.Bet bet) {
         betList.add(bet);
     }
 

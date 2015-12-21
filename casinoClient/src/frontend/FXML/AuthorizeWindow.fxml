@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="400.0"
       style="-fx-background-color: lightseagreen;" xmlns="http://javafx.com/javafx/8"
-      fx:controller="frontend.AuthorizeController">
+      fx:controller="frontend.controllers.AuthorizeController">
    <Button fx:id="sign" contentDisplay="CENTER" layoutX="292.0" layoutY="230.0" mnemonicParsing="false"
            onAction="#checkLogPass" prefHeight="19.0" prefWidth="94.0" text="Sign in"/>
    <AnchorPane layoutX="139.0" layoutY="40.0"/>

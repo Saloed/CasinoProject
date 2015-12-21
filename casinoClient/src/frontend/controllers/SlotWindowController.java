@@ -1,9 +1,10 @@
-package frontend;
+package frontend.controllers;
 
 import base.Abonent;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
+import frontend.WorkThread;
 import gameService.GameService;
 import gameService.messages.MessageChangeCurrentGame;
 import gameService.messages.MessageSendRequest;

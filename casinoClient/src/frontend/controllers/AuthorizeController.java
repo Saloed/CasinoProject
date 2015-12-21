@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 
 import authorizeClient.messages.MessageAuthorizeUser;
@@ -6,6 +6,7 @@ import base.Abonent;
 import base.Address;
 import base.Message;
 import base.MessageSystem;
+import frontend.WorkThread;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;

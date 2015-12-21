@@ -28,7 +28,7 @@ class AuthorizeClientInitializer extends ChannelInitializer<SocketChannel> {
 
         //Encoder
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
-        pipeline.addLast("protubufEncoder", new ProtobufEncoder());
+        pipeline.addLast("protobufEncoder", new ProtobufEncoder());
 
         pipeline.addLast("serverHandler", new AuthorizeClientHandler(messageSystem));
     }

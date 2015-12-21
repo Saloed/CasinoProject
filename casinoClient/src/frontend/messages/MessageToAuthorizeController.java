@@ -3,7 +3,7 @@ package frontend.messages;
 import base.Abonent;
 import base.Address;
 import base.Message;
-import frontend.AuthorizeController;
+import frontend.controllers.AuthorizeController;
 
 public class MessageToAuthorizeController extends Message{
 

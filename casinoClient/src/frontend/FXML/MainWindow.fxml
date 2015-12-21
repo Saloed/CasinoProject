@@ -10,7 +10,7 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefHeight="543.0" prefWidth="911.0"
       style="-fx-background-color: linear-gradient(to bottom, rgba(98,125,77,1) 0%,rgba(31,59,8,1) 100%);"
-      xmlns="http://javafx.com/javafx/8" fx:controller="frontend.MainWindowController">
+      xmlns="http://javafx.com/javafx/8" fx:controller="frontend.controllers.MainWindowController">
    <children>
       <AnchorPane layoutX="5.0" layoutY="7.0" prefHeight="530.0" prefWidth="229.0">
          <children>

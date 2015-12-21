@@ -5,13 +5,11 @@ public interface AddressService {
 
     void register(Abonent object);
 
-    Address getGameClientAddress();
-
     Address getAuthorizeClientAddress();
 
     Address getGameServiceAddress();
 
-    Address getChatClientAddress();
+    //Address getChatClientAddress();
 
     Address getAuthorizeControllerAddress();
 

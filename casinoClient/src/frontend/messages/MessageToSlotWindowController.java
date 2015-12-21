@@ -3,7 +3,7 @@ package frontend.messages;
 import base.Abonent;
 import base.Address;
 import base.Message;
-import frontend.SlotWindowController;
+import frontend.controllers.SlotWindowController;
 
 public class MessageToSlotWindowController extends Message {
 

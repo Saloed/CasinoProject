@@ -1,4 +1,4 @@
-package frontend;
+package frontend.controllers;
 
 import authorizeClient.messages.MessageAuthorizeUser;
 import base.Abonent;
@@ -30,6 +30,10 @@ public class RegistrationController implements Initializable, Abonent {
 
     public void registration(ActionEvent event) {
 
+        if ("".equals(loginReg.getText()) || "".equals(passReg.getText())) {
+            return;
+        }
+
         Message msg = new MessageAuthorizeUser(messageSystem.getAddressService().getAuthorizeControllerAddress(),
                 messageSystem.getAddressService().getAuthorizeClientAddress(), loginReg.getText(), passReg.getText(), true);
         messageSystem.sendMessage(msg);
@@ -43,23 +47,6 @@ public class RegistrationController implements Initializable, Abonent {
 
     }
 
-    /*
-        public void errorHappens(String error) {
-            breaker = false;
-            //  errorMessage.setText(error);
-
-        }
-
-        public void handleAnswer(Boolean answer) {
-            breaker = false;
-
-            if (answer) {
-                application.gotoMainWin();
-            } else {
-                //  errorMessage.setText("Username/Password is incorrect");
-            }
-        }
-    */
     @Override
     public Address getAddress() {
         return address;

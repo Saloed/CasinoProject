@@ -8,9 +8,9 @@ import frontend.messages.MessageToSlotWindowController;
 import gameService.GameService;
 
 public class MessageGameResult extends MessageToGameService {
-    private final GameMessage.ServerAnswer msg;
+    private final GameMessage.Answer.ServerAnswer msg;
 
-    public MessageGameResult(Address from, Address to, GameMessage.ServerAnswer msg) {
+    public MessageGameResult(Address from, Address to, GameMessage.Answer.ServerAnswer msg) {
         super(from, to);
         this.msg = msg;
     }

@@ -27,9 +27,8 @@ public final class GameManager implements Abonent, Runnable {
     private final Map<Integer, Player> activeUsers = new HashMap<>();
     private final Map<Integer, GameType> activePlayers = new HashMap<>();
     private final Map<Integer, ChannelHandlerContext> usersChannels = new HashMap<>();
-    // private final LinkedList<Thread> gameThreadList = new LinkedList<>();
     private final ExecutorService gameThreadPool = Executors.newFixedThreadPool(2);
-    private final Map<GameType, Address> gameAdresses = new HashMap<>();
+    private final Map<GameType, Address> gameAddresses = new HashMap<>();
     private boolean interrupted = false;
 
 
@@ -42,24 +41,18 @@ public final class GameManager implements Abonent, Runnable {
 
         gameThreadPool.execute(new GameSlotMachine(gameMessageSystem));
         gameThreadPool.execute(new GameRoulette(gameMessageSystem));
-/*
-        Thread slotMachineThread = new Thread(new GameSlotMachine(gameMessageSystem));
-        Thread rouletteThread = new Thread(new GameRoulette(gameMessageSystem));
-
-        gameThreadList.add(slotMachineThread);
-        gameThreadList.add(rouletteThread);
-
-        slotMachineThread.start();
-        rouletteThread.start();
-*/
-        gameAdresses.put(GameType.SLOT, gameMessageSystem.getAddressService().getSlotMachineAddress());
-        gameAdresses.put(GameType.ROULETTE, gameMessageSystem.getAddressService().getRouletteAddress());
+        gameAddresses.put(GameType.SLOT, gameMessageSystem.getAddressService().getSlotMachineAddress());
+        gameAddresses.put(GameType.ROULETTE, gameMessageSystem.getAddressService().getRouletteAddress());
 
     }
 
+    public Map<Integer, ChannelHandlerContext> getUsersChannels() {
+        return usersChannels;
+    }
+
     //TODO check and rework
-    public void addNewPlayer(GameMessage.ServerRequest.GameType gameType, Integer sessionId,
-                             @Nullable List<GameMessage.ServerRequest.Bet> playerBet) {
+    public void addNewPlayer(GameMessage.Request.ServerRequest.GameType gameType, Integer sessionId,
+                             @Nullable List<GameMessage.Request.ServerRequest.Bet> playerBet) {
         GameType parsedGameType = GameType.valueOf(gameType.toString());
 
         if (activePlayers.containsKey(sessionId)) {
@@ -73,14 +66,14 @@ public final class GameManager implements Abonent, Runnable {
                 return;
             }
             if (activePlayers.get(sessionId).equals(parsedGameType)) {
-                Address target = gameAdresses.get(parsedGameType);
+                Address target = gameAddresses.get(parsedGameType);
 
                 activeUsers.get(sessionId).changeBet(playerBet);
                 Message msg = new MessageNewPLayer(address, target,
                         getPlayer(sessionId));
                 gameMessageSystem.sendMessage(msg);
             } else {
-                Address target = gameAdresses.get(parsedGameType);
+                Address target = gameAddresses.get(parsedGameType);
                 activePlayers.replace(sessionId, parsedGameType);
                 activeUsers.get(sessionId).changeBet(playerBet);
                 Message msg = new MessageNewPLayer(address, target,
@@ -97,7 +90,7 @@ public final class GameManager implements Abonent, Runnable {
                 }
                 activePlayers.put(sessionId, parsedGameType);
 
-                Address target = gameAdresses.get(parsedGameType);
+                Address target = gameAddresses.get(parsedGameType);
 
                 activeUsers.get(sessionId).changeBet(playerBet);
                 Message msg = new MessageNewPLayer(address, target,
@@ -105,10 +98,6 @@ public final class GameManager implements Abonent, Runnable {
                 gameMessageSystem.sendMessage(msg);
             }
         }
-    }
-
-    public GameMessageSystem getGameMessageSystem() {
-        return gameMessageSystem;
     }
 
     public ChannelHandlerContext getUserChannel(Integer sessionId) {

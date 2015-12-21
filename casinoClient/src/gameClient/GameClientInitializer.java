@@ -1,6 +1,6 @@
 package gameClient;
 
-import base.GameMessage.ServerAnswer;
+import base.GameMessage;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -23,11 +23,11 @@ class GameClientInitializer extends ChannelInitializer<SocketChannel> {
 
         //Decoder
         pipeline.addLast("frameDecoder", new ProtobufVarint32FrameDecoder());
-        pipeline.addLast("protobufDecoder", new ProtobufDecoder(ServerAnswer.getDefaultInstance()));
+        pipeline.addLast("protobufDecoder", new ProtobufDecoder(GameMessage.Answer.getDefaultInstance()));
 
         //Encoder
         pipeline.addLast("frameEncoder", new ProtobufVarint32LengthFieldPrepender());
-        pipeline.addLast("protubufEncoder", new ProtobufEncoder());
+        pipeline.addLast("protobufEncoder", new ProtobufEncoder());
 
         pipeline.addLast("serverHandler", new GameClientHandler(messageSystem));
     }

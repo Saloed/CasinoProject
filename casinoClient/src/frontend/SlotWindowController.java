@@ -85,7 +85,6 @@ public class SlotWindowController implements Initializable, Abonent {
                 messageSystem.getAddressService().getGameServiceAddress(), currentBet, null);
         messageSystem.sendMessage(msg);
 
-        startButton.disarm();
 
     }
 

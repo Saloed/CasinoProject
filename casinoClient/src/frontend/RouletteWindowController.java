@@ -6,12 +6,15 @@ import gameService.messages.MessageChangeCurrentGame;
 import gameService.messages.MessageSendRequest;
 import gameService.messages.MessageSendRouletteReuest;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 import main.Main;
 
@@ -28,6 +31,7 @@ public class RouletteWindowController implements Initializable, Abonent {
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private final List<GameMessage.ServerRequest.Bet> betList = new ArrayList<>();
     private final List<Integer> betPlace = new ArrayList<>();
+    private final ObservableList<String> bidWindowData = FXCollections.observableArrayList();
     public Button zer0;
     public Button r1;
     public Button b2;
@@ -66,6 +70,9 @@ public class RouletteWindowController implements Initializable, Abonent {
     public Button b35;
     public Button r36;
     public Label cashField;
+    public Label resultPrint;
+    public ListView bidWindow;
+    public Button tryBtn;
     private Main application;
     private MessageSystem messageSystem;
     //private int[] array = new int[36];
@@ -100,6 +107,9 @@ public class RouletteWindowController implements Initializable, Abonent {
                 request);
         messageSystem.sendMessage(msg);
         betList.clear();
+        resultPrint.setText("");
+        tryBtn.setDisable(true);
+
     }
 
     public void setResult(int resultCash, int result) {
@@ -108,8 +118,8 @@ public class RouletteWindowController implements Initializable, Abonent {
             protected Void call() throws Exception {
                 application.takeCash(resultCash);
                 cashField.setText(Integer.toString(resultCash));
-                System.out.println(result);
-
+                resultPrint.setText(Integer.toString(result));
+                tryBtn.setDisable(false);
                 return null;
             }
         });
@@ -132,6 +142,11 @@ public class RouletteWindowController implements Initializable, Abonent {
         } catch (InterruptedException e) {
             System.err.println("Error when shutdown roulette Controller");
         }
+    }
+
+    public void collectBid(String bid) {
+        bidWindowData.add(bid);
+        bidWindow.setItems(bidWindowData);
     }
 
     public void startDonateWindow(ActionEvent event) {
@@ -165,6 +180,10 @@ public class RouletteWindowController implements Initializable, Abonent {
 
     public MessageSystem getMessageSystem() {
         return messageSystem;
+    }
+
+    public void clearBidData(ActionEvent event) {
+        bidWindowData.clear();
     }
 
     public void bet_r36(ActionEvent event) {
@@ -2419,411 +2438,917 @@ public class RouletteWindowController implements Initializable, Abonent {
 
 
     public void bet_36_35(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(36);
+        betPlace.add(35);
+        startDonateWindow(event);
 
     }
 
     public void bet_35_34(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(35);
+        betPlace.add(34);
+        startDonateWindow(event);
 
     }
 
     public void bet_34_35_36(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(34);
+        betPlace.add(35);
+        betPlace.add(36);
+        startDonateWindow(event);
 
     }
 
     public void bet_33_32(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(33);
+        betPlace.add(32);
+        startDonateWindow(event);
 
     }
 
     public void bet_32_31(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(32);
+        betPlace.add(31);
+        startDonateWindow(event);
 
     }
 
 
     public void bet_31_34(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(31);
+        betPlace.add(34);
+        startDonateWindow(event);
 
     }
 
     public void bet_32_35(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(32);
+        betPlace.add(35);
+        startDonateWindow(event);
 
     }
 
     public void bet_33_36(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(33);
+        betPlace.add(36);
+        startDonateWindow(event);
 
     }
 
     public void bet_32_33_35_36(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(32);
+        betPlace.add(33);
+        betPlace.add(35);
+        betPlace.add(36);
+        startDonateWindow(event);
 
     }
 
     public void bet_31_32_34_35(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(31);
+        betPlace.add(32);
+        betPlace.add(34);
+        betPlace.add(35);
+        startDonateWindow(event);
 
     }
 
     public void bet_31_32_33(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(31);
+        betPlace.add(32);
+        betPlace.add(33);
+        startDonateWindow(event);
 
     }
 
     public void bet_31_32_33_34_35_36(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(31);
+        betPlace.add(32);
+        betPlace.add(33);
+        betPlace.add(34);
+        betPlace.add(35);
+        betPlace.add(36);
+        startDonateWindow(event);
 
     }
 
     public void bet_30_29(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(30);
+        betPlace.add(29);
+        startDonateWindow(event);
 
     }
 
     public void bet_29_28(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(29);
+        betPlace.add(28);
+        startDonateWindow(event);
 
     }
 
     public void bet_28_31(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(28);
+        betPlace.add(31);
+        startDonateWindow(event);
 
     }
 
     public void bet_29_32(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(29);
+        betPlace.add(32);
+        startDonateWindow(event);
 
     }
 
     public void bet_30_33(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(30);
+        betPlace.add(33);
+        startDonateWindow(event);
 
     }
 
     public void bet_29_30_32_33(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(29);
+        betPlace.add(30);
+        betPlace.add(32);
+        betPlace.add(33);
+        startDonateWindow(event);
 
     }
 
     public void bet_28_29_31_32(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(28);
+        betPlace.add(29);
+        betPlace.add(31);
+        betPlace.add(32);
+        startDonateWindow(event);
 
     }
 
     public void bet_28_29_30(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(28);
+        betPlace.add(29);
+        betPlace.add(30);
+        startDonateWindow(event);
 
     }
 
     public void bet_28_29_30_31_32_33(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(28);
+        betPlace.add(29);
+        betPlace.add(30);
+        betPlace.add(31);
+        betPlace.add(32);
+        betPlace.add(33);
+        startDonateWindow(event);
 
     }
 
     public void bet_27_26(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(27);
+        betPlace.add(36);
+        startDonateWindow(event);
 
     }
 
     public void bet_26_25(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(26);
+        betPlace.add(25);
+        startDonateWindow(event);
 
     }
 
     public void bet_25_28(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(25);
+        betPlace.add(28);
+        startDonateWindow(event);
 
     }
 
     public void bet_26_29(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(26);
+        betPlace.add(29);
+        startDonateWindow(event);
 
     }
 
     public void bet_27_30(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(27);
+        betPlace.add(30);
+        startDonateWindow(event);
 
     }
 
     public void bet_26_27_29_30(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(26);
+        betPlace.add(27);
+        betPlace.add(29);
+        betPlace.add(30);
+        startDonateWindow(event);
 
     }
 
     public void bet_25_26_28_29(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(25);
+        betPlace.add(26);
+        betPlace.add(28);
+        betPlace.add(29);
+        startDonateWindow(event);
 
     }
 
     public void bet_25_26_27(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(25);
+        betPlace.add(26);
+        betPlace.add(27);
+        startDonateWindow(event);
 
     }
 
     public void bet_25_26_27_28_29_30(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(25);
+        betPlace.add(26);
+        betPlace.add(27);
+        betPlace.add(28);
+        betPlace.add(29);
+        betPlace.add(30);
+        startDonateWindow(event);
 
     }
 
     public void bet_24_23(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(24);
+        betPlace.add(23);
+        startDonateWindow(event);
 
     }
 
     public void bet_23_22(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(23);
+        betPlace.add(22);
+        startDonateWindow(event);
 
     }
 
     public void bet_22_25(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(22);
+        betPlace.add(25);
+        startDonateWindow(event);
 
     }
 
     public void bet_23_26(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(23);
+        betPlace.add(26);
+        startDonateWindow(event);
 
     }
 
     public void bet_24_27(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(24);
+        betPlace.add(27);
+        startDonateWindow(event);
 
     }
 
     public void bet_23_24_26_27(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(23);
+        betPlace.add(24);
+        betPlace.add(26);
+        betPlace.add(27);
+        startDonateWindow(event);
 
     }
 
     public void bet_22_23_25_26(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(22);
+        betPlace.add(23);
+        betPlace.add(25);
+        betPlace.add(26);
+        startDonateWindow(event);
 
     }
 
     public void bet_22_23_24(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(22);
+        betPlace.add(23);
+        betPlace.add(24);
+        startDonateWindow(event);
 
     }
 
     public void bet_22_23_24_25_26_27(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(22);
+        betPlace.add(23);
+        betPlace.add(24);
+        betPlace.add(25);
+        betPlace.add(26);
+        betPlace.add(27);
+        startDonateWindow(event);
 
     }
 
     public void bet_21_20(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(21);
+        betPlace.add(20);
+        startDonateWindow(event);
 
     }
 
     public void bet_20_19(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(20);
+        betPlace.add(19);
+        startDonateWindow(event);
 
     }
 
     public void bet_19_22(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(19);
+        betPlace.add(22);
+        startDonateWindow(event);
 
     }
 
     public void bet_20_23(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(20);
+        betPlace.add(23);
+        startDonateWindow(event);
 
     }
 
     public void bet_21_24(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(21);
+        betPlace.add(24);
+        startDonateWindow(event);
 
     }
 
     public void bet_20_21_23_24(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(20);
+        betPlace.add(21);
+        betPlace.add(23);
+        betPlace.add(24);
+        startDonateWindow(event);
 
     }
 
     public void bet_19_20_22_23(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(19);
+        betPlace.add(20);
+        betPlace.add(22);
+        betPlace.add(23);
+        startDonateWindow(event);
 
     }
 
     public void bet_19_20_21(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(19);
+        betPlace.add(20);
+        betPlace.add(21);
+        startDonateWindow(event);
 
     }
 
     public void bet_19_20_21_22_23_24(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(19);
+        betPlace.add(20);
+        betPlace.add(21);
+        betPlace.add(22);
+        betPlace.add(23);
+        betPlace.add(24);
+        startDonateWindow(event);
 
     }
 
     public void bet_18_17(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(18);
+        betPlace.add(17);
+        startDonateWindow(event);
 
     }
 
     public void bet_17_16(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(17);
+        betPlace.add(16);
+        startDonateWindow(event);
 
     }
 
     public void bet_16_19(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(16);
+        betPlace.add(19);
+        startDonateWindow(event);
 
     }
 
     public void bet_17_20(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(17);
+        betPlace.add(20);
+        startDonateWindow(event);
 
     }
 
     public void bet_18_21(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(18);
+        betPlace.add(21);
+        startDonateWindow(event);
 
     }
 
     public void bet_17_18_20_21(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(17);
+        betPlace.add(18);
+        betPlace.add(20);
+        betPlace.add(21);
+        startDonateWindow(event);
 
     }
 
     public void bet_16_17_19_20(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(16);
+        betPlace.add(17);
+        betPlace.add(19);
+        betPlace.add(20);
+        startDonateWindow(event);
 
     }
 
     public void bet_16_17_18(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(16);
+        betPlace.add(17);
+        betPlace.add(28);
+        startDonateWindow(event);
 
     }
 
     public void bet_16_17_18_19_20_21(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(16);
+        betPlace.add(17);
+        betPlace.add(18);
+        betPlace.add(19);
+        betPlace.add(20);
+        betPlace.add(21);
+        startDonateWindow(event);
 
     }
 
     public void bet_15_14(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(15);
+        betPlace.add(14);
+        startDonateWindow(event);
 
     }
 
     public void bet_14_13(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(13);
+        betPlace.add(14);
+        startDonateWindow(event);
 
     }
 
     public void bet_13_16(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(13);
+        betPlace.add(16);
+        startDonateWindow(event);
 
     }
 
     public void bet_14_17(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(14);
+        betPlace.add(17);
+        startDonateWindow(event);
 
     }
 
     public void bet_15_18(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(15);
+        betPlace.add(18);
+        startDonateWindow(event);
 
     }
 
     public void bet_14_15_17_18(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(14);
+        betPlace.add(15);
+        betPlace.add(17);
+        betPlace.add(18);
+        startDonateWindow(event);
 
     }
 
     public void bet_13_14_16_17(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(13);
+        betPlace.add(14);
+        betPlace.add(16);
+        betPlace.add(17);
+        startDonateWindow(event);
 
     }
 
     public void bet_13_14_15(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(13);
+        betPlace.add(14);
+        betPlace.add(15);
+        startDonateWindow(event);
 
     }
 
     public void bet_13_14_15_16_17_18(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(13);
+        betPlace.add(14);
+        betPlace.add(15);
+        betPlace.add(16);
+        betPlace.add(17);
+        betPlace.add(18);
+        startDonateWindow(event);
 
     }
 
     public void bet_12_11(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(12);
+        betPlace.add(11);
+        startDonateWindow(event);
 
     }
 
     public void bet_11_10(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(11);
+        betPlace.add(10);
+        startDonateWindow(event);
 
     }
 
     public void bet_10_13(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(10);
+        betPlace.add(13);
+        startDonateWindow(event);
 
     }
 
     public void bet_11_14(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(11);
+        betPlace.add(14);
+        startDonateWindow(event);
 
     }
 
     public void bet_12_15(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(12);
+        betPlace.add(15);
+        startDonateWindow(event);
 
     }
 
     public void bet_11_12_14_15(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(11);
+        betPlace.add(12);
+        betPlace.add(14);
+        betPlace.add(15);
+        startDonateWindow(event);
 
     }
 
     public void bet_10_11_13_14(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(10);
+        betPlace.add(11);
+        betPlace.add(13);
+        betPlace.add(14);
+        startDonateWindow(event);
 
     }
 
     public void bet_10_11_12(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(10);
+        betPlace.add(11);
+        betPlace.add(12);
+        startDonateWindow(event);
 
     }
 
     public void bet_10_11_12_13_14_15(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(10);
+        betPlace.add(11);
+        betPlace.add(12);
+        betPlace.add(13);
+        betPlace.add(14);
+        betPlace.add(15);
+        startDonateWindow(event);
 
     }
 
     public void bet_8_9(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(8);
+        betPlace.add(9);
+        startDonateWindow(event);
+
 
     }
 
     public void bet_7_8(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(7);
+        betPlace.add(8);
+        startDonateWindow(event);
 
     }
 
     public void bet_7_10(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(7);
+        betPlace.add(10);
+        startDonateWindow(event);
 
     }
 
     public void bet_8_11(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(8);
+        betPlace.add(11);
+        startDonateWindow(event);
 
     }
 
     public void bet_9_12(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(12);
+        betPlace.add(9);
+        startDonateWindow(event);
 
     }
 
     public void bet_8_9_11_12(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(8);
+        betPlace.add(9);
+        betPlace.add(11);
+        betPlace.add(12);
+        startDonateWindow(event);
 
     }
 
     public void bet_7_8_10_11(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(7);
+        betPlace.add(8);
+        betPlace.add(10);
+        betPlace.add(11);
+        startDonateWindow(event);
+
 
     }
 
     public void bet_7_8_9(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(7);
+        betPlace.add(8);
+        betPlace.add(9);
+        startDonateWindow(event);
 
     }
 
     public void bet_7_8_9_10_11_12(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(7);
+        betPlace.add(8);
+        betPlace.add(9);
+        betPlace.add(10);
+        betPlace.add(11);
+        betPlace.add(12);
+        startDonateWindow(event);
 
     }
 
     public void bet_5_6(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(5);
+        betPlace.add(6);
+        startDonateWindow(event);
+
 
     }
 
     public void bet_4_5(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(4);
+        betPlace.add(5);
+        startDonateWindow(event);
 
     }
 
     public void bet_4_7(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(4);
+        betPlace.add(7);
+        startDonateWindow(event);
 
     }
 
     public void bet_5_8(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(5);
+        betPlace.add(8);
+        startDonateWindow(event);
 
     }
 
     public void bet_6_9(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(9);
+        betPlace.add(6);
+        startDonateWindow(event);
 
     }
 
     public void bet_5_6_8_9(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(5);
+        betPlace.add(6);
+        betPlace.add(8);
+        betPlace.add(9);
+        startDonateWindow(event);
 
     }
 
     public void bet_4_5_7_8(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(4);
+        betPlace.add(5);
+        betPlace.add(7);
+        betPlace.add(8);
+        startDonateWindow(event);
 
     }
 
     public void bet_4_5_6(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(4);
+        betPlace.add(5);
+        betPlace.add(6);
+        startDonateWindow(event);
 
     }
 
     public void bet_4_5_6_7_8_9(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(4);
+        betPlace.add(5);
+        betPlace.add(6);
+        betPlace.add(7);
+        betPlace.add(8);
+        betPlace.add(9);
+        startDonateWindow(event);
 
     }
 
     public void bet_0_1(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(0);
+        betPlace.add(1);
+        startDonateWindow(event);
 
     }
 
     public void bet_2_3(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(2);
+        betPlace.add(3);
+        startDonateWindow(event);
 
     }
 
     public void bet_1_2(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(1);
+        betPlace.add(2);
+        startDonateWindow(event);
 
     }
 
     public void bet_1_4(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(1);
+        betPlace.add(4);
+        startDonateWindow(event);
 
     }
 
     public void bet_2_5(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(2);
+        betPlace.add(5);
+        startDonateWindow(event);
 
     }
 
     public void bet_3_6(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(3);
+        betPlace.add(6);
+        startDonateWindow(event);
 
     }
 
     public void bet_2_3_5_6(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(2);
+        betPlace.add(3);
+        betPlace.add(5);
+        betPlace.add(6);
+        startDonateWindow(event);
 
     }
 
     public void bet_1_2_4_5(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(1);
+        betPlace.add(2);
+        betPlace.add(4);
+        betPlace.add(5);
+        startDonateWindow(event);
 
     }
 
     public void bet_0_2(ActionEvent event) {
+        betPlace.clear();
+        betPlace.add(0);
+        betPlace.add(2);
+        startDonateWindow(event);
 
     }
 
@@ -2891,7 +3416,7 @@ public class RouletteWindowController implements Initializable, Abonent {
         startDonateWindow(event);
     }
 
-    public void betf_12(ActionEvent event) {
+    public void bet_f_12(ActionEvent event) {
         betPlace.clear();
         for (int i = 1; i < 13; i++) {
             betPlace.add(i);
@@ -2996,4 +3521,5 @@ public class RouletteWindowController implements Initializable, Abonent {
 
 
     }
+
 }

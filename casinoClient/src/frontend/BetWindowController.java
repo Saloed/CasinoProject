@@ -22,7 +22,6 @@ public class BetWindowController implements Initializable {
     public Button betBrn;
     private MessageSystem messageSystem;
     private RouletteWindowController application;
-    //private String betPlace;
     private List<Integer> betPlace;
 
     public void setApp(RouletteWindowController application, List<Integer> betPlace) {
@@ -35,7 +34,10 @@ public class BetWindowController implements Initializable {
 
     public void sendBet(ActionEvent event) {
 
-        System.out.println("Your bet is:" + betPlace);
+        String bid = "You bet " + betCount.getText() + " on " + betPlace;
+        application.collectBid(bid);
+
+
         /*
         Message msg = new MessageSendRequest(messageSystem.getAddressService().getSlotWindowControllerAddress(),
                 messageSystem.getAddressService().getGameServiceAddress(), 35, Integer.parseInt(betCount.toString()));
